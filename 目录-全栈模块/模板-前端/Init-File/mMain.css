@@ -1,0 +1,122 @@
+/* 背景颜色 */
+.mbgcolor{
+	background-color: rgba(195, 15, 255, 0.9);;
+}
+
+/* 圆角边框 */
+.mborder {
+	border: 1px solid rgba(170, 170, 255, 0.6);
+	border-radius: 5px;
+}
+
+.mborder-1 {
+	border: 1px solid rgba(170, 170, 255, 0.6);
+	border-radius: 10px;
+}
+
+.mborder-2 {
+	border: 1px solid rgba(170, 170, 255, 0.6);
+	border-radius: 15px;
+}
+.mborder-3 {
+	border: 1px solid rgba(170, 170, 255, 0.6);
+	border-radius: 20px;
+}
+
+/* 字体设置 */
+.mpink {
+	color: rgba(255, 135, 203, 0.8);
+}
+.mpurple {
+	color: rgba(195, 15, 255, 0.8);
+}
+.mdanger{
+	color: rgba(255, 0, 127, 0.8);
+}
+.minfo{
+	color: rgba(85, 170, 255, 0.8);
+}
+.msuccess{
+	color:rgba(65, 213, 156, 0.8);
+}
+/* filter设置 */
+.mgrey {
+	color: grey;
+}
+
+.mh1 {
+	font-size: 20px;
+}
+
+.mh2 {
+	font-size: 16px;
+}
+
+.mh3 {
+	font-size: 12px
+}
+
+.msmall {
+	font-size: 10px
+}
+
+
+/* 盒子 */
+.mshadow-outer {
+	box-shadow: 0 0 5px rgba(195, 15, 255, 0.4);
+}
+.mshadow-inner {
+	box-shadow:inset 0 0 5px rgba(195, 15, 255, 0.4);
+}
+
+/* 滤镜 */
+.mfilter-g1{
+	filter: grayscale(10%);
+}
+.mfilter-g2{
+	filter: grayscale(30%);
+}
+.mfilter-g3{
+	filter: grayscale(60%);
+}
+.mfilter-g4{
+	filter: grayscale(100%);
+}
+.mfilter-b1{
+	filter: blur(0.5px);
+}
+.mfilter-b2{
+	filter: blur(1px);
+}
+.mfilter-b3{
+	filter: blur(2px);
+}
+.mfilter-b4{
+	filter: blur(4px);
+}
+/* 初始化 */
+ul,
+li,
+p,
+div,
+a,
+span,
+input,
+section,
+i,
+table,
+img,
+button,
+label,
+nav,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	outline: none;
+	list-style: none;
+	font-family: "楷体";
+	text-decoration: none;
+}
