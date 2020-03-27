@@ -58,7 +58,7 @@ yum install -y git
 	https://github.com/settings/keys 
 
 （4）配置账号密码
-	在/.git/config中添加
+	在/root/.gitconfig中添加
 	[user]
         name = Yooven
         email = 444891953@qq.com
