@@ -7,6 +7,9 @@
 2.使用一些伪元素选择器如.outer div:nth-of-type(1) {**}会将第一个div内所有的子元素的样式统统渲染
 3.行内元素如图片，默认值是本身大小
 4.父级元素随子级元素增加而增加
+5.li前面的小圆点，是ul上的样式
+6.flex是一个组合属性
+	设flex:1,相当于flex-grow:1;flex-shink:1;flex-basis:0%;
 ```
 
 ### Float
@@ -115,6 +118,10 @@ flex-wrap:
 	wrap	换行
 	wrap-reverse	以相反的方向换行
 ```
+
+
+
+
 
 
 

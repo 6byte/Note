@@ -1,41 +1,69 @@
 ## Git-基本操作
 
+
+
 #### Git&Hub-基本命令
 
 **命令大全**		https://www.jianshu.com/p/93318220cdce
 
-#### Git&Hub-核心操作
+#### 初始化用户名
 
-```js
-#初始化仓库
-1.新建文件夹
-2.进入文件夹，运行命令 git init
+```
+$ git config --global user.name "YOURNAME"
+$ git config --global user.email "YOUREMAIL@XX.COM"
+```
 
-#向仓库中添加文件
-add		:	git add index.html
-commit  : 	git commit -m "提交描述"
+#### 添加到暂存区
+
+```
+git add *  //将工作区所有修改添加到暂存区
+git add .  //将工作区所有修改添加到暂存区
+git add filename //将指定文件添加到暂存区
+
+git status  //列出变更文件
+```
+
+#### 添加到本地仓库
+
+```
+git commit -m '备注信息'
+```
+
+#### 添加到远程仓库
+
+```
+git remote add origin https://github.com/XXX.git
+git push -u origin master
+
+注意:以https 提交代码每次都要输入账号密码
+
+解决方案
+git remote rm origin   //移除
+git remote add origin git@github.com:gitname/xx.git       //添加
+```
+
+#### 放弃暂存区修改
+
+```
+git checkout -- filename  //放弃暂存区修改
+git rm --cached filename  //放弃add
+git reset HEAD filename   //放弃add
+
+git stash     //暂时放弃未提交的修改
+git stash pop  //恢复
+```
+
+#### 分支操作
+
+```
+git branch     //所有本地分支
+git branch -r  //所有远程分支
+git branch -a  //所有远程分支和本地分支
 ```
 
 
 
-#### Git&Hub-管理远程仓库
-
-##### 克隆操作
-
-```js
-定义:下载远程仓库的项目
-1.从远程仓库获取地址 github.com/yourAddress.com
-2.git clone github.com/yourAddress.com
-```
-
-##### 发布到远程仓库
-
-```
-push:	将本地内容提交到远程仓库
-1.严格按照 执行流程 操作==>add commit push
-```
-
-##### 操作远程仓库
+#### 操作远程仓库
 
 ```GIT
 $ git remote
@@ -68,19 +96,5 @@ git add .
 git commit -m "info"
 git remote add origin https://github.com/Yooven/game.git
 git push -u origin master
-```
-
-#### 创建远程仓库
-
-```
-git remote add origin 远程仓库名称
-git remote add origin https://github.com/6byte/game.git
-
-```
-
-#### 关联远程仓库
-
-```
-git remote set-url --add origin https://gitee.com/jinsx/oa.git
 ```
 

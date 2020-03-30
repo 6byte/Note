@@ -29,11 +29,75 @@ mf-word-**		pink purple grey
 
  */
 
-/* 背景颜色 */
-.mbgcolor {
-	background-color: rgba(195, 15, 255, 0.9);
+
+/* 元素样式 */
+.md-inline{
+	display: inline !important;
+}
+/* 位置 */
+.mp-abs{
+	position: absolute;
 }
 
+/* 背景颜色 */
+.mbgc-pink {
+	background-color: rgba(195, 15, 255, 0.6);
+}
+
+.mbgc-pink-1 {
+	background-color: rgba(195, 15, 255, 0.5);
+}
+
+.mbgc-pink-2 {
+	background-color: rgba(195, 15, 255, 0.4);
+}
+
+.mbgc-pink-3 {
+	background-color: rgba(195, 15, 255, 0.3);
+}
+
+.mbgc-pink-4 {
+	background-color: rgba(195, 15, 255, 0.2);
+}
+
+.mbgc-black {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.mbgc-black-1 {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.mbgc-black-2 {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mbgc-black-3 {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mbgc-black-4 {
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.mbgc-white {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.mbgc-white-1 {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.mbgc-white-2 {
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mbgc-white-3 {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+.mbgc-white-4 {
+	background-color: rgba(255, 255, 255, 0);
+}
 /* 圆角边框 */
 .mborder {
 	border-radius: 5px;
@@ -88,11 +152,11 @@ mf-word-**		pink purple grey
 
 /* 字体设置 */
 .mpink {
-	color: rgba(255, 135, 203, 0.8);
+	color: rgba(255, 135, 203, 0.8) !important;
 }
 
 .mpurple {
-	color: rgba(195, 15, 255, 0.8);
+	color: rgba(195, 15, 255, 0.8) !important;
 }
 
 .mdanger {
@@ -106,7 +170,9 @@ mf-word-**		pink purple grey
 .msuccess {
 	color: rgba(65, 213, 156, 0.8);
 }
-
+.mwhite{
+	color: white;
+}
 
 .mf-word-pink::first-letter {
 	color: rgba(255, 85, 255, 0.8);
@@ -202,7 +268,6 @@ a,
 span,
 input,
 section,
-i,
 table,
 img,
 button,
@@ -214,10 +279,10 @@ h3,
 h4,
 h5,
 h6 {
-	outline: none;
-	list-style: none;
-	font-family: "楷体";
-	text-decoration: none;
+	outline: none !important;
+	list-style: none !important;
+	font-family: "楷体" !important;
+	text-decoration: none !important;
 }
 
 ul,
@@ -232,4 +297,11 @@ body,
 html {
 	padding: 0;
 	margin: 0;
+}
+
+a:hover{
+	color: rgba(255, 85, 255, 0.8) !important;
+}	
+a{
+	color: black ;
 }

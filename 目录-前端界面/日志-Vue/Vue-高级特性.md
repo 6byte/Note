@@ -189,3 +189,17 @@ watch: {
 
 
 
+### 生命周期
+
+```
+四个生命周期:
+created(),mounted(),updated(),destroyed()
+
+beforeCreate(),beforeMounted(),beforeMouned(),beforeDestroyed()
+
+
+beforeCreated:不能使用this、methods中的方法等等
+destroyed:将组件从dom中删除时触发
+updated:更新值的时候会触发
+```
+

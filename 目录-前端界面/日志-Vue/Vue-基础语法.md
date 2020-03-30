@@ -252,7 +252,7 @@ data (){
 
 ```vue
 方式
-1.v-for绑定computed的属性，而不是data的属性
+1.v-for最好绑定使用computed计算后的属性
 2.computed需要返回一个计算后的对象，或者数组
 3.使用filter时，注意函数this指向
 
@@ -280,7 +280,7 @@ export default {
 				type:'all',}
 		},
 computed:{
-//因为需要V-for的迭代，所以需要返回一个重新计算后的对象
+//返回一个重新计算后的对象给V-for
 	stat:function(){
 		if(this.type == 'all'){
 			return this.user
