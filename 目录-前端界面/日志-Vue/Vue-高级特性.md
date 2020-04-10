@@ -1,6 +1,6 @@
-## Vue-高级特性
+#### Vue-高级特性
 
-### 路由
+###### 路由
 
 #### 重要概念
 
@@ -178,6 +178,32 @@ watch: {
 ```
 
 ##### 路由守卫
+
+##### 滚动行为
+
+```
+作用:
+	解决问题：如果前一个页面有滚动条的滚动，路由跳转后滚动条保持在原来的位置
+	
+注意: 浏览器支持 history.pushState 才可用。
+
+```
+
+简单实现
+
+```JS
+const router = new VueRouter({
+  routes: [...],
+  scrollBehavior(to,from,savePosition){ 
+  // 在点击浏览器的“前进/后退”，或者切换导航的时候触发。
+    console.log(to) // to：要进入的目标路由对象，到哪里去
+    console.log(from) // from：离开的路由对象，哪里来
+    console.log(savePosition) // savePosition：会记录滚动条的坐标，点击前进/后退的时候记录值{x:?,y:?}
+
+})
+```
+
+
 
 ##### 路由懒加载
 

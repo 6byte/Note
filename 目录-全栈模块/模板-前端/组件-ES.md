@@ -1,6 +1,6 @@
-## ES5-应用组件
+#### ES5-应用组件
 
-#### 禁止拖拽图片
+###### 禁止拖拽图片
 
 ```JS
 function imgdragstart() {
@@ -12,7 +12,7 @@ for (i in document.images) document.images[i].ondragstart = imgdragstart;
 
 
 
-#### 禁用文本选择
+###### 禁用文本选择
 
 ```js
 document.addEventListener('selectstart',function(e){
@@ -20,7 +20,7 @@ document.addEventListener('selectstart',function(e){
 })
 ```
 
-#### 阻止右键菜单
+###### 阻止右键菜单
 
 ```JS
 document.addEventListener('contextmenu',function(e){
@@ -28,7 +28,7 @@ document.addEventListener('contextmenu',function(e){
 })
 ```
 
-#### 获取鼠标坐标
+###### 获取鼠标坐标
 
 ```JS
 document.addEventListener('mousemove',function(e){
@@ -40,7 +40,7 @@ document.addEventListener('mousemove',function(e){
 })
 ```
 
-#### 复制粘贴
+###### 复制粘贴
 
 ```js
 --#html代码
@@ -63,7 +63,7 @@ document.addEventListener('mousemove',function(e){
 
 
 
-#### 获取时间
+###### 获取时间
 
 ```
 function writeCurrentDate() {
@@ -97,7 +97,7 @@ function writeCurrentDate() {
 
 
 
-#### 标准注释
+标准注释
 
 ```JS
 /**
@@ -108,7 +108,7 @@ function writeCurrentDate() {
 * */
 ```
 
-#### 全屏页面
+###### 全屏页面
 
 进入全屏
 
@@ -154,7 +154,7 @@ function exitfullscreen() { //退出全屏
 
 ````
 
-#### 操作Cookies
+###### 操作Cookies
 
 读取
 
@@ -198,7 +198,7 @@ function clearCookie(){
 } 
 ```
 
-#### 节流防抖
+###### 节流防抖
 
 防抖
 
@@ -283,7 +283,7 @@ function throttle(func, wait ,type) {
 }
 ```
 
-#### 滚动到底部
+###### 滚动条
 
 ```JS
 window.onscroll = function() {
@@ -303,7 +303,7 @@ window.onscroll = function() {
 			}
 ```
 
-#### 随机数生成
+###### 随机数生成
 
 ```
 生成m到n之间的随机数
@@ -312,7 +312,7 @@ var num = Math.floor(Math.random() * 10 + 1);
 
 
 
-#### Animate特效
+###### Animate特效
 
 ```CSS
 var	animateClass = [{
@@ -348,7 +348,7 @@ var	animateClass = [{
 	]
 ```
 
-#### 数组操作
+###### 数组操作
 
 Filter应用
 

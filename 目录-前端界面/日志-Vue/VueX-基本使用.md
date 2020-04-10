@@ -6,7 +6,24 @@
 1.Vue组件传值不方便，Vuex很好的解决了该问题
 2.数据处理都放在Vuex中
 3.vuex是单向数据
+4.vuex的内容全局共享
+
 ```
+
+#### 快速使用
+
+```js
+定义-state
+state: {
+	view:100
+}
+更改-mutations
+
+--定义
+
+```
+
+
 
 #### 了解
 
@@ -26,22 +43,16 @@ getters：			计算
 特点:<作用域:当前模块>
 1.只读不可写
 2.作用域:仅在当前模块有效
-使用
+
+--	定义
 
 给state赋值
-export default new Vuex.Store({
+
 	state: {
 		number : 100
 	}
-})
-获取state的值
-//最好选用计算属性，当state的值发生变化，计算属性也会跟着变化
-computed:{
-	  price:function(){
-		  console.log(this.$store.state.number);
-		  return this.$store.state.number*6
-	  }
-  }
+
+
 ```
 
 
@@ -53,28 +64,25 @@ computed:{
 ```js
 特点:<作用域:全局>
 作用:修改仓库的数据
-使用：
-1.在store.js中写逻辑代码
-2.通过vue的普通方法调用mutations中的方法
-3.普通方法可以传参给mutations中的方法
-4.触发方式:commit
-代码-store.js
-export default new Vuex.Store({
+
+-- store.js：
 	state: {number : 100},
 	mutations: {
-        //param是从
-		del:(state,param)=>{
+        //param是从vue中传过来的
+		mut:(state,param)=>{
 			state.number = 1.52
+            state.number = param
 		}
 	},
-})
-代码-vue
-methods:{
-	  change:function(id){
-		  this.$store.commit('del',10)
-//this.$store.commit('mutations中的函数',从普通函数传过来的参数)
-	  }
+
+-- xx.vue
+
+change:function(id){
+    //this.$store.commit('mutations中的函数',从vue传过来的参数)
+    this.$store.commit('mut',10)
+    
 }
+
 ```
 
 
@@ -89,7 +97,7 @@ methods:{
 1.getter是一个对象，需要自定义函数来处理逻辑关系
 使用步骤：
 定义
-1.在getter中自定义逻辑处理函数
+1.在getters中自定义逻辑处理函数
 2.函数需要有返回值，以供外部调用
 export default new Vuex.Store({
 	state: {

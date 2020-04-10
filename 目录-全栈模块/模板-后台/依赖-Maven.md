@@ -151,3 +151,32 @@ Maven-JWT
 </dependency>
 ```
 
+### Maven-Mysql
+
+```
+<dependency>
+    <groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    <version>8.0.19</version>
+</dependency>
+```
+
+### Maven-Mybatis-Plus
+
+```
+核心maven:
+<dependency>
+     <groupId>com.baomidou</groupId>
+     <artifactId>mybatis-plus-boot-starter</artifactId>
+     <version>3.3.1.tmp</version>
+</dependency>
+
+
+代码生成器：
+<dependency>
+    <groupId>com.baomidou</groupId>
+    <artifactId>mybatis-plus-generator</artifactId>
+    <version>3.3.1.tmp</version>
+</dependency>
+```
+

@@ -181,48 +181,76 @@ body{
 ### 移动端禁止双击放大
 
 ```CSS
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 ```
 
 ### 常用内容结构
 
 ```
-具体实现在同目录文件夹---常用组件中
+电梯导航、手风琴、横向手风琴、
 ```
 
-
-
-电梯导航
+### 底部导航栏<完美版>
 
 ```html
-技术要点
-1.总体结构分：侧边导航，中间内容
-2.侧边导航，固定到屏幕左到右边，用固定定位
-3.使用锚点进行跳转
-<ul>
-	<li>首页</li>
-    <li>...</li>
-</ul>
-<div>
-    首页内容
-<div>
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+		<style type="text/css">
+			.acv,
+			.acv ul,
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				margin: 0;
+				padding: 0;
+			}
+
+			.acv ul {
+				display: flex;
+				flex-direction: column;
+				list-style: none;
+			}
+
+			.acv ul li:nth-of-type(1) {
+				background-color: red;
+				flex: 1;
+			}
+
+			.acv ul li:nth-of-type(2) {
+				flex: 8;
+				overflow: scroll;
+			}
+
+			.acv ul li:nth-of-type(3) {
+				background-color: blue;
+				flex: 1;
+				max-height: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="acv">
+			<ul>
+				<li>
+					顶部导航
+				</li>
+				<li>
+					内容
+				</li>
+				<li>
+					底部导航
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
+
 ```
-
-手风琴
-
-横向手风琴
-
-```
-技术要点
-css部分
-	1.使用弹性布局
-	2.div超出部分隐藏
-	3.每次仅展示一个div，其他收缩
-html
-	1.直接使用简单水平排列
-js
-
-```
-
-
 

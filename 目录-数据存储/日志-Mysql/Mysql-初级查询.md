@@ -6,11 +6,7 @@
 
 ```mysql
 select *from student where name like % name %;
-
-
 ```
-
-
 
 ### Mysql-Join
 

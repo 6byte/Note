@@ -6,13 +6,12 @@
 
 #设置数据源
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/myblog?characterEncoding=utf8&serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=00000000
 
 #日志设置
-logging.file.path=cherrioLog/log4.log
-logging.level.com.cherrio.cherrio_controller = info
+logging.file.path=Log/log4.log
 
 #为避免冲突重定义端口
 server.port=10000
