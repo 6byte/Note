@@ -14,6 +14,7 @@ rpm -e --nodeps java-1.8.0-openjdk-devel-1.8.0.242.b08-0.el7_7.x86_64
 #安装Java,两个必须一起安装
 	yum install -y java-1.8.0-openjdk.x86_64
 	yum install -y java-1.8.0-openjdk-devel.x86_64
+	yum install java-1.8.0-openjdk-devel.x86_64
 #验证
 java -version
 //验证配置

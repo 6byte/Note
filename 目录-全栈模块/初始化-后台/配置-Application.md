@@ -55,3 +55,5 @@ eureka.client.fetch-registry=false
 eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
 ```
 
+
+

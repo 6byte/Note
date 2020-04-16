@@ -42,3 +42,40 @@ cd /usr/local/maven/conf/
 mvn help:system
 
 ```
+
+### Windows-Maven
+
+配置镜像--setting.xml
+
+```
+<mirrors>
+    <mirror>
+      <id>alimaven</id>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <mirrorOf>central</mirrorOf>        
+    </mirror>
+  </mirrors>
+
+```
+
+配置镜像--pom.xml
+
+```
+<repositories>  
+        <repository>  
+            <id>alimaven</id>  
+            <name>aliyun maven</name>  
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>  
+            <releases>  
+                <enabled>true</enabled>  
+            </releases>  
+            <snapshots>  
+                <enabled>false</enabled>  
+            </snapshots>  
+        </repository>  
+</repositories>  
+ 
+ project标签中即可
+```
+

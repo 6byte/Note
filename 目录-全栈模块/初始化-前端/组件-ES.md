@@ -305,8 +305,12 @@ window.onscroll = function() {
 
 ###### 随机数生成
 
-```
+```js
 生成m到n之间的随机数
+function randH(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 var num = Math.floor(Math.random() * 10 + 1);
 ```
 
@@ -376,5 +380,115 @@ var goods = [
 var newArr = goods.filter((i)=>{
 	return id == i.id
 })
+```
+
+###### VUE分页
+
+思路
+
+```js
+1.定义页号currentPage , 页大小pagesize
+
+2.data中用一个数组存储服务器上的数据
+
+3.用计算属性返回数组page_arrs，让页面展示数据
+
+4.用slice()方法进行分割page_arrs；<核心>
+
+5.通过按钮改变currentPage属性，完成分页逻辑
+```
+
+
+
+
+
+实现
+
+```JS
+<template>
+  <div>
+    <table class="table table-hover">
+        //标题部分
+      <thead>
+        <tr>
+            <th class="number">序号</th>
+            <th>题目</th>
+            <th class="del">删除</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr v-for="(item,index) in page_arrs" :key="index">
+            <th>{{index+1}}</th>
+            <td>{{item.name}}</td>
+<td>
+            <a>删除</a>
+</td>
+</tr>
+</tbody>
+    </table>
+
+<div>
+      <button @click="primaryPage">首页</button>
+      <button @click="prePage">上页</button>
+//总数
+      <button >{{current_page}}/{{Math.ceil(arrs.length/pagesize)}}</button>
+      <button  @click="nextPage">下页</button>
+      <button  @click="lastPage">尾页</button>
+    </div></div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      arrs: [
+        { name: "Otto", id: 1 },
+        { name: "Jacob", id: 2 },
+        { name: "Larry", id: 3 },
+        { name: "Tim", id: 4 },
+        { name: "Tom", id: 5 },
+      ],
+      currentPage: 1, //当前页号
+      pagesize: 10 //每页大小
+    };
+  },
+  computed: {
+    page_arrs() {
+      let { currentPage, pagesize } = this;
+      // 返回
+      return this.arrs.slice(
+        (currentPage - 1) * pagesize,
+        currentPage * pagesize
+      );
+    },
+    current_page() {
+      return this.currentPage;
+    }
+  },
+  methods: {
+    primaryPage() {
+      this.currentPage = 1;
+    },
+    prePage() {
+      if (this.currentPage == 1) {
+        return;
+      }
+      this.currentPage = this.currentPage - 1;
+    },
+    nextPage() {
+      if (this.currentPage == Math.ceil(this.arrs.length / this.pagesize)) {
+        return;
+      }
+      this.currentPage = this.currentPage + 1;
+    },
+    lastPage() {
+      this.currentPage = Math.ceil(this.arrs.length / this.pagesize);
+    }
+  }
+};
+</script>
+
+<style scoped lang='less'>
+</style>
 ```
 

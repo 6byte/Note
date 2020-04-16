@@ -93,7 +93,7 @@ public String upload(MultipartFile file) {
 
 设置上传文件大小
 
-```
+```java
 @Component
 public class MyExceptionHandler  {
 @Bean
@@ -106,6 +106,51 @@ MultipartConfigFactory factory = new MultipartConfigFactory();
 	return factory.createMultipartConfig();
 	}
 }
+
+```
+
+对应前端VUE代码
+
+```JS
+<template>
+  <div>
+    <div>
+      <div>
+        <b-form-file
+          v-model="file"
+          :state="Boolean(file)"
+          placeholder="文件名"
+          drop-placeholder="Drop file here..."
+          browse-text="选择文件"
+        ></b-form-file>
+      </div>
+      <div class="pt-2">
+        <b-button variant="outline-primary" @click="save" size="sm" block>上传文件</b-button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      file: null,
+      host: "http://127.0.0.1:8080/reciveFile"
+    };
+  },
+  methods: {
+    save() {
+      let formData = new FormData();
+      formData.append("file", this.file);
+      axios.post(this.host, formData).then(res => {
+        console.log(res);
+      });
+    }
+  }
+};
+</script>
 
 ```
 

@@ -128,7 +128,7 @@ component: () => import( '../views/Children.vue')}],
 
 ##### 路由函数
 
-```
+```js
 this.$router：路径跳转
 1.基本使用
 
@@ -178,6 +178,12 @@ watch: {
 ```
 
 ##### 路由守卫
+
+```
+beforeRouteEnter，beforeRouteUpdate，beforeRouteLeave
+```
+
+
 
 ##### 滚动行为
 

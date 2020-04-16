@@ -39,3 +39,22 @@ CASE
 	student
 ```
 
+#### 权限查询
+
+```MYSQL
+SELECT
+	u.*,
+	r.*,
+	p.* 
+FROM
+	USER AS u
+	LEFT JOIN user_role AS ur ON u.userId = ur.userId
+	LEFT JOIN role AS r ON r.role_id = ur.roleId
+	LEFT JOIN role_perm AS rp ON rp.role_id = r.role_id
+	LEFT JOIN permission AS p ON p.permissionId = rp.permission_id 
+WHERE
+	u.mainId = 1
+	
+--一旦用了别名，就要一用到底，不能停
+```
+

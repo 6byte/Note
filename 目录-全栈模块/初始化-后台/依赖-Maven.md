@@ -180,3 +180,33 @@ Maven-JWT
 </dependency>
 ```
 
+### Maven-AliYun
+
+```
+<dependency>
+    <groupId>com.aliyun.oss</groupId>
+    <artifactId>aliyun-sdk-oss</artifactId>
+    <version>3.8.0</version>
+</dependency>
+```
+
+### Maven-JWT
+
+```
+
+
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.4.1</version>
+</dependency>
+    
+    
+    
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>0.6.0</version>
+    </dependency>
+```
+

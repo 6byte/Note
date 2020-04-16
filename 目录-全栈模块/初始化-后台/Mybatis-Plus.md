@@ -43,7 +43,7 @@ public class MpGenerator {
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
+        help.append("请输入 包名：");
         System.out.println(help.toString());
         if (scanner.hasNext()) {
             String ipt = scanner.next();
@@ -51,6 +51,7 @@ public class MpGenerator {
                 return ipt;
             }
         }
+        throw new MybatisPlusException("请输入正确的" + someThing + "！");
     }
 
     public static void main(String[] args) {
@@ -68,7 +69,8 @@ public class MpGenerator {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         //配置数据库，和application.properties保持一样即可
-        dsc.setUrl("jdbc:mysql://localhost:3306/authority?characterEncoding=utf8&serverTimezone=UTC");
+        //一定要该，不然建空文件夹
+        dsc.setUrl(jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC);
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername(数据库账号);
@@ -80,8 +82,9 @@ public class MpGenerator {
         //配置包名，创建的所有文件都会放在这个包下
         //如果该包不存在，就创建
         pc.setModuleName(scanner(包名));
-        pc.setModuleName("abc");
-        //配置根目录包，生成文件会放在com.m.alpha.next.abc下
+        //将要创建的文件夹名字
+        pc.setModuleName(Folder);
+        //配置根目录包，生成文件会放在com.m.alpha.next.Folder下
         pc.setParent(根目录包);
         mpg.setPackageInfo(pc);
 

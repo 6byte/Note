@@ -66,7 +66,7 @@ btree索引
 3.必须数据类型一致
 4.组合索引不按前缀规则查询
 5.用count(列)代替count(*)
-6.使用join 代替 (Sub-Queries)
+6.使用join 代替 (子查询)
 7.重复值较少，不适合做索引，如性别
 8.尽量用char代替varchar
 
@@ -85,3 +85,8 @@ char 和varchar的区别
 #### Mysql-原理
 
 网页https://www.jianshu.com/p/57ecc074af32
+
+#### 性能分析
+
+
+

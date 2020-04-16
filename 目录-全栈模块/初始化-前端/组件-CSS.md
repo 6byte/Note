@@ -15,6 +15,16 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+线性渐变背景
+
+ background: linear-gradient(
+    145deg,
+    #0e4174 40%,
+    #177abb 0,
+    #177abb 80%,
+    white 0
+  );
 ```
 
 ### 文字换行

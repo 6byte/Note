@@ -1,8 +1,11 @@
-# 防火墙&端口
+## 防火墙&端口
 
 ### 防火墙
 
 ```
+开启防火墙
+systemctl start firewalld
+
 开启80端口
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 开启8080端口
@@ -46,6 +49,7 @@ ps -ef |grep nginx
 查看所有端口
 netstat -nat  只显示部分
 netstat -apn  可以查看系统进程
+netstat -ntlp 查看TCP端口
 ```
 
 ### 查看进程

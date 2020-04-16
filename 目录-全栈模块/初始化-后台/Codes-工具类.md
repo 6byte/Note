@@ -1,4 +1,4 @@
-## Spring-Boot 工具组件
+## Codes-Tools
 
 ### Tool-WebSocket
 
@@ -151,7 +151,7 @@ public static int getRandomNumber(){
 }
 ```
 
-Tool-获取远程IP
+### Tool-获取远程IP
 
 ```JAVA
 /**
@@ -190,4 +190,190 @@ public static String getRemoteAddr(HttpServletRequest request){
         return ipAddress;
 }
 ```
+
+### Tool-文件获取
+
+概览
+
+```
+对应关系
+文件列表	=>	分类列表
+文件名		 =>	 内容
+
+需要获取
+目录下所有文件夹
+该文件下所有内容
+```
+
+### Tool-对象存储
+
+```java
+public class Tools {
+
+    String endpoint = "https://6byte.oss-cn-chengdu.aliyuncs.com/";
+    String accessKeyId = "LTAI4FpXGmp1TvygZhqdYx8g";
+    String accessKeySecret = "B4IXsT2SescVGMeroCwbzBIvnQwm7i";
+
+    OSS ossClient = getOssClient();
+
+    public OSS getOssClient() {
+        return ossClient;
+    }
+
+    public Tools(String endpoint , String accessKeyId , String accessKeySecret) {
+        this.endpoint = endpoint;
+        this.accessKeyId = accessKeyId;
+        this.accessKeySecret = accessKeySecret;
+    }
+//可以直接调用getOssClient()获取对象
+}
+```
+
+### Tool-生成UUID
+
+```JAVA
+public static String getId() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString().replace("-" , "");
+    }
+```
+
+### Tool-生成JWT
+
+```java
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+public class JwtUtil {
+    //过期时间
+    private static final long EXPIRE_TIME = 15 * 60 * 1000;
+    //私钥
+    private static final String TOKEN_SECRET = "privateKey";
+
+    /**
+     * 生成签名，15分钟过期
+     *
+     * @param **username**
+     * @param **password**
+     * @return
+     */
+    public static String sign(Long userId) {
+        try {
+            // 设置过期时间
+            Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+            // 私钥和加密算法
+            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+            // 设置头部信息
+            Map<String, Object> header = new HashMap<>(2);
+            header.put("Type" , "Jwt");
+            header.put("alg" , "HS256");
+            // 返回token字符串
+            return JWT.create()
+                    .withHeader(header)
+                    .withClaim("userId" , userId)
+                    .withExpiresAt(date)
+                    .sign(algorithm);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 检验token是否正确
+     *
+     * @param **token**
+     * @return
+     */
+    public static Long verify(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT jwt = verifier.verify(token);
+            Long userId = jwt.getClaim("userId").asLong();
+            return userId;
+        }
+        catch (Exception e) {
+            return 0L;
+        }
+    }
+
+    public static void main(String[] args) {
+        JwtUtil util = new JwtUtil();
+        System.out.println(util.sign(456415l));
+    }
+}
+```
+
+### Tool-手动注入
+
+配置
+
+```JS
+@Component
+public class SpringConfig implements ApplicationContextAware {
+
+    private static ApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) {
+        SpringConfig.context = context;
+    }
+
+    public static ApplicationContext getContext() {
+        return context;
+    }
+
+    public static <T> T getBean(String name) {
+        return (T) context.getBean(name);
+    }
+
+    public static <T> T getBean(String name , ApplicationContext applicationContext) {
+        return (T) applicationContext.getBean(name);
+    }
+
+    public static <T> T getBean(Class<T> clazz) {
+        Map<String, T> beanMaps = context.getBeansOfType(clazz);
+        if (beanMaps != null && !beanMaps.isEmpty()) {
+            return beanMaps.values().iterator().next();
+        } else {
+            return null;
+        }
+    }
+
+    public static <T> T getBean(Class<T> clazz , ApplicationContext applicationContext) {
+        Map<String, T> beanMaps = applicationContext.getBeansOfType(clazz);
+        if (beanMaps != null && !beanMaps.isEmpty()) {
+            return beanMaps.values().iterator().next();
+        } else {
+            return null;
+        }
+    }
+}
+```
+
+使用
+
+```java
+
+public class A implements Runnable {
+    private AMapper aMapper;
+    @Override
+    public void run() {
+//需要在线程中执行
+        this.AMapper= SpringConfig.getBean(aMapper.class);
+    }
+}
+```
+
+
+
+
 
