@@ -492,3 +492,24 @@ export default {
 </style>
 ```
 
+###### 全屏滚动
+
+判断鼠标滚轮
+
+```JS
+$(document).on("mousewheel DOMMouseScroll", function (e) {
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+        if (delta > 0) {
+            // 向上滚
+            console.log("wheelup");
+
+        } else if (delta < 0) {
+            // 向下滚
+             console.log("wheeldown");
+        }
+    });
+```
+
+
+

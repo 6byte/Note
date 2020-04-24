@@ -23,7 +23,7 @@ float元素
 4.A，B两个div并列,有float属性,
 	<1>  A+B的宽  <  浏览器宽度 ，同行显示
     <2>  A+B的宽  >	浏览器视宽， A后面可能留出很长一段空白，并且能被行内元素填充
-
+5.父元素无法感知高度，需要清除浮动
 5.清除浮动:一般给下面的元素清除浮动
         1.通过clear:both
         2.通过after
@@ -33,10 +33,6 @@ float元素
         	display:block
         }
 ```
-
-
-
-
 
 ### 元素属性
 
@@ -99,10 +95,6 @@ float元素
 
 ```
 
-### BFC
-
-
-
 ### 弹性布局
 
 ```
@@ -120,6 +112,18 @@ flex-wrap:
 ```
 
 
+
+### 表单元素
+
+oninput
+
+```JS
+表单方法，当表单获得值时触发
+let input = document.querySelector('input')
+	input.oninput=function(e){
+	console.log(e.data);//获取e的data
+}
+```
 
 
 

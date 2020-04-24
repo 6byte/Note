@@ -210,10 +210,9 @@ public static String getRemoteAddr(HttpServletRequest request){
 ```java
 public class Tools {
 
-    String endpoint = "https://6byte.oss-cn-chengdu.aliyuncs.com/";
-    String accessKeyId = "LTAI4FpXGmp1TvygZhqdYx8g";
-    String accessKeySecret = "B4IXsT2SescVGMeroCwbzBIvnQwm7i";
-
+填写密钥
+    
+    
     OSS ossClient = getOssClient();
 
     public OSS getOssClient() {
@@ -373,7 +372,98 @@ public class A implements Runnable {
 }
 ```
 
+### 生成唯一LongID
 
+```JAVA
+public class ID
+{
 
+    private static long tmpID = 0;
 
+    private static boolean tmpIDlocked = false;
+
+    public static long getId()
+    {
+        long ltime = 0;
+        while (true)
+        {
+            if(tmpIDlocked == false)
+            {
+                tmpIDlocked = true;
+                //当前：（年、月、日、时、分、秒、毫秒）*10000
+                ltime = Long.valueOf(new SimpleDateFormat("yyMMddhhmmssSSS").format(new Date()).toString()) * 10000;
+                if(tmpID < ltime)
+                {
+                    tmpID = ltime;
+                }
+                else
+                {
+                    tmpID = tmpID + 1;
+                    ltime = tmpID;
+                }
+                tmpIDlocked = false;
+                return ltime;
+            }
+        }
+    }
+}
+```
+
+### Session监听
+
+继承
+
+```JAVA
+public class SessionListener implements HttpSessionListener {
+    public static int online = 0;
+//    Session销毁
+
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        System.out.println("创建session");
+        online++;
+    }
+
+    //Session创建
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        System.out.println("销毁session");
+        online--;
+    }
+
+}
+
+```
+
+配置
+
+```JAVA
+@Configuration
+public class MywebConfig implements WebMvcConfigurer {
+    @Bean
+    public ServletListenerRegistrationBean listenerRegist() {
+        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
+        srb.setListener(new SessionListener());
+        return srb;
+    }
+}
+
+```
+
+其他
+
+```
+public class MyListener implements HttpSessionBindingListener {
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+
+    }
+
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event) {
+
+    }
+}
+
+```
 
