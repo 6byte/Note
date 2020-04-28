@@ -164,20 +164,24 @@ Maven-JWT
 ### Maven-Mybatis-Plus
 
 ```
-核心maven:
-<dependency>
-     <groupId>com.baomidou</groupId>
-     <artifactId>mybatis-plus-boot-starter</artifactId>
-     <version>3.3.1.tmp</version>
-</dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.2</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.1.tmp</version>
+        </dependency>
 
-代码生成器：
-<dependency>
-    <groupId>com.baomidou</groupId>
-    <artifactId>mybatis-plus-generator</artifactId>
-    <version>3.3.1.tmp</version>
-</dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.3.1.tmp</version>
+        </dependency>
+
 ```
 
 ### Maven-AliYun

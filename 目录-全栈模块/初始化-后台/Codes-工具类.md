@@ -372,7 +372,7 @@ public class A implements Runnable {
 }
 ```
 
-### 生成唯一LongID
+### Tool-LongID
 
 ```JAVA
 public class ID
@@ -409,7 +409,7 @@ public class ID
 }
 ```
 
-### Session监听
+### Tool-Session监听
 
 继承
 
@@ -464,6 +464,106 @@ public class MyListener implements HttpSessionBindingListener {
 
     }
 }
+
+```
+
+### Tool-Generater
+
+```JAVA
+ public static void main(String[] args) {
+        // 代码生成器
+        AutoGenerator mpg = new AutoGenerator();
+
+        // 全局配置
+        GlobalConfig gc = new GlobalConfig();
+        String projectPath = System.getProperty("user.dir");
+        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setAuthor("6bye");
+        gc.setOpen(false);
+        mpg.setGlobalConfig(gc);
+
+        // 数据源配置
+        DataSourceConfig dsc = new DataSourceConfig();
+        dsc.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("00000000");
+        mpg.setDataSource(dsc);
+
+        // 包配置
+        PackageConfig pc = new PackageConfig();
+     	==>修改
+  		pc.setModuleName("Catalina");
+     	==>修改
+  		pc.setParent("com.github.alpha.Tools");
+        //生成的类在com.github.alpha.Tools.Catalina下
+        mpg.setPackageInfo(pc);
+
+         String templatePath = "/templates/mapper.xml.vm";
+
+        // 自定义输出配置
+        List<FileOutConfig> focList = new ArrayList<>();
+        // 自定义配置会被优先输出
+        focList.add(new FileOutConfig(templatePath) {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
+                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+            }
+        });
+
+        // 策略配置
+        StrategyConfig strategy = new StrategyConfig();
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        strategy.setEntityLombokModel(true);
+        strategy.setRestControllerStyle(true);
+        // 写于父类中的公共字段
+        strategy.setSuperEntityColumns("id");
+        strategy.setInclude("users");
+        strategy.setControllerMappingHyphenStyle(true);
+        strategy.setTablePrefix(pc.getModuleName() + "_");
+        mpg.setStrategy(strategy);
+        mpg.execute();
+    }
+
+```
+
+### Tool-分页
+
+配置
+
+```JAVA
+@EnableTransactionManagement
+@Configuration
+public class MybatisPlusConfig {
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
+}
+
+
+```
+
+使用
+
+```JAVA
+@RequestMapping("/index")
+public List index(String uname) {
+    //         和limit用法一样
+    Page page = new Page(1 , 4);
+    //        需要返回一个记录
+    List records = usersMapper.selectPage(page , null).getRecords();
+    return records;
+}
+```
+
+### Tool-Wrapper
+
+```
 
 ```
 
