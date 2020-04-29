@@ -511,5 +511,25 @@ $(document).on("mousewheel DOMMouseScroll", function (e) {
     });
 ```
 
+###### 滚动特效
+
+```
+$("select").click(function() {
+    $("html, body").animate({
+      scrollTop: $($(this).attr("href")).offset().top + "px"
+    }, {
+      duration: 500,
+      easing: "swing"
+    });
+    return false;
+  });
+  
+  
+  
+$('select').click(function() {
+    $('html,body').animate({ scrollTop: 			  $("#history").offset().top - 100 }, 200)
+});
+```
+
 
 

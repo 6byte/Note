@@ -264,3 +264,9 @@ body{
 
 ```
 
+### 隐藏滚动条
+
+```
+.select::-webkit-scrollbar {display:none}
+```
+
