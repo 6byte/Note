@@ -26,6 +26,11 @@ document.addEventListener('selectstart',function(e){
 document.addEventListener('contextmenu',function(e){
     e.preventDefault()
 })
+
+window.oncontextmenu=function(e){
+    //取消默认的浏览器自带右键 很重要！！
+    e.preventDefault();
+}
 ```
 
 ###### 获取鼠标坐标
@@ -513,7 +518,7 @@ $(document).on("mousewheel DOMMouseScroll", function (e) {
 
 ###### 滚动特效
 
-```
+```js
 $("select").click(function() {
     $("html, body").animate({
       scrollTop: $($(this).attr("href")).offset().top + "px"

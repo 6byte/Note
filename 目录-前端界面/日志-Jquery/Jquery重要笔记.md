@@ -171,8 +171,12 @@ $('#message').scrollTop($('#message')[0].scrollHeight);
 
 #### JQuery位置
 
+<https://blog.csdn.net/justlpf/article/details/81281365>
+
 ```js
-offset相对浏览器顶部距离的偏移
+注意:一定要在页面完全加载后再获取高度，否则一直为0
+
+offset相对浏览器顶部距离的偏移，绝对位置
 拥有两个属性Top,Left
 $('demo').offset({top:10,left:10}) 
 
@@ -183,7 +187,24 @@ $(document).scrollLeft() //获取水平滚动条的距离
 $(document).height()  //获取整个页面的高度
 
 $(window).height()  //获取当前,也就是你浏览器所能看到的页面的那部分的高度,这个大小在你缩放浏览器窗口大小,会改变,与document是不一样的
+
+
 ```
+
+#### JQuery兼容滚动条
+
+```JS
+var scrollPos;//滚动条位置
+if (typeof window.pageYOffset != 'undefined') {
+    scrollPos = window.pageYOffset;
+} else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
+    scrollPos = document.documentElement.scrollTop;
+} else if (typeof document.body != 'undefined') {
+    scrollPos = document.body.scrollTop;
+}
+```
+
+
 
 
 
