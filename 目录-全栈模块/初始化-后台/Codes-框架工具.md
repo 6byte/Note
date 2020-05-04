@@ -283,9 +283,9 @@ public class MpGenerator {
 
 ```java
 //注意检查此处信息
-    static String endpoint = "http://oss-cn-shanghai.aliyuncs.com";
-    static String accessKeyId = "LTAI4FpXGmp1TvygZhqdYx8g";
-    static String accessKeySecret = "B4IXsT2SescVGMeroCwbzBIvnQwm7i";
+    static String endpoint = "http://oss-cn-**.***.com";
+    static String accessKeyId = "***";
+    static String accessKeySecret = "***";
     static String bucketName = "sixbyte";
     static OSS ossClient = getOssClient();
 
