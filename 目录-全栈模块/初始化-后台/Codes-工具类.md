@@ -561,9 +561,10 @@ public List index(String uname) {
 }
 ```
 
-### Tool-Wrapper
+### Tool-执行任意SQL
 
-```
-
+```java
+@Select("${sql}")
+    public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
 
