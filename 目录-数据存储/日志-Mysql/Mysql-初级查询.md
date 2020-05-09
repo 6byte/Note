@@ -2,12 +2,6 @@
 
 ### Mysql-简单查询
 
-#### 模糊查询
-
-```mysql
-select *from student where name like % name %;
-```
-
 ### Mysql-Join
 
 #### 概览

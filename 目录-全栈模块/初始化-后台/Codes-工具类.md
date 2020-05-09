@@ -568,3 +568,13 @@ public List index(String uname) {
     public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
 
+### Tools-获取所有请求信息
+
+```
+Enumeration em = request.getParameterNames();
+ while (em.hasMoreElements()) {
+    String name = (String) em.nextElement();
+    String value = req.getParameter(name);
+}
+```
+
