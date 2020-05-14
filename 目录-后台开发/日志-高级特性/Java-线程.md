@@ -1,14 +1,12 @@
-#### Java-线程通信
+## Java-线程
 
-博客网页:
+##### 线程-通信
 
 ​	<https://www.jianshu.com/p/8a58d8335270>
 
 ​	<https://blog.csdn.net/dingchang3060/article/details/82384748>
 
-概览
-
-```
+````
 关键字:wait(),notify(),notifyAll(),synchronized
 前提理解：
 	1.一个类可以有多个对象，一个对象可以产生多个线程
@@ -23,12 +21,9 @@
 	7.每个线程有各自的工作内存，工作内存中的变量是主内存的副本
 	8.线程通信只能在主内存中进行
 
-```
+````
 
-
-
-
-主内存与工作内存交互
+##### 线程-交互
 
 ```
 lock（锁定）：作用于主内存变量，把一个变量标识为一条线程独占状态。
@@ -49,11 +44,10 @@ write（写入）：作用于主内存变量，把 store 操作从工作内存�
 
 ```
 
-## Happen-Before（先行发生规则）
+##### 线程-Happen-Before
 
-分析一个并发程序是否安全，依赖分析。
-
-Happen-Before被翻译成先行发生原则，意思就是当A操作先行发生于B操作，则在发生B操作的时候，操作A产生的影响能被B观察到，“影响”包括修改了内存中的共享变量的值、发送了消息、调用了方法等。
+````
+先行发生原则，A操作比B操作先执行，则在发生B操作的时候，操作A产生的影响能被B观察到，“影响”包括修改了内存中的共享变量的值、发送了消息、调用了方法等。
 
 　　Happen-Before的规则有以下几条
 
@@ -66,4 +60,111 @@ Happen-Before被翻译成先行发生原则，意思就是当A操作先行发生
   - 对象中止规则（Finalizer Rule）：一个对象的初始化方法先于一个方法执行Finalizer()方法
   - 传递性（Transitivity）：如果操作A先于操作B、操作B先于操作C,则操作A先于操作C
 
-　　以上就是Happen-Before中的规则。通过这些条件的判定，仍然很难判断一个线程是否能安全执行，毕竟在我们的时候线程安全多数依赖于工具类的安全性来保证。想提高自己对线程是否安全的判断能力，必然需要理解所使用的框架或者工具的实现，并积累线程安全的经验。
+````
+
+##### 线程-创建
+
+方式一:继承Runnable
+
+```JAVA
+public static void main(String[] args) {
+    //1.新建对象,将目标类传给Thread类
+    Thread thread = new Thread(new Main());
+    //调用thread.start();
+    thread.start();
+}
+//覆盖方法
+@Override
+public void run(){
+    for(int i = 0 ; i < 10000 ; i ++ ){
+        System.out.println(i+"A");
+    }
+}
+
+```
+
+方式二:继承Thread
+
+```JAVA
+public class A extends Thread{
+    public static void main(String[] args) {
+        Main main = new Main();//1.新建对象
+        main.start();
+    }
+public void run(){
+      for(int i = 0 ; i < 10000 ; i ++ ){
+       System.out.println(i+"A");
+     }
+}
+}
+
+```
+
+方式三:匿名内部类
+
+```
+new Thread(new Runnable() {
+			@Override
+	public void run() {
+				for (int i = 0; i < 10000; i++) {
+			System.out.println(i);
+		}
+	}
+}).start();
+```
+
+##### 线程-方法
+
+```
+sleep(): 					强迫一个线程睡眠Ｎ毫秒。
+
+yield():					线程让步
+
+isAlive(): 					判断一个线程是否存活。
+
+join(): 					调用Join的方法先被执行。
+
+activeCount(): 				程序中活跃的线程数。
+
+enumerate(): 				枚举程序中的线程。
+
+currentThread(): 			得到当前线程。
+
+isDaemon(): 				一个线程是否为守护线程。
+
+setDaemon(): 				设置一个线程为守护线程。
+
+setName(): 					为线程设置一个名称。
+
+wait(): 					强迫一个线程等待。
+
+notify(): 					通知一个线程继续运行。
+
+setPriority(): 				设置一个线程的优先级。
+
+getPriority():				获取优先级
+```
+
+
+
+##### 线程-线程池
+
+线程池-入门理解
+
+<https://www.cnblogs.com/zhujiabin/p/5404771.html>
+
+```
+Java通过Executors提供四种线程池，分别为：
+newCachedThreadPool，newCachedThreadPool，newScheduledThreadPool，newSingleThreadExecutor
+
+newCachedThreadPool			创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+
+newCachedThreadPool 		创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+
+newScheduledThreadPool 		创建一个定长线程池，支持定时及周期性任务执行。
+
+newSingleThreadExecutor 	创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+```
+
+
+

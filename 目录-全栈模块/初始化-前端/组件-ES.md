@@ -538,3 +538,140 @@ $('select').click(function() {
 
 
 
+###### 处理非法字符
+
+正则
+
+```JS
+var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥&*（）——|{}【】‘；：”“'。，、？]")
+```
+
+判断
+
+```JS
+/**
+	功能：
+		功能1:判断是否含有非法字符串
+		功能2:删除所有非法字符
+	参数:
+		参数1:str:需要处理的字符串
+		
+	返回值:
+    	result.str:过滤后的字符串
+		result.status:是否含有非法字符
+*/
+
+function strFilter(str) {
+    let result = {
+        str:'',
+        status:false
+    }
+    var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")
+    var rs = "";
+    for (var i = 0; i < str.length; i++) {
+        if(str.substr(i, 1).match(pattern) != null){
+            result.status = true
+        }
+        rs = rs + str.substr(i, 1).replace(pattern, '');
+    }
+    result.str=rs
+    return result;
+}
+```
+
+###### 高亮文字
+
+```JS
+/**
+函数描述
+	功能:高亮关键字
+	参数:
+		参数一(keyword):需要高亮的关键字
+		参数二(selector):一个选择器，需要高亮的区域
+			ex:highLight(..,"#select",...),#select下的内容会被高亮
+		参数三(style):一个css的class，暂时不支持style
+	返回值:Null
+*/
+
+function highLight(keyword,selector,style) {
+    const content = document.getElementsByTagName(selector)[0];
+    const text = content.innerHTML;
+    const string = text.split(keyword);
+    content.innerHTML = string.join(`<span class="${style}">` + keyword + '</span>');
+}
+```
+
+###### 字符转换
+
+转Unicode
+
+```JS
+/**
+	功能:把中文转换成Unicode
+	参数一：需要转换的字符串
+	返回值:
+		result.value:
+			描述:成功返回的值，失败为空
+			类型:字符串
+		result.status:
+			描述:转换状态,true--成功,false--失败
+			类型:Boolean
+*/
+function toUnicode(string) {
+    let result = {
+        value:null,
+        status:false
+    }
+    var str = '';
+    if (string == ''){
+        result.status = false
+        return result;
+    }
+    else{
+        for (var i = 0; i < datastringlength; i++) {
+            str += "\\u" + parseInt(string[i].charCodeAt(0), 10).toString(16);
+        }
+        result.value = str
+        result.status = true
+    }
+
+    return result;
+}
+```
+
+转中文
+
+```JS
+/**
+	功能:把Unicode转换成中文
+	参数一：需要转换的Unicode
+	返回值:
+		result.value:
+			描述:成功返回的值，失败为空
+			类型:字符串
+		result.status:
+			描述:转换状态,true--成功,false--失败
+			类型:Boolean
+*/
+function toChinese(string) {
+    let result = {
+        value:null,
+        status:false
+    }
+    string = string.split("\\u");
+    var str = '';
+    if (string == ''){
+        result.status = false
+        return result
+    };
+    else{
+        for (var i = 0; i < string.length; i++) {
+            str += String.fromCharCode(parseInt(string[i], 16).toString(10));
+        }
+        result.value = str
+        result.status = true
+        return result;
+    }
+}
+```
+
