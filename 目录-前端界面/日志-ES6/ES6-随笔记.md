@@ -77,7 +77,6 @@ test = new Proxy(test, {
 			key：键
 			return:如果不返回值,将获取不到任何对象
         */
-        
         return target[key];
     },
     set(target,key,value){
@@ -93,12 +92,4 @@ test = new Proxy(test, {
 test.name = "小黑"
 console.log(test.name);
 ```
-
-#### Ajax
-
-```
-
-```
-
-
 

@@ -530,24 +530,6 @@ public class MyListener implements HttpSessionBindingListener {
 
 ```
 
-### Tool-分页
-
-配置
-
-```JAVA
-@EnableTransactionManagement
-@Configuration
-public class MybatisPlusConfig {
-
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
-}
-
-
-```
-
 使用
 
 ```JAVA
@@ -576,5 +558,11 @@ Enumeration em = request.getParameterNames();
     String name = (String) em.nextElement();
     String value = req.getParameter(name);
 }
+```
+
+### Tools-静态变量注入
+
+```
+
 ```
 

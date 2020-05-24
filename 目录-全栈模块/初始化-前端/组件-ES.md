@@ -675,3 +675,96 @@ function toChinese(string) {
 }
 ```
 
+###### 滚动监听
+
+````JS
+/*
+	功能:
+		处理兼容性问题
+		获取在Y轴上滚动的距离
+	返回值:
+		(int)scrollTop:滚动条距离顶部的距离
+*/
+getScrollTop() {
+
+    var scrollTop = 0,
+        bodyScrollTop = 0,
+        documentScrollTop = 0;
+    
+    if (document.body) {
+        bodyScrollTop = document.body.scrollTop;
+    }
+
+    if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop;
+    }
+
+    scrollTop = bodyScrollTop - documentScrollTop > 0 ?
+        bodyScrollTop :
+    documentScrollTop;
+
+    return scrollTop;
+}
+
+ /*
+	功能:
+		处理兼容性问题
+		获取浏览器窗口当前高度
+	返回值:
+		(int)scrollTop:滚动条距离顶部的距离
+*/
+    getHeight() {
+        var scrollHeight = 0,
+            bodyScrollHeight = 0,
+            documentScrollHeight = 0;
+
+        if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+        }
+
+        if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+        }
+
+        Height =
+            bodyScrollHeight - documentScrollHeight > 0 ?
+            bodyScrollHeight :
+        documentScrollHeight;
+
+        return Height;
+    }
+
+        //浏览器视口的高度
+
+getWindowHeight() {
+
+   var windowHeight = 0;
+   if (document.compatMode == "CSS1Compat") {
+      windowHeight = document.documentElement.clientHeight;
+   } else {
+      windowHeight = document.body.clientHeight;
+   }
+	return windowHeight;
+   }
+
+````
+
+###### 监听窗口改变
+
+```JS
+window.onresize = function(){
+}
+```
+
+#### ES-属性
+
+###### 页面属性
+
+<https://blog.csdn.net/jarniyy/article/details/80423813>
+
+```
+window.screen.height:浏览器目前高度，可以动态获取
+window.screen.weight:浏览器目前宽度，可以动态获取
+document.body.offsetWidth:浏览器总高度
+```
+

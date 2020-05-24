@@ -3,8 +3,13 @@
 ##### some()
 
 ```js
-#some方法查找数组中是否有满足条件的元素
-返回:		Boolean
+/* 
+    功能:查找数组中是否含有某个值
+    参数:回调函数作为判断条件
+    返回值:
+        true:该值存在
+        false:该值不存在
+*/
 var arr = [1, 2, 3, 4]
 var result = arr.some(function(value) {
     return value == 9
@@ -28,7 +33,12 @@ console.log(result);
 ##### find()
 
 ```js
-#查找符合条件的数
+/* 
+	功能:查找数组中符合条件的值
+	参数:回调函数作为判断条件
+	返回值:
+		Object:符合条件的值
+*/
 返回:		一个符合条件元素
 var num = [10,3,5,15,100,1].find(function(elem, index){    
     return elem>=15;
@@ -39,8 +49,12 @@ console.log(num)     // 15
 ##### findIndex() 
 
 ```JS
-#查找数组中第一个大于等于15的元素的位置
-#返回索引
+/* 
+	功能:查找数组中第一个大于等于15的元素的位置
+	参数:回调函数作为判断条件
+	返回值:
+		int:该数的索引
+*/
 var num = [10,3,5,15,100,1].findIndex(function(e, i){    // 15
     return elem>=15;
 });
@@ -113,38 +127,40 @@ arr.reverse()
 ##### slice
 
 ```js
+/* 
+	模型:slice(n,m)
+	功能:
+		1.删除元素
+	参数:
+		(int)n:数组下标
+		(int)m:数组下标
+		说明:截取从n到m的数
+	返回值:
+		object[]：截取后的数组
+	注意
+		1.参数m可以是负数
+		2.n>m,不能等于
+*/
 
-返回:		选定元素的新数组
-
-函数原型：slice(n,m)
-
-    仅有一个参数	删除前n+1个元素
-    有n和m,删除n到m个元素
-	当n为负数，反向删除元素
-！该数超过数组最大长度，返回所有元素
-
-    
-情形一:单个参数
-
-var arr = [1,2,3]
-console.log(arr.slice(1));
-从第二位开始截取数组，输出[2,3]数组
-
-情形二:两个个参数
-  var arr = [1,2,3,4]
-  console.log(arr.slice(1,2));	
 ```
 
 ##### splice
 
 ```JS
-#从数组中同时添加和删除项目，然后返回被删除的项目。
-返回:被截取的的元素
-特点:原数组有添加删除效果
-函数原型:array.splice(index,howmany,item1,.....,itemX)
-index:				删除的起始下标
-howmany:			删除多少个，为0会全部删除
-item1...:			需要添加的元素
+/* 
+	模型:函数原型:array.splice(index,howmany,item1...)
+	功能:
+		1.删除元素
+		2.获得一个新数组
+		3.添加元素
+		4.替换元素
+	参数:
+		(int)index:			删除的起始下标
+		(int)num:			删除多少个，为0会全部删除
+		(string)item1:		需要添加的元素
+	返回值:
+		object[]：			一个新的数组
+*/
 var arr = ["apple","banana","pear","peach"]
 arr.splice(1,2,"car")
 //删除"banana","pear",并添加"car"
@@ -153,14 +169,16 @@ arr.splice(1,2,"car")
 ##### foreach
 
 ```js
-#定义
-array.foreach((数组当前项的值，数组当前的索引，数组对象本身)=>{})
-array.foreach((e,i,array)=>{})
-数组有多少个元素，就会被执行多少次
-
-使用：
-	1.可以对数组和对象使用
-    2.为数组执行一次回调函数
+/* 
+	模型:array.foreach((e,i,arr)=>{})
+	功能:
+		1.迭代数组
+	参数:
+		(int)e:				数组当前项的值
+		(int)i:				数组当前的索引
+		(arr[])arr:			数组对象本身
+	返回值:Null
+*/
 ```
 
 
@@ -176,59 +194,33 @@ unshift			#向数组开头添加元素
 shift			#向数组开头删除元素
 ```
 
-### 对象遍历
-
-##### for in
+##### 对象遍历
 
 ```js
+for (let item in object) {}
 
-let object = {
-    name: 'wang',
-    age: 18
-}
+for (let o of obj) {}
 
-for (let item in object) {
-    #	item相当于key
-    #	Object[item]相当于遍历key所对应的value
-    console.log(item)  			//  'name','age'
-    console.log(object[item]) 	//	'wang',18
-}
+
+遍历Key
+Object.keys(object) 	
+
+遍历values
+Object.values(object)	
+
+遍历值和对象
+console.log(Object.entries(object))
 ```
 
-## 
 
 
-
-
-
-#### Object.key
-
-```JS
-#只遍历key
-Object.keys(object) 	#	'name','age'
-```
-
-#### Object.values
-
-```JS
-#只遍历values
-Object.values(object)	#	'wang',18
-```
-
-#### Object.entries
-
-```js
-#遍历值和对象
-console.log(Object.entries(object)) //['name', 'wang'],['age', 18]
-```
-
-### Iterator
+##### Iterator
 
 ```js
 定义:iterator是接口，为不同的数据结构提供统一的访问机制
 ```
 
-#### 工作原理
+##### 工作原理
 
 ```
 1.  创建一个指针对象，指向数据结构的起始位置。
@@ -246,7 +238,7 @@ console.log(Object.entries(object)) //['name', 'wang'],['age', 18]
 
 
 
-#### 具备接口的对象
+具备接口的对象
 
 ```
 Array
@@ -256,16 +248,14 @@ map容器
 String
 ```
 
-#### 特性
+##### for..of
 
 ```
-for..of..
-具备接口的元素可用for of遍历
-创建一个指针对象，指向数据结构的起始位置。
-第一次调用next方法，指针自动指向数据结构的第一个成员
-不断调用next方法，指针会往后移动，直到指向最后的成员
-每次调用next方法返回一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}
-
+1.具备接口的元素可用for of遍历
+2.创建一个指针对象，指向数据结构的起始位置。
+3.第一次调用next方法，指针自动指向数据结构的第一个成员
+4.不断调用next方法，指针会往后移动，直到指向最后的成员
+5.每次调用next方法返回一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}
 ```
 
 

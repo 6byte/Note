@@ -41,3 +41,21 @@
 理解:提供从文件网络读取数据的渠道
 ```
 
+### transferFrom
+
+文件复制
+
+```java
+String sourcePath = "G:\\tmp\\Bootstrap.jpg";//源文件
+String targetPath = "G:\\text\\B.jpg";//将要复制到的地址
+FileInputStream is = new FileInputStream(sourcePath);
+FileOutputStream os = new FileOutputStream(targetPath);
+
+//通过通道进行复制
+FileChannel isChannel = is.getChannel();
+FileChannel osChannel = os.getChannel();
+
+//基于通道复制，最大单个文件小于2g
+osChannel.transferFrom(isChannel, 0, isChannel.size());
+```
+
