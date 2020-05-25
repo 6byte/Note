@@ -336,9 +336,7 @@ var	animateClass = [{
 		 'rotateIn', 'rotateInDownLeft', 'rotateInDownRight',
 		'rotateInUpLeft', 'rotateInUpRight',
 		'slideInDown', 'slideInLeft', 'slideInRight', 'rollIn',
-		
-	],
-},
+	],},
 {
     //animate滑出样式
 	animateOut: [
@@ -350,11 +348,7 @@ var	animateClass = [{
 		'rotateOut', 'rotateOutDownLeft', 'bounceOutUp', 'rollOut',
 		'lightSpeedOut','flipOutY', 'hinge' ,'flipOutY','lightSpeedOut',
 		'slideOutRight'
-	]
-}
-		
-		
-	]
+	]}]
 ```
 
 ###### 数组操作
@@ -367,8 +361,7 @@ var goods = [
 	{id:1,name:'books',price:12.2},
 	{id:2,name:'pens',price:2.2},
 	{id:3,name:'mouse',price:42.2},
-	{id:4,name:'keyboard',price:62.2},
-]
+	{id:4,name:'keyboard',price:62.2},]
 
 var newArr = goods.filter((i)=>{
 	return id != i.id
@@ -382,9 +375,7 @@ var goods = [
 	{id:4,name:'keyboard',price:62.2},
 ]
 
-var newArr = goods.filter((i)=>{
-	return id == i.id
-})
+var newArr = goods.filter((i)=>{return id == i.id})
 ```
 
 ###### VUE分页
@@ -411,26 +402,22 @@ var newArr = goods.filter((i)=>{
 
 ```JS
 <template>
-  <div>
-    <table class="table table-hover">
+  <div><table class="table table-hover">
         //标题部分
-      <thead>
-        <tr>
+      <thead><tr>
             <th class="number">序号</th>
             <th>题目</th>
             <th class="del">删除</th>
-        </tr>
-      </thead>
+        </tr></thead>
       <tbody>
 <tr v-for="(item,index) in page_arrs" :key="index">
             <th>{{index+1}}</th>
-            <td>{{item.name}}</td>
-<td>
-            <a>删除</a>
-</td>
-</tr>
-</tbody>
-    </table>
+            <td>{{item.name}}</td><td><a>删除</a>
+</td></tr></tbody>
+</table>
+/*
+	功能:点击翻页
+*/
 
 <div>
       <button @click="primaryPage">首页</button>
@@ -493,8 +480,7 @@ export default {
 };
 </script>
 
-<style scoped lang='less'>
-</style>
+<style scoped lang='less'></style>
 ```
 
 ###### 全屏滚动
@@ -529,8 +515,6 @@ $("select").click(function() {
     return false;
   });
   
-  
-  
 $('select').click(function() {
     $('html,body').animate({ scrollTop: 			  $("#history").offset().top - 100 }, 200)
 });
@@ -560,7 +544,6 @@ var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥&*（）—�
     	result.str:过滤后的字符串
 		result.status:是否含有非法字符
 */
-
 function strFilter(str) {
     let result = {
         str:'',
@@ -587,12 +570,11 @@ function strFilter(str) {
 	功能:高亮关键字
 	参数:
 		参数一(keyword):需要高亮的关键字
-		参数二(selector):一个选择器，需要高亮的区域
+		参数二(selector):输入选择器，如#id
 			ex:highLight(..,"#select",...),#select下的内容会被高亮
 		参数三(style):一个css的class，暂时不支持style
 	返回值:Null
 */
-
 function highLight(keyword,selector,style) {
     const content = document.getElementsByTagName(selector)[0];
     const text = content.innerHTML;
@@ -634,7 +616,6 @@ function toUnicode(string) {
         result.value = str
         result.status = true
     }
-
     return result;
 }
 ```
@@ -690,19 +671,15 @@ getScrollTop() {
     var scrollTop = 0,
         bodyScrollTop = 0,
         documentScrollTop = 0;
-    
     if (document.body) {
         bodyScrollTop = document.body.scrollTop;
     }
-
     if (document.documentElement) {
         documentScrollTop = document.documentElement.scrollTop;
     }
-
     scrollTop = bodyScrollTop - documentScrollTop > 0 ?
         bodyScrollTop :
     documentScrollTop;
-
     return scrollTop;
 }
 
@@ -752,8 +729,7 @@ getWindowHeight() {
 ###### 监听窗口改变
 
 ```JS
-window.onresize = function(){
-}
+window.onresize = function(){}
 ```
 
 #### ES-属性

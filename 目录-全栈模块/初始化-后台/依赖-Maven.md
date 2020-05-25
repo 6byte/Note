@@ -104,6 +104,12 @@
     <artifactId>aspectjweaver</artifactId>
     <version>1.8.7</version>
 </dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>5.2.3.RELEASE</version>
+</dependency>
 ```
 
 ### Maven-Jsoup
