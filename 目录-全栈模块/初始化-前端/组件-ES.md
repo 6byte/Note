@@ -732,6 +732,38 @@ getWindowHeight() {
 window.onresize = function(){}
 ```
 
+###### 倒计时
+
+```JS
+/*
+	功能:实现倒计时,返回从year到现在的时间差
+	参数:
+		(number)year:从未来的某一年开始倒计时
+				要求:比现在的年份要大
+	返回值:
+		str:倒计时的时分秒
+*/
+function counter(year) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var date2 = new Date(year, 11, 30, 23, 59, 59);
+    /*转换成秒*/
+    var time = (date2 - date) / 1000;
+    var day = Math.floor(time / (24 * 60 * 60))
+    var hour = Math.floor(time % (24 * 60 * 60) / (60 * 60))
+    var minute = Math.floor(time % (24 * 60 * 60) % (60 * 60) / 60);
+    var second = Math.floor(time % (24 * 60 * 60) % (60 * 60) % 60);
+    var str = 2021 + "年还剩" + day + "天" + hour + "时" + minute + "分" + second + "秒";
+    return str
+}
+
+			window.setInterval(counter, 1000);
+```
+
+
+
+
+
 #### ES-属性
 
 ###### 页面属性

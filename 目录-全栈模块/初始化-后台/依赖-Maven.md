@@ -202,19 +202,18 @@ Maven-JWT
 
 ### Maven-JWT
 
+<https://www.jianshu.com/p/fe67b4bb6f2c>
+
 ```
-
-
 <dependency>
     <groupId>com.auth0</groupId>
     <artifactId>java-jwt</artifactId>
-    <version>3.4.1</version>
+    <version>3.2.0</version>
 </dependency>
-    
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
     <artifactId>jjwt</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
