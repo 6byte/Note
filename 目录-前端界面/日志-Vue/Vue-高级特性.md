@@ -4,18 +4,15 @@
 
 #### 重要概念
 
-```
-理解:路由就是通过路径访问组件
-知识点:路由守卫，路由参数
-```
 
-#### 路由传数
+
+#### 
 
 ##### PATH传参
 
 ```js
 
-query传参: 
+
 	1.简单易用
 传递
 this.$router.push({
@@ -107,11 +104,10 @@ const routes = [{
 path: '/about',name: 'about',
 //子路由,嵌套路由定义
 children:[{
-            //为了区别,上层路径最好与父路由保持一致
-path:'/about/child',
-component: () => import( '../views/Children.vue')}],
-    //此处省略父路由代码
-    ....
+        //为了区别,上层路径最好与父路由保持一致
+        path:'/about/child',
+        component: () => import( '../views/Children.vue')}],
+        //此处省略父路由代码
   }
 ]
 ```

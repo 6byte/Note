@@ -228,14 +228,57 @@ public class Tools {
 }
 ```
 
-### Tool-生成UUID
+### Tool-生成ID
+
+生成UUID
 
 ```JAVA
+
+
 public static String getId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replace("-" , "");
     }
 ```
+
+生成数字ID
+
+```JAVA
+public class ID
+{
+
+    private static long tmpID = 0;
+
+    private static boolean tmpIDlocked = false;
+
+    public static long getId()
+    {
+        long ltime = 0;
+        while (true)
+        {
+            if(tmpIDlocked == false)
+            {
+                tmpIDlocked = true;
+                //当前：（年、月、日、时、分、秒、毫秒）*10000
+                ltime = Long.valueOf(new SimpleDateFormat("yyMMddhhmmssSSS").format(new Date()).toString()) * 10000;
+                if(tmpID < ltime)
+                {
+                    tmpID = ltime;
+                }
+                else
+                {
+                    tmpID = tmpID + 1;
+                    ltime = tmpID;
+                }
+                tmpIDlocked = false;
+                return ltime;
+            }
+        }
+    }
+}
+```
+
+
 
 ### Tool-生成JWT
 
@@ -257,7 +300,6 @@ public class JwtUtil {
 
     /**
      * 生成签名，15分钟过期
-     *
      * @param **username**
      * @param **password**
      * @return
@@ -372,42 +414,7 @@ public class A implements Runnable {
 }
 ```
 
-### Tool-LongID
 
-```JAVA
-public class ID
-{
-
-    private static long tmpID = 0;
-
-    private static boolean tmpIDlocked = false;
-
-    public static long getId()
-    {
-        long ltime = 0;
-        while (true)
-        {
-            if(tmpIDlocked == false)
-            {
-                tmpIDlocked = true;
-                //当前：（年、月、日、时、分、秒、毫秒）*10000
-                ltime = Long.valueOf(new SimpleDateFormat("yyMMddhhmmssSSS").format(new Date()).toString()) * 10000;
-                if(tmpID < ltime)
-                {
-                    tmpID = ltime;
-                }
-                else
-                {
-                    tmpID = tmpID + 1;
-                    ltime = tmpID;
-                }
-                tmpIDlocked = false;
-                return ltime;
-            }
-        }
-    }
-}
-```
 
 ### Tool-Session监听
 
@@ -452,19 +459,15 @@ public class MywebConfig implements WebMvcConfigurer {
 
 其他
 
-```
+```java
 public class MyListener implements HttpSessionBindingListener {
     @Override
     public void valueBound(HttpSessionBindingEvent event) {
-
     }
-
     @Override
     public void valueUnbound(HttpSessionBindingEvent event) {
-
     }
 }
-
 ```
 
 ### Tool-Generater
@@ -552,7 +555,7 @@ public List index(String uname) {
 
 ### Tools-获取所有请求信息
 
-```
+```JAVA
 Enumeration em = request.getParameterNames();
  while (em.hasMoreElements()) {
     String name = (String) em.nextElement();
@@ -560,9 +563,11 @@ Enumeration em = request.getParameterNames();
 }
 ```
 
-### Tools-静态变量注入
+### Tools-时间格式
 
-```
-
+```JAVA
+ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+ String currentTime = sdf.format(new Date());
+//结果是:2020-05-29
 ```
 
