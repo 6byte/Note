@@ -152,12 +152,6 @@ body{
 
 ```
 
-### 引用外部样式
-
-```HTML
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-```
-
 ### 自定义滚动条
 
 ```CSS

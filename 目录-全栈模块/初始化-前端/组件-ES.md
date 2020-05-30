@@ -1,18 +1,19 @@
 #### ES5-应用组件
 
-###### 禁止拖拽图片
+
+
+###### 页面基础事件
+
+禁止拖拽图片
 
 ```JS
 function imgdragstart() {
 	return false;
 }
 for (i in document.images) document.images[i].ondragstart = imgdragstart;
-
 ```
 
-
-
-###### 禁用文本选择
+禁用文本选择
 
 ```js
 document.addEventListener('selectstart',function(e){
@@ -20,7 +21,7 @@ document.addEventListener('selectstart',function(e){
 })
 ```
 
-###### 阻止右键菜单
+阻止右键菜单
 
 ```JS
 document.addEventListener('contextmenu',function(e){
@@ -45,32 +46,11 @@ document.addEventListener('mousemove',function(e){
 })
 ```
 
-###### 复制粘贴
+
+
+###### 获取中文时间
 
 ```js
---#html代码
-//将要复制的内容必须加一个id属性
-<span id="target">将要复制的内容</span>
-//绑定的事件上，需要有	data-clipboard-target="#target"属性
-<button class="btn" data-clipboard-target="#target" id="copy_btn">点击复制</button>  
-
---#JS代码
- $(document).ready(function(){
-     //获取对象
-        var clipboard = new Clipboard('#copy_btn');  
-   
-        clipboard.on('success', function(e) { 
-            //清除选中状态
-            e.clearSelection();       
-        });    
-    });
-```
-
-
-
-###### 获取时间
-
-```
 function writeCurrentDate() {
 	var now = new Date();
 	var year = now.getFullYear(); //得到年份
@@ -98,19 +78,6 @@ function writeCurrentDate() {
 	// var timer = setTimeout("writeCurrentDate()", 1000);
 	return time;
 }
-```
-
-
-
-标准注释
-
-```JS
-/**
-* [函数名	作用]
-* @param {类型} 参数名 		[作用]
-* @param {类型} 参数名 		[作用]
-* @return {返回类型}		 [作用]
-* */
 ```
 
 ###### 全屏页面
@@ -292,20 +259,20 @@ function throttle(func, wait ,type) {
 
 ```JS
 window.onscroll = function() {
-				//变量scrollTop是滚动条滚动时，距离顶部的距离
-				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-				//变量windowHeight是可视区的高度
-				var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-				//变量scrollHeight是滚动条的总高度
-				var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-				//滚动条到底部的条件
-				if (scrollTop + windowHeight == scrollHeight) {
-					//写后台加载数据的函数
-					this.show=!this.show
-					alert('滚动到底部')
-					console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
-				}
-			}
+    //变量scrollTop是滚动条滚动时，距离顶部的距离
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    //变量windowHeight是可视区的高度
+    var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    //变量scrollHeight是滚动条的总高度
+    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    //滚动条到底部的条件
+    if (scrollTop + windowHeight == scrollHeight) {
+        //写后台加载数据的函数
+        this.show=!this.show
+        alert('滚动到底部')
+        console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+    }
+}
 ```
 
 ###### 随机数生成
@@ -315,7 +282,6 @@ window.onscroll = function() {
 function randH(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
 var num = Math.floor(Math.random() * 10 + 1);
 ```
 
@@ -374,7 +340,6 @@ var goods = [
 	{id:3,name:'mouse',price:42.2},
 	{id:4,name:'keyboard',price:62.2},
 ]
-
 var newArr = goods.filter((i)=>{return id == i.id})
 ```
 
@@ -784,6 +749,54 @@ function counter(year) {
             top: document.body.scrollTop
         }
     }
+```
+
+###### 点击复制
+
+思路
+
+```
+1.将textarea获取input的样式去掉
+2.通过execCommand()获取input中的值
+```
+
+实现
+
+```HTML
+<head>
+	<style type="text/css">
+        /*都是必须的的*/
+	   .wrapper {position: relative;}
+	   textarea {position: absolute;top: 0;left: 0;opacity: 0;}
+	</style>
+</head>
+<body>
+    <div class="wrapper">
+       <p id="text">我是需要复制的文本内容</p>
+       <textarea id="input">这是幕后黑手</textarea>
+       <button onclick="copyText()">copy<tton>
+    </div>
+</body>
+<script type="text/javascript">
+/* 
+   函数名:copyText
+	 功能:实现复制
+	 逻辑:
+	 	1.获取p标签中的内容
+	 	2.获取输入框中的内容
+	 	3.将P标签的内容传给输入框
+	 	4.选中文本
+	 	5.复制
+	 解释:execCommand()命令只能复制输入框中的内容
+*/
+	function copyText() {
+        var text = document.getElementById("text").innerHTML;
+        var input = document.getElementById("input");
+        input.value = text;
+        input.select();//选中文本
+        document.execCommand("copy");
+    }
+</script>
 ```
 
 

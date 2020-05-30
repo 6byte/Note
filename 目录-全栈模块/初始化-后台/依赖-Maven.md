@@ -125,16 +125,6 @@
 
 ```
 
-Maven-JWT
-
-```
-<dependency>
-      <groupId>com.auth0</groupId>
-      <artifactId>java-jwt</artifactId>
-      <version>3.4.0</version>
-</dependency>
-```
-
 ### Maven-MarkDown
 
 ```
@@ -160,6 +150,7 @@ Maven-JWT
 ### Maven-Mysql
 
 ```
+<!-- Mysql jar包 -->
 <dependency>
     <groupId>mysql</groupId>
     	<artifactId>mysql-connector-java</artifactId>
@@ -170,6 +161,7 @@ Maven-JWT
 ### Maven-Mybatis-Plus
 
 ```
+<!-- Mybatis-Plus jar包 -->
 <dependency>
     <groupId>org.apache.velocity</groupId>
     <artifactId>velocity-engine-core</artifactId>
@@ -193,6 +185,7 @@ Maven-JWT
 ### Maven-AliYun
 
 ```
+<!-- 阿里云存储 jar包 -->
 <dependency>
     <groupId>com.aliyun.oss</groupId>
     <artifactId>aliyun-sdk-oss</artifactId>
@@ -205,6 +198,7 @@ Maven-JWT
 <https://www.jianshu.com/p/fe67b4bb6f2c>
 
 ```
+<!-- jwt jar包 -->
 <dependency>
     <groupId>com.auth0</groupId>
     <artifactId>java-jwt</artifactId>
@@ -236,5 +230,18 @@ Maven-JWT
     <artifactId>spring-boot-starter-test</artifactId>
     <scope>test</scope>
 </dependency>
+```
+
+### Maven-Cglib
+
+```
+<!-- cglib jar包 -->
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>3.2.12</version>
+</dependency>
+
+
 ```
 
