@@ -50,7 +50,7 @@
 ### Maven-Mybatis
 
 ```
-<!-- mybatis依赖 -->
+<!-- mybatis依赖开始 -->
 <dependency>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis</artifactId>
@@ -70,6 +70,7 @@
     	<artifactId>mybatis-spring-boot-starter</artifactId>
     <version>1.1.1</version>
 </dependency>
+<!-- end -->
 ```
 
 ### Maven-WebSocket
@@ -242,6 +243,18 @@
     <version>3.2.12</version>
 </dependency>
 
+<!-- END -->
+```
 
+### Maven-PageHelper
+
+```
+<!-- 分页插件 -->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.10</version>
+</dependency>
+<!-- END -->
 ```
 

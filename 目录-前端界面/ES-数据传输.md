@@ -2,6 +2,27 @@
 
 ### Vue-Axios
 
+```js
+axios.get(ulr,{
+    params:{},
+    headers:{}
+})
+
+传递三个参数
+发送是json数据
+axios.post(url,{
+    username:name,
+},{
+    //可以不传
+    
+    params:{
+        //会拼接到URL中
+    }
+})
+```
+
+
+
 ### ES-JSONP
 
 ### JWT

@@ -17,10 +17,6 @@
 state: {
 	view:100
 }
-更改-mutations
-
---定义
-
 ```
 
 
