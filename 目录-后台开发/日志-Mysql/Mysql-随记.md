@@ -1,51 +1,62 @@
 ## Mysql-随记
 
+#### 将sql文件添加到数据库
 
+```mysql
+load data local infile '本地绝对路径' into table '表格'
+fields terminated by ',' lines terminated by '\n'
 
-##### Mysql-三大范式
-
-```
-https://www.bilibili.com/video/BV1jb411u7dj?p=50
-1.范式一:原子性，每一列都不可分割，如果能分，绝对不能放一个表中
-2.范式二:
-	1.如果通过(主键+其他键)可以确定唯一的一条信息
-	2.
-```
-
-##### Mysql-事务
-
+load data local infile:添加文件固定写法
+fields terminated by ',':通过 ','分隔每个语句
+lines terminated by '\n':通过 '\n'分隔每一行
 ```
 
-四大特征
-    1)原子性
-    2)一致性
-    3)隔离级别	
-    4)一致性
-存在问题:
-    :
-    :
+#### 优化语句
+
+```SQL
+关闭唯一性校验:SET UNIQUE_CHECK = 0
+
+order by null:不排序操作，提升效率
+
+优化or:
+	1.OR的两边都必须要用到索引
+	2.不能使用复合索引
+	3.没有索引应该考虑添加索引
+	4.使用union代替or
 ```
 
-存在问题
+#### 优化insert
+
+```mysql
+传统方案
+insert into tableA values('1','NAME')；
+insert into tableA values('2','NAMEA')；
+优化方案:
+insert into tableA values('1','NAME'),('2','NAMEA')
+```
+
+#### 优化排序
+
+```mysql
+MYSQL有两种排序方案:
+Using filesort:
+		1.性能:效率低
+		2.算法:
+			一次扫描算法：磁盘IO开销大
+			两次扫描算法：性能较低
+Using index:效率高
 
 
+2.ORDER BY:
+	1.多个字段排序要么都升序要么都降序
+	2.排序的顺序需要和索引的顺序一致
+	3.同样可以利用索引排序
+```
 
-| 问题 |                             现象                             |
-| :--: | :----------------------------------------------------------: |
-| 脏读 |          一个事务，读取到另一个事务中没有提交的数据          |
-| 虚读 |              同一个事务，两次读取到的数据不一样              |
-| 幻读 | 一个事务操作表，另一个事务添加数据，则第一个事务查询不到修改 |
-|      |                                                              |
+##### 查询缓存
 
-
-
-隔离级别
-
-|       类型       |          问题          | 效率 |
-| :--------------: | :--------------------: | :--: |
-| read uncommitted | 脏读，不可重复度，幻读 | 最高 |
-|  read committed  |    不可重复度，幻读    |  高  |
-| repeatable read  |        可重复读        |  低  |
-|   serializable   |     可解决所有问题     | 最低 |
-|                  |                        |      |
+```js
+show VARIABLES like 'query_cache_type'
+show VARIABLES like 'query_cache_size'
+```
 

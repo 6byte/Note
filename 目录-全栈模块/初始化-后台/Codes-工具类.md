@@ -283,121 +283,56 @@ public class ID
 ### Tool-生成JWT
 
 ```java
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+@Data
+public class Jwt {
 
-public class JwtUtil {
-    //过期时间
-    private static final long EXPIRE_TIME = 15 * 60 * 1000;
-    //私钥
-    private static final String TOKEN_SECRET = "privateKey";
 
-    /**
-     * 生成签名，15分钟过期
-     * @param **username**
-     * @param **password**
-     * @return
-     */
-    public static String sign(Long userId) {
+    /*
+     *   功能:设置认证token
+     *   参数:
+     *       map.id:         登录用户ID
+     *       map.subject:    登录用户名
+     *       map.author      用户权限信息
+     * */
+    public String createJwt(HashMap map,Long ttl,String key) {
         try {
-            // 设置过期时间
-            Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-            // 私钥和加密算法
-            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
-            // 设置头部信息
-            Map<String, Object> header = new HashMap<>(2);
-            header.put("Type" , "Jwt");
-            header.put("alg" , "HS256");
-            // 返回token字符串
-            return JWT.create()
-                    .withHeader(header)
-                    .withClaim("userId" , userId)
-                    .withExpiresAt(date)
-                    .sign(algorithm);
+//        设置失效时间
+            long now = System.currentTimeMillis();
+            Long exp = now + ttl;
+
+            JwtBuilder builder = Jwts.builder()
+                    .setId(map.get("id").toString())            //设置ID
+                    .setSubject(map.get("subject").toString())  //设置用户名
+                    .signWith(SignatureAlgorithm.HS256 , key)   // //设置签名
+                    .claim("author" , map.get("author"))
+                    .setExpiration(new Date(exp));              //设置失效时间
+            String token = builder.compact();
+            return token;                                       //返回token
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        catch (java.lang.Exception e) {
+            System.out.println(e);
         }
+        return null;
     }
 
-    /**
-     * 检验token是否正确
-     *
-     * @param **token**
-     * @return
-     */
-    public static Long verify(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
-            JWTVerifier verifier = JWT.require(algorithm).build();
-            DecodedJWT jwt = verifier.verify(token);
-            Long userId = jwt.getClaim("userId").asLong();
-            return userId;
-        }
-        catch (Exception e) {
-            return 0L;
-        }
+
+    /*
+     * 功能:解析token
+     * 参数:客户端传来的token
+     * 返回:claims或null	
+     * */
+
+
+    public Object parseJwt(String token,String key) {
+            Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+            return claims;
+
     }
 
-    public static void main(String[] args) {
-        JwtUtil util = new JwtUtil();
-        System.out.println(util.sign(456415l));
-    }
+
 }
-```
 
-### Tool-手动注入
-
-配置
-
-```JS
-@Component
-public class SpringConfig implements ApplicationContextAware {
-
-    private static ApplicationContext context;
-
-    @Override
-    public void setApplicationContext(ApplicationContext context) {
-        SpringConfig.context = context;
-    }
-
-    public static ApplicationContext getContext() {
-        return context;
-    }
-
-    public static <T> T getBean(String name) {
-        return (T) context.getBean(name);
-    }
-
-    public static <T> T getBean(String name , ApplicationContext applicationContext) {
-        return (T) applicationContext.getBean(name);
-    }
-
-    public static <T> T getBean(Class<T> clazz) {
-        Map<String, T> beanMaps = context.getBeansOfType(clazz);
-        if (beanMaps != null && !beanMaps.isEmpty()) {
-            return beanMaps.values().iterator().next();
-        } else {
-            return null;
-        }
-    }
-
-    public static <T> T getBean(Class<T> clazz , ApplicationContext applicationContext) {
-        Map<String, T> beanMaps = applicationContext.getBeansOfType(clazz);
-        if (beanMaps != null && !beanMaps.isEmpty()) {
-            return beanMaps.values().iterator().next();
-        } else {
-            return null;
-        }
-    }
-}
 ```
 
 使用
@@ -569,5 +504,79 @@ Enumeration em = request.getParameterNames();
  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
  String currentTime = sdf.format(new Date());
 //结果是:2020-05-29
+```
+
+### Tools-手动注入
+
+注入
+
+```JAVA
+ AbstractApplicationContext ac = (AbstractApplicationContext) SpringContextUtil.getApplicationContext();
+    MIndex mIndex = ac.getBean(Mapper接口.class);
+```
+
+定义工具类
+
+```JAVA
+/*
+	功能:
+		在多线程中注入mapper
+		在websocket中注入mapper
+*/
+
+@Component
+public class SpringContextUtil implements ApplicationContextAware {
+
+    /**
+     * 上下文对象实例
+     */
+    private static ApplicationContext applicationContext;
+
+    @Autowired
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    /**
+     * 获取applicationContext
+     *
+     * @return
+     */
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    /**
+     * 通过name获取 Bean.
+     *
+     * @param name
+     * @return
+     */
+    public static Object getBean(String name) {
+        return getApplicationContext().getBean(name);
+    }
+
+    /**
+     * 通过class获取Bean.
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T getBean(Class<T> clazz) {
+        return getApplicationContext().getBean(clazz);
+    }
+
+    /**
+    
+    功能:通过name,以及Clazz返回指定的Bean
+    参数:
+    	name:Bean的名字
+    	clazz:Bean的类
+     */
+    public static <T> T getBean(String name , Class<T> clazz) {
+        return getApplicationContext().getBean(name , clazz);
+    }
+}
 ```
 

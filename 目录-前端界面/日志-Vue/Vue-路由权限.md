@@ -59,17 +59,14 @@ app,apps,options,beforeHooks,resolveHooks,afterHooks,matcher,mode
 1.路由跳转两种方式,编程式，声明式，重点掌握编程式
 2.路由传递参数
 3.路由接受参数
+
+注意:如果	
 ```
 
-##### 编程式导航
-
-```
-概览：带参跳转，不带参跳转
-```
-
-带参跳转
+##### 跳转传递参数
 
 ```js
+带参跳转
 router.push({ 目标, params: {参数}})
 router.push({ name: 'user', params: { userId: '123' }})
 ```

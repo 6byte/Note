@@ -80,52 +80,6 @@ function writeCurrentDate() {
 }
 ```
 
-###### 全屏页面
-
-进入全屏
-
-```js
-//控制全屏
-function enterfullscreen() { //进入全屏
-    $("#fullscreen").html("退出全屏");
-    var docElm = document.documentElement;
-    //W3C
-    if(docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    }
-    //FireFox
-    else if(docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    }
-    //Chrome等
-    else if(docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
-    //IE11
-    else if(elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-    }
-}
-```
-
-退出全屏
-
-````JS
-function exitfullscreen() { //退出全屏
-    $("#fullscreen").html("切换全屏");
-    if(document.exitFullscreen) {
-    document.exitFullscreen();
-    } else if(document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-    } else if(document.webkitCancelFullScreen) {
-    document.webkitCancelFullScreen();
-    } else if(document.msExitFullscreen) {
-    document.msExitFullscreen();
-    }
-}
-
-````
-
 ###### 操作Cookies
 
 读取
@@ -797,6 +751,42 @@ function counter(year) {
         document.execCommand("copy");
     }
 </script>
+```
+
+###### 切换屏幕
+
+```JS
+/*
+	功能:全屏兼容性调用方案
+	参数:
+		ele:传入的参数值
+	注意:全屏必须通过用户点击才能调用
+*/
+function full(ele) {
+    if (ele.requestFullscreen) {
+        ele.requestFullscreen();
+    } else if (ele.mozRequestFullScreen) {
+        ele.mozRequestFullScreen();
+    } else if (ele.webkitRequestFullscreen) {
+        ele.webkitRequestFullscreen();
+    } else if (ele.msRequestFullscreen) {
+        ele.msRequestFullscreen();
+    }
+}
+
+ //退出全屏
+function exitfullscreen(ele) {
+    if(ele.exitFullscreen) {
+        ele.exitFullscreen();
+    } else if(ele.mozCancelFullScreen) {
+        ele.mozCancelFullScreen();
+    } else if(ele.webkitCancelFullScreen) {
+        ele.webkitCancelFullScreen();
+    } else if(ele.msExitFullscreen) {
+        ele.msExitFullscreen();
+    }
+}
+
 ```
 
 

@@ -157,6 +157,7 @@
     	<artifactId>mysql-connector-java</artifactId>
     <version>8.0.19</version>
 </dependency>
+<!-- end -->
 ```
 
 ### Maven-Mybatis-Plus
