@@ -1,5 +1,41 @@
 ## Mysql-系统设置
 
+#### 配置
+
+```mysql
+#查看配置
+cat /etc/my.cnf
+
+#修改配置
+vi /etc/my.cnf
+```
+
+#### 启动关闭
+
+启动
+
+```
+service mysqld start
+```
+
+关闭
+
+```
+service mysqld stop
+```
+
+重启
+
+```
+service mysqld restart
+```
+
+状态
+
+```
+service mysqld status
+```
+
 #### 密码修改
 
 ```mysql
@@ -11,11 +47,12 @@
 #### 开启远程连接
 
 ```
+远程LINUX主机操作
 1.use mysql;
 2.update user set host="%" where user="root";
 2.刷新权限：FLUSH PRIVILEGES;
 
-CMD远程连接
+Windows远程连接
 mysql -h yooven.xyz -P 3306 -u root -p00000000
 mysql -h 主机地址 -P 端口号 -u 用户名 -p 密码
 ```
