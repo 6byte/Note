@@ -165,7 +165,7 @@ show status like "innodb_row_lock%";查看锁的状态
 
 ### MYSQL-备份
 
-#### 将sql文件添加到数据库
+#### 备份SQL
 
 ```MYSQL
 load data local infile '本地绝对路径' into table '表格'
@@ -183,6 +183,8 @@ SQL语句中有大量分号，所以需要上面分隔符处理
 #mysqldump:备份数据，不同数据库之间迁移，备份内容:创建表，插入表的SQL语句
 #mysqlimport/source:导入mysqldump导出的文件
 ```
+
+
 
 ### MYSQL-索引
 
@@ -213,6 +215,11 @@ show index from tableA:查看索引
 
 ```
 日志类型:错误日志，二进制日志，查询日志，慢查询日志
+常用命令:
+	#查看日志状态
+	1.show master status;
+	#查看日志条数
+	2.show master logs;
 ```
 
 #### 错误日志
@@ -233,12 +240,6 @@ show variables like 'log_error%';
 	3.用于数据恢复
 	4.MSYQL主从复制
 默认:不开启，需要到配置文件中开启，并配置格式
-
-开启：
-	#指定日志文件前缀为sqlbin,生成的文件是sqlbin.0001...
-	log_bin = sqlbin 
-	#配置二进制日志格式
-	binlog_format = STATEMENT || ROW ||MIXED
 ```
 
 日志格式
@@ -255,12 +256,23 @@ MIXED
 	作用:以上两种日志的混合使用，
 ```
 
-
+#### 查询日志
 
 ```
-1.mysqlbinlog
-由于服务器生成的日志文件以二进制格式保存,用mysqlbinlog进行管理
+1.默认不开启
+2.记录所有SQL语句
+```
 
+#### 慢查询日志
+
+```
+1.默认关闭
+```
+
+删除日志
+
+```
+第一种方式:reset master
 ```
 
 ### MYSQL-缓存
@@ -274,5 +286,23 @@ show VARIABLES like 'query_cache_type';
 show VARIABLES like 'query_cache_size';
 #查询缓存空间
 show status like 'Qcache%';
+```
+
+### MYSQL-集群
+
+#### 主从复制
+
+```
+概念：
+	通过二进制文件作为载体，将主数据库和从数据库的内容保持一致
+	基于二进制文件完成的
+步骤
+	1.Master主库提交事务时，会把变更记录在二进制文件A.LOG中
+	2.主库推送A.LOG二进制文件到从库的中继日志
+	3.SLAVE重做中继日志的事件
+优势
+	1.主库出现问题，可以快速切换到从库提供服务
+	2.可以完成读写分离操作
+	3.分离备份
 ```
 

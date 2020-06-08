@@ -52,18 +52,6 @@ grant all privileges on *.* to '自定义用户名'@'%' with grant option;
 flush privileges;
 ```
 
-### 故障解决
-
-```MYSQL
-#Job for mysqld.service failed because the control process exited with error code.
-把/etc/my.cnf中的	datadir=/var/lib/mysql注视掉
-
-#mysqld: error while loading shared libraries: libnuma.so.1
-yum -y install numactl
-```
-
-
-
 
 
 ### 配置端口

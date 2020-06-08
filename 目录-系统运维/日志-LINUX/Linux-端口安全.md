@@ -23,6 +23,9 @@ systemctl start firewalld.service
 systemctl enable firewalld.service
 关闭开机自启动
 systemctl disable firewalld.service
+
+关闭防火墙
+service iptables stop
 ```
 
 
@@ -69,7 +72,7 @@ x：显示当前用户在所有终端下的进程。
 #### 命令->TOP
 
 ```
-说明:动态监视进程
+说明:动态监视进程,查看内存占用最高
 使用:		top
 ```
 

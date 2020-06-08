@@ -127,8 +127,6 @@ traffic，information，machinery，merchandise
 produce，scenery，vegetable，fruit，ice cream
 ```
 
-##### 
-
 
 
 
