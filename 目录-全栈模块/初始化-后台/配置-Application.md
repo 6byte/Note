@@ -74,3 +74,60 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
 
 
 
+## 配置-YML
+
+### 服务端
+
+```yml
+
+server:
+  port: 9090
+  #配置eureka serve
+eureka:
+
+    ##配置eureka client,是否需要配置取决于单服务端和多服务端
+  client:
+    register-with-eureka: false   #是否将自己注册到注册中心
+    fetch-registry: false        #是否从eureka中获取注册信息
+    #配置暴露给eurekaClient的请求地址
+    service-url:
+      defaultZone: http://127.0.0.1:{server.port}/eureka/
+```
+
+
+
+### 服务提供者
+
+```YML
+
+server:
+  port: 8081
+  
+   #注册到刚才那台Eureka Server地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9090/eureka/ 
+   #应用名字  
+spring:
+  application:
+    name: client-0
+```
+
+### 服务消费者
+
+```YML
+server:
+  port: 8082
+  
+   #注册到刚才那台Eureka Server地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9090/eureka/ 
+   #应用名字  
+spring:
+  application:
+    name: client-0
+```
+

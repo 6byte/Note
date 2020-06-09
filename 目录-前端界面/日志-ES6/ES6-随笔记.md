@@ -1,5 +1,31 @@
 ## ES-小技巧
 
+#### 你应该知道的
+
+优雅去掉小数点
+
+```
+console.log(~~ 1.5) //结果1
+console.log(1.5 | 0)//结果1
+```
+
+用Map代替switch
+
+```JS
+function condition(){
+    console.log('执行');
+}
+const map = new Map([
+    [0,condition],
+    [1,condition],
+    [2,condition],
+    [3,condition],
+])
+map.get(0)()&&map.get(0)()
+```
+
+
+
 #### 左值
 
 ```js
@@ -14,36 +40,6 @@ false || 10 //返回10
 
 ```
 
-#### call
-
-<https://blog.csdn.net/kiven_wolf/article/details/79272370>
-
-概念
-
-```
-1.函数中的this总是指向它的调用者
-2.apply和call用于执行函数
-3.方法A和对象B,A借助Call调用B的内容
-```
-
-使用
-
-```js
-函数A.call(对象B,值..)
-函数A调用对象B中的内容
-
-function A() {
-	console.log(this.value)//指向B
-}
-var B = {
-	value: "B",
-};
-A.call(B);//b
-A调用B中的food
-```
-
-
-
 #### 好用的函数
 
 ```
@@ -51,45 +47,20 @@ Math.trunc(0.001) 去除小数部分 返回整数
 Math.sign(0||1||-1)
 ```
 
-#### proxy
+#### 移动公式
 
-概念
+````
+要点:需要offsetLeft和style.left配合使用	
+````
 
-```
-作用
-	1.拦截，过滤对象
-语法
-	let p = new Proxy(target, handler);
-		target ：目标对象，任意对象，甚至另一个代理
-		handler: 处理目标对象的方法
-```
-
-使用
+实现
 
 ```JS
-let test = {
-    name: "小红"
-};
-test = new Proxy(test, {
-    get(target, key) {
-		/*
-			target：test自身
-			key：键
-			return:如果不返回值,将获取不到任何对象
-        */
-        return target[key];
-    },
-    set(target,key,value){
-		/*
-			target：test自身
-			key：键
-			value:被设置的值，不设置，
-				  test.name = "小黑"语句将不起作用
-        */
-        target[key] = value
-    }
-});
-test.name = "小黑"
-console.log(test.name);
+var leader = id.offsetLeft //获取当前位置
+var step = 10  		//  步长
+leader += step 		//  当前的位置加10
+id.style.left = leader + 'px'
 ```
+
+
 
