@@ -34,7 +34,7 @@ window.oncontextmenu=function(e){
 }
 ```
 
-###### 获取鼠标坐标
+获取鼠标坐标
 
 ```JS
 document.addEventListener('mousemove',function(e){
@@ -44,6 +44,161 @@ document.addEventListener('mousemove',function(e){
 */
 			console.log(e.screenX,e.screenY);
 })
+```
+
+##### 滚动效果
+
+滚动条到底部
+
+```JS
+window.onscroll = function() {
+    //变量scrollTop是滚动条滚动时，距离顶部的距离
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    //变量windowHeight是可视区的高度
+    var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    //变量scrollHeight是滚动条的总高度
+    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+    //滚动条到底部的条件
+    if (scrollTop + windowHeight == scrollHeight) {
+        //写后台加载数据的函数
+        this.show=!this.show
+        alert('滚动到底部')
+        console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+    }
+}
+```
+
+获取滚动事件
+
+````
+ function scroll() {
+        if(window.pageYOffset != null) // ie9+ 和其他浏览器
+        {
+            return {
+                left: window.pageXOffset,
+                top: window.pageYOffset
+            }
+        }
+        else if(document.compatMode == "CSS1Compat") // 声明的了 DTD
+          // 检测是不是怪异模式的浏览器 -- 就是没有 声明<!DOCTYPE html>
+        {
+            return {
+                left: document.documentElement.scrollLeft,
+                top: document.documentElement.scrollTop
+            }
+        }
+        return { // 剩下的肯定是怪异模式的
+            left: document.body.scrollLeft,
+            top: document.body.scrollTop
+        }
+    }
+````
+
+
+
+滚动特效
+
+```JS
+$("select").click(function() {
+    $("html, body").animate({
+      scrollTop: $($(this).attr("href")).offset().top + "px"
+    }, {
+      duration: 500,
+      easing: "swing"
+    });
+    return false;
+  });
+  
+$('select').click(function() {
+    $('html,body').animate({ scrollTop: 			  $("#history").offset().top - 100 }, 200)
+});
+```
+
+鼠标滚轮
+
+```JS
+$(document).on("mousewheel DOMMouseScroll", function (e) {
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+        if (delta > 0) {
+            // 向上滚
+            console.log("wheelup");
+
+        } else if (delta < 0) {
+            // 向下滚
+             console.log("wheeldown");
+        }
+    });
+```
+
+滚动监听
+
+```JS
+/*
+	功能:
+		处理兼容性问题
+		获取在Y轴上滚动的距离
+	返回值:
+		(int)scrollTop:滚动条距离顶部的距离
+*/
+getScrollTop() {
+
+    var scrollTop = 0,
+        bodyScrollTop = 0,
+        documentScrollTop = 0;
+    if (document.body) {
+        bodyScrollTop = document.body.scrollTop;
+    }
+    if (document.documentElement) {
+        documentScrollTop = document.documentElement.scrollTop;
+    }
+    scrollTop = bodyScrollTop - documentScrollTop > 0 ?
+        bodyScrollTop :
+    documentScrollTop;
+    return scrollTop;
+}
+
+ /*
+	功能:
+		处理兼容性问题
+		获取浏览器窗口当前高度
+	返回值:
+		(int)scrollTop:滚动条距离顶部的距离
+*/
+    getHeight() {
+        var scrollHeight = 0,
+            bodyScrollHeight = 0,
+            documentScrollHeight = 0;
+
+        if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+        }
+
+        if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+        }
+
+        Height =
+            bodyScrollHeight - documentScrollHeight > 0 ?
+            bodyScrollHeight :
+        documentScrollHeight;
+
+        return Height;
+    }
+
+        //浏览器视口的高度
+
+getWindowHeight() {
+
+   var windowHeight = 0;
+   if (document.compatMode == "CSS1Compat") {
+      windowHeight = document.documentElement.clientHeight;
+   } else {
+      windowHeight = document.body.clientHeight;
+   }
+	return windowHeight;
+   }
+
 ```
 
 
@@ -205,26 +360,6 @@ function throttle(func, wait ,type) {
                 }, wait)
             }
         }
-    }
-}
-```
-
-###### 滚动条
-
-```JS
-window.onscroll = function() {
-    //变量scrollTop是滚动条滚动时，距离顶部的距离
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    //变量windowHeight是可视区的高度
-    var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    //变量scrollHeight是滚动条的总高度
-    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-    //滚动条到底部的条件
-    if (scrollTop + windowHeight == scrollHeight) {
-        //写后台加载数据的函数
-        this.show=!this.show
-        alert('滚动到底部')
-        console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
     }
 }
 ```
@@ -402,42 +537,7 @@ export default {
 <style scoped lang='less'></style>
 ```
 
-###### 全屏滚动
 
-判断鼠标滚轮
-
-```JS
-$(document).on("mousewheel DOMMouseScroll", function (e) {
-        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
-                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
-        if (delta > 0) {
-            // 向上滚
-            console.log("wheelup");
-
-        } else if (delta < 0) {
-            // 向下滚
-             console.log("wheeldown");
-        }
-    });
-```
-
-###### 滚动特效
-
-```js
-$("select").click(function() {
-    $("html, body").animate({
-      scrollTop: $($(this).attr("href")).offset().top + "px"
-    }, {
-      duration: 500,
-      easing: "swing"
-    });
-    return false;
-  });
-  
-$('select').click(function() {
-    $('html,body').animate({ scrollTop: 			  $("#history").offset().top - 100 }, 200)
-});
-```
 
 
 
@@ -481,7 +581,9 @@ function strFilter(str) {
 }
 ```
 
-###### 高亮文字
+##### 文字处理
+
+高亮文字
 
 ```JS
 /**
@@ -502,7 +604,7 @@ function highLight(keyword,selector,style) {
 }
 ```
 
-###### 字符转换
+字符转换
 
 转Unicode
 
@@ -575,76 +677,6 @@ function toChinese(string) {
 }
 ```
 
-###### 滚动监听
-
-````JS
-/*
-	功能:
-		处理兼容性问题
-		获取在Y轴上滚动的距离
-	返回值:
-		(int)scrollTop:滚动条距离顶部的距离
-*/
-getScrollTop() {
-
-    var scrollTop = 0,
-        bodyScrollTop = 0,
-        documentScrollTop = 0;
-    if (document.body) {
-        bodyScrollTop = document.body.scrollTop;
-    }
-    if (document.documentElement) {
-        documentScrollTop = document.documentElement.scrollTop;
-    }
-    scrollTop = bodyScrollTop - documentScrollTop > 0 ?
-        bodyScrollTop :
-    documentScrollTop;
-    return scrollTop;
-}
-
- /*
-	功能:
-		处理兼容性问题
-		获取浏览器窗口当前高度
-	返回值:
-		(int)scrollTop:滚动条距离顶部的距离
-*/
-    getHeight() {
-        var scrollHeight = 0,
-            bodyScrollHeight = 0,
-            documentScrollHeight = 0;
-
-        if (document.body) {
-            bodyScrollHeight = document.body.scrollHeight;
-        }
-
-        if (document.documentElement) {
-            documentScrollHeight = document.documentElement.scrollHeight;
-        }
-
-        Height =
-            bodyScrollHeight - documentScrollHeight > 0 ?
-            bodyScrollHeight :
-        documentScrollHeight;
-
-        return Height;
-    }
-
-        //浏览器视口的高度
-
-getWindowHeight() {
-
-   var windowHeight = 0;
-   if (document.compatMode == "CSS1Compat") {
-      windowHeight = document.documentElement.clientHeight;
-   } else {
-      windowHeight = document.body.clientHeight;
-   }
-	return windowHeight;
-   }
-
-````
-
 ###### 监听窗口改变
 
 ```JS
@@ -677,32 +709,6 @@ function counter(year) {
 }
 
 			window.setInterval(counter, 1000);
-```
-
-###### 获取滚动事件
-
-```JS
- function scroll() {
-        if(window.pageYOffset != null) // ie9+ 和其他浏览器
-        {
-            return {
-                left: window.pageXOffset,
-                top: window.pageYOffset
-            }
-        }
-        else if(document.compatMode == "CSS1Compat") // 声明的了 DTD
-          // 检测是不是怪异模式的浏览器 -- 就是没有 声明<!DOCTYPE html>
-        {
-            return {
-                left: document.documentElement.scrollLeft,
-                top: document.documentElement.scrollTop
-            }
-        }
-        return { // 剩下的肯定是怪异模式的
-            left: document.body.scrollLeft,
-            top: document.body.scrollTop
-        }
-    }
 ```
 
 ###### 点击复制
@@ -753,7 +759,7 @@ function counter(year) {
 </script>
 ```
 
-###### 切换屏幕
+###### 全屏特效
 
 ```JS
 /*
@@ -800,8 +806,8 @@ function exitfullscreen(ele) {
 <https://blog.csdn.net/jarniyy/article/details/80423813>
 
 ```
-window.screen.height:浏览器目前高度，可以动态获取
-window.screen.weight:浏览器目前宽度，可以动态获取
+window.screen.height:	浏览器目前高度，可以动态获取
+window.screen.weight:	浏览器目前宽度，可以动态获取
 document.body.offsetWidth:浏览器总高度
 ```
 

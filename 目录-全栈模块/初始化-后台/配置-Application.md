@@ -26,18 +26,22 @@ logging:
 ### 常规配置
 
 ```java
-
 #设置数据源
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC
+spring.datasource.url=jdbc:mysql://localhost:3306/market?characterEncoding=utf8&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=00000000
+#阿里巴巴连接池类型
+spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
 
 #日志设置
-logging.file.path=Log/log4.log
-
+logging.file.path=log/log4.log
 #为避免冲突重定义端口
-server.port=10000
+server.port=8080
+mybatis.configuration.map-underscore-to-camel-case=true
+#使用xml文件必配
+mybatis.mapper-locations=classpath:generator//*.xml
+spring.main.banner-mode=off
 
 #关闭启动图案
 spring.main.banner-mode=off
@@ -153,5 +157,11 @@ eureka:
   instance:
     prefer-ip-address: true # 当其它服务获取地址时提供ip而不是hostname
     ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
+```
+
+## JRebel破解
+
+```
+http://jrebel.yanjiayu.cn:9001/64245b6b-ef68-4bdc-aabf-7f8e85a540e4
 ```
 

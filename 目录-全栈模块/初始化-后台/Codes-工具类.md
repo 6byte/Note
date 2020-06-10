@@ -586,7 +586,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 ```JAVA
 @Configuration
-public class Config {
+public class BeanConfig {
     @Bean
     public PageHelper pageHelper(){
         PageHelper pageHelper = new PageHelper();
@@ -621,7 +621,7 @@ public PageInfo<DiscussPost> index(Integer page , Integer size) {
     //获取List结果
     List<DiscussPost> discussPosts = discussMapper.selectDiscussPost();
     //注意此处:会返回一个List列表，除了结果以外附带下面信息
-    returnnew PageInfo<>(discussPosts);
+    return new PageInfo<>(discussPosts);
 }
 ```
 
