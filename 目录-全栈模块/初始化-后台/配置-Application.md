@@ -1,4 +1,27 @@
-## 配置-Application
+## 单体-配置-YML
+
+```
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/market?characterEncoding=utf8&serverTimezone=UTC
+    data-username: root
+    data-password: 00000000
+  main:
+    banner-mode: off
+logging:
+  file:
+    path: Log/log4.log
+
+```
+
+
+
+
+
+## 单体-配置-Application
 
 ### 常规配置
 
@@ -74,24 +97,24 @@ eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${serve
 
 
 
-## 配置-YML
+## 分布式-配置-YML
 
 ### 服务端
 
+<https://blog.csdn.net/weixin_44217401/article/details/104266509>
+
 ```yml
-
 server:
-  port: 9090
-  #配置eureka serve
+  port: 8088 # 端口
+spring:
+  application:
+    name: eurekaserverdemo # 应用名称，会在Eureka中显示
 eureka:
-
-    ##配置eureka client,是否需要配置取决于单服务端和多服务端
   client:
-    register-with-eureka: false   #是否将自己注册到注册中心
-    fetch-registry: false        #是否从eureka中获取注册信息
-    #配置暴露给eurekaClient的请求地址
-    service-url:
-      defaultZone: http://127.0.0.1:{server.port}/eureka/
+    register-with-eureka: false # 是否注册自己的信息到EurekaServer，默认是true
+    fetch-registry: false # 是否拉取其它服务的信息，默认是true
+    service-url: # EurekaServer的地址，现在是自己的地址，如果是集群，需要加上其它Server的地址。
+      defaultZone: http://127.0.0.1:8088/eureka
 ```
 
 
@@ -99,35 +122,36 @@ eureka:
 ### 服务提供者
 
 ```YML
-
 server:
   port: 8081
-  
-   #注册到刚才那台Eureka Server地址
+spring:
+  application:
+    name: userservice # 应用名称，会在Eureka中显示
+mybatis:
+  type-aliases-package: com.geek.pojo
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9090/eureka/ 
-   #应用名字  
-spring:
-  application:
-    name: client-0
+      defaultzone: http://127.0.0.1:8088/eureka
+  instance:
+    prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称
+    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
 ```
 
 ### 服务消费者
 
 ```YML
 server:
-  port: 8082
-  
-   #注册到刚才那台Eureka Server地址
+  port: 8080
+spring:
+  application:
+    name: userconsumer
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9090/eureka/ 
-   #应用名字  
-spring:
-  application:
-    name: client-0
+      defaultZone: http://127.0.0.1:8088/eureka
+  instance:
+    prefer-ip-address: true # 当其它服务获取地址时提供ip而不是hostname
+    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
 ```
 

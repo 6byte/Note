@@ -1,5 +1,29 @@
 ## Maven-依赖
 
+### Maven-SpringCloud
+
+解决返回XML问题
+
+```
+<!--排除eureka依赖XML的依赖-->
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>
+        spring-cloud-starter-netflix-eureka-client
+    </artifactId>
+
+    <exclusions>
+        <exclusion>
+        <artifactId>jackson-dataformat-xml</artifactId>
+            <groupId>
+            	com.fasterxml.jackson.dataformat
+            </groupId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
 
 
 ### Maven-Httpclient

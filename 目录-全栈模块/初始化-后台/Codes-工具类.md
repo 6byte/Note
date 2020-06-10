@@ -580,3 +580,85 @@ public class SpringContextUtil implements ApplicationContextAware {
 }
 ```
 
+### Tool-分页实现
+
+配置
+
+```JAVA
+@Configuration
+public class Config {
+    @Bean
+    public PageHelper pageHelper(){
+        PageHelper pageHelper = new PageHelper();
+        Properties p = new Properties();
+        p.setProperty("offsetAsPageNum","true");
+        p.setProperty("rowBoundsWithCount","true");
+        p.setProperty("reasonable","true");
+        pageHelper.setProperties(p);
+        return pageHelper;
+    }
+}
+
+
+```
+
+DAO层
+
+```JAVA
+//    按照常规写Mapper
+@Select("select * from discuss_post ")
+List<DiscussPost> selectDiscussPost();
+
+```
+
+Center
+
+```JAVA
+@RequestMapping("/postlist")
+public PageInfo<DiscussPost> index(Integer page , Integer size) {
+    //配置PagerHelper的分页
+    PageHelper.startPage(page,size);
+    //获取List结果
+    List<DiscussPost> discussPosts = discussMapper.selectDiscussPost();
+    //注意此处:会返回一个List列表，除了结果以外附带下面信息
+    returnnew PageInfo<>(discussPosts);
+}
+```
+
+结果
+
+```
+{
+	"total": 1,
+	"list": [{
+		"id": 1,
+		"userId": 0,
+		"title": "标题啊",
+		"content": "内容啊",
+		"type": 0,
+		"createTime": null,
+		"status": 0,
+		"score": 10.0,
+		"commentCount": 0
+	}],
+	"pageNum": 0,
+	"pageSize": 2,
+	"size": 1,
+	"startRow": 1,
+	"endRow": 1,
+	"pages": 1,
+	"prePage": 0,
+	"nextPage": 1,
+	"isFirstPage": false,
+	"isLastPage": false,
+	"hasPreviousPage": false,
+	"hasNextPage": true,
+	"navigatePages": 8,
+	"navigatepageNums": [1],
+	"navigateFirstPage": 1,
+	"navigateLastPage": 1
+}
+
+
+```
+

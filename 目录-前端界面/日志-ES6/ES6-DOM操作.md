@@ -43,3 +43,15 @@
 2.获取带单位的字符串
 ```
 
+### scrollHeight/scrollWidth
+
+```
+
+```
+
+### scrollTop/scrollLeft
+
+```
+
+```
+
