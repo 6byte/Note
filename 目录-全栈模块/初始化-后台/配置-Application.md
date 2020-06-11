@@ -1,4 +1,10 @@
-## 单体-配置-YML
+
+
+## 配置
+
+## 单体-配置
+
+### 配置-YML
 
 ```
 server:
@@ -17,13 +23,9 @@ logging:
 
 ```
 
+### 配置-Application
 
-
-
-
-## 单体-配置-Application
-
-### 常规配置
+### 配置-常规
 
 ```java
 #设置数据源
@@ -33,70 +35,58 @@ spring.datasource.username=root
 spring.datasource.password=00000000
 #阿里巴巴连接池类型
 spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
-
 #日志设置
 logging.file.path=log/log4.log
 #为避免冲突重定义端口
 server.port=8080
+#关闭启动图案
+spring.main.banner-mode=off
+```
+
+### 配置-邮件
+
+```
+spring.mail.default-encoding=UTF-8
+spring.mail.host=smtp.xxx.com
+#发送者的邮箱密码
+spring.mail.password=xxxx
+#端口
+spring.mail.port=25
+#协议
+spring.mail.protocol=smtp
+#发送者的邮箱账号
+spring.mail.username=xxxx@qq.com
+```
+
+### 配置-Mybatis
+
+```
 mybatis.configuration.map-underscore-to-camel-case=true
 #使用xml文件必配
 mybatis.mapper-locations=classpath:generator//*.xml
-spring.main.banner-mode=off
+```
 
-#关闭启动图案
-spring.main.banner-mode=off
-# Redis数据库索引（默认为0）
-spring.redis.database=0
-# Redis服务器地址
-spring.redis.host=127.0.0.1
-# Redis服务器连接端口
+### 配置-Mybatis-Plus
+
+```
+#MybatisPlus默认日志配置
+mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+
+#配置逻辑删除
+#已经删除的值
+mybatis-plus.global-config.db-config.logic-delete-value=0
+
+#没有删除的值
+mybatis-plus.global-config.db-config.logic-not-delete-value=1
+```
+
+### 配置-Redis
+
+```
 spring.redis.port=6379
-# Redis服务器连接密码（默认为空）
+spring.redis.host=127.0.0.1
+spring.redis.database=0
 spring.redis.password=
-# 连接池最大连接数（使用负值表示没有限制）
-spring.redis.jedis.pool.max-active=20
-# 连接池最大阻塞等待时间（使用负值表示没有限制）
-spring.redis.jedis.pool.max-wait=-1
-# 连接池中的最大空闲连接
-spring.redis.jedis.pool.max-idle=10
-# 连接池中的最小空闲连接
-spring.redis.jedis.pool.min-idle=0
-# 连接超时时间（毫秒）
-spring.redis.timeout=1000
-```
-
-### 分布式
-
-```
-
-
-#设置数据源
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=00000000
-
-#日志设置
-logging.file.path=cherrioLog/log4.log
-logging.level.com.cherrio.cherrio_controller = info
-
-#为避免冲突重定义端口
-server.port=10000
-
-
-#关闭启动图案
-spring.main.banner-mode=off
-
-server.port=8087
-
-#设置该服务注册中心的hostname
-eureka.instance.hostname=Eureka
-#禁止注册自己
-eureka.client.register-with-eureka=false
-#不检索其他服务
-eureka.client.fetch-registry=false
-#指定服务中心的位置
-eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
 ```
 
 
@@ -157,6 +147,40 @@ eureka:
   instance:
     prefer-ip-address: true # 当其它服务获取地址时提供ip而不是hostname
     ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
+```
+
+### 分布式
+
+```
+
+
+#设置数据源
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=00000000
+
+#日志设置
+logging.file.path=cherrioLog/log4.log
+logging.level.com.cherrio.cherrio_controller = info
+
+#为避免冲突重定义端口
+server.port=10000
+
+
+#关闭启动图案
+spring.main.banner-mode=off
+
+server.port=8087
+
+#设置该服务注册中心的hostname
+eureka.instance.hostname=Eureka
+#禁止注册自己
+eureka.client.register-with-eureka=false
+#不检索其他服务
+eureka.client.fetch-registry=false
+#指定服务中心的位置
+eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
 ```
 
 ## JRebel破解

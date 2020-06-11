@@ -237,24 +237,13 @@
 </dependency>
 ```
 
-### Maven-Redis
+### Maven-Jedis
 
 ```
-<!--redis依赖-->
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-redis</artifactId>
-</dependency>
-<!--web开发支持-->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-<!--测试支持-->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <scope>test</scope>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>2.6.0</version> 
 </dependency>
 ```
 
@@ -281,5 +270,29 @@
     <version>1.2.10</version>
 </dependency>
 <!-- END -->
+```
+
+### Maven-Email
+
+<https://www.cnblogs.com/chenjiahao9527/p/12432217.html>
+
+```
+<!-- 发送邮件 -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+</dependency>
+<!-- END -->
+```
+
+### Maven-Druid
+
+```
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+
 ```
 
