@@ -12,19 +12,19 @@ public class Login {
     public void index(User user) {
         //获取登录主体
         Subject subject = SecurityUtils.getSubject();
-//        开启验证
+        //        开启验证
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername() , user.getPassword());
-         /** 无异常    =      成功
+        /** 无异常    =      成功
              有异常    =      失败
          **/
         try {
             subject.login(token);
-       //如果不为空，用户存在，进行逻辑处理
+            //如果不为空，用户存在，进行逻辑处理
             if (!StringUtils.isEmpty(user)) {}
         }
         // 账号被锁定
         catch (LockedAccountException e) {}
-         //未知账号异常
+        //未知账号异常
         catch (UnknownAccountException e) {}
         //凭证过期
         catch (ExpiredCredentialsException e) {}
