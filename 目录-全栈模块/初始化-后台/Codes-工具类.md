@@ -1,6 +1,121 @@
 ## Codes-Tools
 
-### Tool-WebSocket
+### Tool-Springboot
+
+##### Tool-异常处理
+
+<https://www.cnblogs.com/lvbinbin2yujie/p/10574812.html>
+
+```JAVA
+@ControllerAdvice
+public class ErrorConfig {
+        //标注错误类型
+    @ExceptionHandler(value = AuthorizationException.class)
+     public String methods(){
+         //捕获到异常，返回到页面unAuthor.html
+        return "/guest/unAuthor.html";
+    }
+    //黑名单
+    @ExceptionHandler(value=DisabledAccountException.class)
+    public String DisabledAccountException() {
+        //捕获到异常，返回到页面unAuthor.html
+        return "限定登录";
+    }
+}
+```
+
+
+
+##### Tool-Session监听
+
+继承
+
+```java
+public class SessionListener implements HttpSessionListener {
+    public static int online = 0;
+    //    Session销毁
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        System.out.println("创建session");
+        online++;
+    }
+    //Session创建
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        System.out.println("销毁session");
+        online--;
+    }
+}
+
+```
+
+配置
+
+```JAVA
+@Configuration
+public class MywebConfig implements WebMvcConfigurer {
+    @Bean
+    public ServletListenerRegistrationBean listenerRegist() {
+        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
+        srb.setListener(new SessionListener());
+        return srb;
+    }
+}
+```
+
+其他
+
+```JAVA
+public class MyListener implements HttpSessionBindingListener {
+    @Override
+    public void valueBound(HttpSessionBindingEvent event) {
+    }
+    @Override
+    public void valueUnbound(HttpSessionBindingEvent event){
+    }
+}
+```
+
+##### Tool-获取远程IP
+
+```JAVA
+/**
+ * 获得用户远程地址
+ */
+public static String getRemoteAddr(HttpServletRequest request){
+    String ipAddress = request.getHeader("x-forwarded-for");
+    if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+        ipAddress = request.getHeader("Proxy-Client-IP");
+    }
+    if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+        ipAddress = request.getHeader("WL-Proxy-Client-IP");
+    }
+    if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+        ipAddress = request.getRemoteAddr();
+        if(ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")){
+            //根据网卡取本机配置的IP
+            InetAddress inet=null;
+            try {
+                inet = InetAddress.getLocalHost();
+            } catch ( UnknownHostException e) {
+                e.printStackTrace();
+            }
+            ipAddress= inet.getHostAddress();
+        }
+    }
+    //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+    if(ipAddress!=null && ipAddress.length()>15){ //"***.***.***.***".length() = 15
+        if(ipAddress.indexOf(",")>0){
+            ipAddress = ipAddress.substring(0,ipAddress.indexOf(","));
+        }
+    }
+    return ipAddress;
+}
+```
+
+
+
+##### Tool-WebSocket
 
 概览
 
@@ -47,36 +162,7 @@ public void getService(ApplicationContext context){
 }
 ```
 
-### Tool-Error
-
-异常有三种处理方式，参见网页：<https://www.cnblogs.com/lvbinbin2yujie/p/10574812.html>
-
-概览
-
-```
-作用:处理捕获到的异常信息
-使用:
-	1.主要通过@ControllerAdvice/@RestControllerAdvice实现
-	2.当捕获到异常，会被提交到这个类，并返回数据
-	3.在方法上标注@ExceptionHandler确定错误类型
-```
-
-代码
-
-```JAVA
-@ControllerAdvice
-public class ErrorConfig {
-    //标注错误类型
-@ExceptionHandler(value = AuthorizationException.class)
- public String methods(){
-     //捕获到异常，返回到页面unAuthor.html
-    return "/guest/unAuthor.html";
-}}
-```
-
-
-
-### Tool-Schedule
+##### Tool-Schedule
 
 概念
 
@@ -110,17 +196,68 @@ cron="秒 分 时 周日 月份 星期 年份"
 To be Continue
 ```
 
+##### Tool-发送EMAIL
 
-
-### Tool-监听器
+配置
 
 ```
-作用:对Session的创建，销毁等事件进行控制
-使用:
-.
+spring.mail.default-encoding=UTF-8
+spring.mail.host=smtp.qq.com
+#发送者的邮箱密码
+spring.mail.password=XXXXXX
+#端口
+spring.mail.port=25
+#协议
+spring.mail.protocol=smtp
+#发送者的邮箱账号
+spring.mail.username=XXXXXX@qq.com
 ```
 
-### Tool-随机数
+工具类
+
+```JAVA
+@Autowired
+JavaMailSender jsm;
+@Autowired
+SimpleMailMessage message;
+
+@Value("${spring.mail.username}")
+private String username;
+
+
+/*
+    *   功能:给目标发送邮件
+    *   参数:
+    *       targetEmail:目标邮箱
+    *       content：内容
+    *       title:标题
+    *   返回值:
+    *       是否成功
+    * */
+@RequestMapping("/sendEmail")
+public boolean sendEmail(String targetEmail,String content,String title) {
+    //建立邮箱消息
+    //发送者
+    try {
+        message.setFrom(username);
+        //接收者
+        message.setTo(targetEmail);
+        //发送标题
+        message.setSubject(title);
+        //发送内容
+        message.setText(content);
+        jsm.send(message);
+    }
+    catch (MailException e) {
+        return false;
+    }
+    return true;
+}
+```
+
+### Tool-生成数
+
+##### Tool-随机数
 
 概览:
 
@@ -153,90 +290,15 @@ public static int getRandomNumber(){
 }
 ```
 
-### Tool-获取远程IP
 
-```JAVA
-/**
- * 获得用户远程地址
- */
-public static String getRemoteAddr(HttpServletRequest request){
 
-        
-        
-        String ipAddress = request.getHeader("x-forwarded-for");
-        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("Proxy-Client-IP");
-        }
-        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getRemoteAddr();
-                if(ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")){
-                        //根据网卡取本机配置的IP
-                        InetAddress inet=null;
-                        try {
-                                inet = InetAddress.getLocalHost();
-                        } catch ( UnknownHostException e) {
-                                e.printStackTrace();
-                        }
-                        ipAddress= inet.getHostAddress();
-                }
-        }
-        //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-        if(ipAddress!=null && ipAddress.length()>15){ //"***.***.***.***".length() = 15
-                if(ipAddress.indexOf(",")>0){
-                        ipAddress = ipAddress.substring(0,ipAddress.indexOf(","));
-                }
-        }
-        return ipAddress;
-}
-```
 
-### Tool-文件获取
 
-概览
-
-```
-对应关系
-文件列表	=>	分类列表
-文件名		 =>	 内容
-
-需要获取
-目录下所有文件夹
-该文件下所有内容
-```
-
-### Tool-对象存储
-
-```java
-public class Tools {
-
-填写密钥
-    
-    
-    OSS ossClient = getOssClient();
-
-    public OSS getOssClient() {
-        return ossClient;
-    }
-
-    public Tools(String endpoint , String accessKeyId , String accessKeySecret) {
-        this.endpoint = endpoint;
-        this.accessKeyId = accessKeyId;
-        this.accessKeySecret = accessKeySecret;
-    }
-//可以直接调用getOssClient()获取对象
-}
-```
-
-### Tool-生成ID
+##### Tool-生成ID
 
 生成UUID
 
 ```JAVA
-
-
 public static String getId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replace("-" , "");
@@ -282,7 +344,7 @@ public class ID
 
 
 
-### Tool-生成JWT
+##### Tool-生成JWT
 
 ```java
 
@@ -348,138 +410,6 @@ public class A implements Runnable {
 //需要在线程中执行
         this.AMapper= SpringConfig.getBean(aMapper.class);
     }
-}
-```
-
-
-
-### Tool-Session监听
-
-继承
-
-```JAVA
-public class SessionListener implements HttpSessionListener {
-    public static int online = 0;
-//    Session销毁
-
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("创建session");
-        online++;
-    }
-
-    //Session创建
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("销毁session");
-        online--;
-    }
-
-}
-
-```
-
-配置
-
-```JAVA
-@Configuration
-public class MywebConfig implements WebMvcConfigurer {
-    @Bean
-    public ServletListenerRegistrationBean listenerRegist() {
-        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
-        srb.setListener(new SessionListener());
-        return srb;
-    }
-}
-
-```
-
-其他
-
-```java
-public class MyListener implements HttpSessionBindingListener {
-    @Override
-    public void valueBound(HttpSessionBindingEvent event) {
-    }
-    @Override
-    public void valueUnbound(HttpSessionBindingEvent event) {
-    }
-}
-```
-
-### Tool-Generater
-
-```JAVA
- public static void main(String[] args) {
-        // 代码生成器
-        AutoGenerator mpg = new AutoGenerator();
-
-        // 全局配置
-        GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("6bye");
-        gc.setOpen(false);
-        mpg.setGlobalConfig(gc);
-
-        // 数据源配置
-        DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("00000000");
-        mpg.setDataSource(dsc);
-
-        // 包配置
-        PackageConfig pc = new PackageConfig();
-     	==>修改
-  		pc.setModuleName("Catalina");
-     	==>修改
-  		pc.setParent("com.github.alpha.Tools");
-        //生成的类在com.github.alpha.Tools.Catalina下
-        mpg.setPackageInfo(pc);
-
-         String templatePath = "/templates/mapper.xml.vm";
-
-        // 自定义输出配置
-        List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
-        focList.add(new FileOutConfig(templatePath) {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-            }
-        });
-
-        // 策略配置
-        StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
-        strategy.setInclude("users");
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
-        mpg.setStrategy(strategy);
-        mpg.execute();
-    }
-
-```
-
-使用
-
-```JAVA
-@RequestMapping("/index")
-public List index(String uname) {
-    //         和limit用法一样
-    Page page = new Page(1 , 4);
-    //        需要返回一个记录
-    List records = usersMapper.selectPage(page , null).getRecords();
-    return records;
 }
 ```
 
@@ -600,8 +530,6 @@ public class BeanConfig {
         return pageHelper;
     }
 }
-
-
 ```
 
 DAO层
@@ -664,64 +592,27 @@ public PageInfo<DiscussPost> index(Integer page , Integer size) {
 
 ```
 
-### Tool-发送EMAIL
-
-配置
-
-```
-spring.mail.default-encoding=UTF-8
-spring.mail.host=smtp.qq.com
-#发送者的邮箱密码
-spring.mail.password=XXXXXX
-#端口
-spring.mail.port=25
-#协议
-spring.mail.protocol=smtp
-#发送者的邮箱账号
-spring.mail.username=XXXXXX@qq.com
-```
-
-工具类
+### Tool-对象存储
 
 ```JAVA
-@Autowired
-JavaMailSender jsm;
-@Autowired
-SimpleMailMessage message;
-
-@Value("${spring.mail.username}")
-private String username;
-
-
-/*
-    *   功能:给目标发送邮件
-    *   参数:
-    *       targetEmail:目标邮箱
-    *       content：内容
-    *       title:标题
-    *   返回值:
-    *       是否成功
-    * */
-@RequestMapping("/sendEmail")
-public boolean sendEmail(String targetEmail,String content,String title) {
-    //建立邮箱消息
-    //发送者
-    try {
-        message.setFrom(username);
-        //接收者
-        message.setTo(targetEmail);
-        //发送标题
-        message.setSubject(title);
-        //发送内容
-        message.setText(content);
-        jsm.send(message);
+public class Tools {
+    填写密钥
+        OSS ossClient = getOssClient();
+    public OSS getOssClient() {
+        return ossClient;
     }
-    catch (MailException e) {
-        return false;
+    public Tools(String endpoint , String accessKeyId , String accessKeySecret) {
+        this.endpoint = endpoint;
+        this.accessKeyId = accessKeyId;
+        this.accessKeySecret = accessKeySecret;
     }
-    return true;
+    //可以直接调用getOssClient()获取对象
 }
 ```
+
+
+
+
 
 ### Tool-Jedis
 

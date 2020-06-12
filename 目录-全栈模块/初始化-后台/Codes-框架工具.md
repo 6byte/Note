@@ -172,10 +172,21 @@ public class ShiroConfig {
 ```JAVA
 需要继承AuthorizingRealm
 public class Realm extends AuthorizingRealm {
+//配置加密，一旦使用MD5校验，就一定得配置该类
+@Override
+public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+//HashedCredentialsMatcher是shiro提供的解析盐的实现类
+    HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+    //采用的算法是md5
+    matcher.setHashAlgorithmName("md5");
+    //设置加密次数
+    matcher.setHashIterations(1);
+    super.setCredentialsMatcher(matcher);
+}
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         return null;
-    }
+}
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
