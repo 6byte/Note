@@ -2,6 +2,50 @@
 
 ### Tool-Springboot
 
+##### Tool-资源处理
+
+https://blog.csdn.net/sinat_32829963/article/details/79690058
+
+获取默认静态资源路径
+
+配置修改
+
+```js
+推荐使用,使用编码容易炸
+#配置内部访问地址和外部图片访问地址 /myimgs/**
+spring.mvc.static-path-pattern=/**
+spring.resources.static-locations=file:G:/market,classpath:/static/
+```
+
+编码修改
+
+```java
+@Configuration  //配置类注解
+public class WebConfig extends WebMvcConfigurationSupport {
+
+@Override
+public void addResourceHandlers( ResourceHandlerRegistry registry ) {
+        /**
+         把F:\temp作为静态资源路径
+         1.配置本地路径                 addResourceLocations
+                addResourceLocations("file:" +"F:\temp" )
+         2.配置静态资源访问路径         addResourceHandler
+                addResourceHandler("/static/**")
+         3.访问F:\temp中的img.jpg
+                localhost:80/static/img.jpg
+         ！！！
+         addResourceLocations的参数要么要加上“classpath”表示相对路径，要么用file+绝对路径
+         *
+         * */
+        registry.addResourceHandler( "/static/**" ).addResourceLocations( "file:" + "G:\\网页资源\\高清动漫壁纸\\高清动漫壁纸\\" );
+        super.addResourceHandlers( registry );
+}
+}
+
+```
+
+
+
 ##### Tool-异常处理
 
 <https://www.cnblogs.com/lvbinbin2yujie/p/10574812.html>
@@ -196,7 +240,9 @@ cron="秒 分 时 周日 月份 星期 年份"
 To be Continue
 ```
 
-##### Tool-发送EMAIL
+##### Tool-发送Email
+
+https://www.cnblogs.com/heqiyoujing/p/9477490.html
 
 配置
 
@@ -254,6 +300,102 @@ public boolean sendEmail(String targetEmail,String content,String title) {
     return true;
 }
 ```
+
+##### Tool-文件传输
+
+文件上传
+
+```JAVA
+@RequestMapping("/upload")
+@ResponseBody
+public String upload(MultipartFile file) {
+        if(StringUtils.isEmpty(file)) {
+                return "上传失败，请选择文件";
+        }
+        //指定文件另存为的名字
+        String fileName = file.getOriginalFilename();
+        //指定文件路径
+        String filePath = "F:\\Temp";
+        File dest = new File(filePath + fileName);
+        try {
+                file.transferTo(dest);
+                return filePath + fileName;
+        }
+        catch(IOException e) {
+        }
+        return "失败";
+}
+```
+
+
+
+文件下载
+
+```java
+@RequestMapping("/guest/download")
+public String downloadFile(HttpServletRequest request,
+                           HttpServletResponse response) throws UnsupportedEncodingException {
+    
+    // 获取指定目录下的第一个文件
+    File scFileDir = new File("F:\\temp\\download");
+    File TrxFiles[] = scFileDir.listFiles();
+    String fileName = TrxFiles[0].getName(); //下载的文件名
+    // 如果文件名不为空，则进行下载
+    if (fileName != null) {
+        //设置文件路径
+        String realPath = "F:\\temp\\download\\";
+        File file = new File(realPath, fileName);
+        
+        // 如果文件名存在，则进行下载
+        if (file.exists()) {
+            
+            // 配置文件下载
+            response.setHeader("content-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+            // 下载文件能正常显示中文
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+            
+            // 实现文件下载
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                OutputStream os = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    os.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+                System.out.println("Download the song successfully!");
+            }
+            catch (Exception e) {
+                System.out.println("Download the song failed!");
+            }
+            finally {
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+    return null;
+}
+```
+
+
 
 ### Tool-生成数
 
