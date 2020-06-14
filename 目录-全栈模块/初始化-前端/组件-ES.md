@@ -677,6 +677,31 @@ function toChinese(string) {
 }
 ```
 
+中文转二进制
+
+```JS
+//功能:将中文转换成二进制
+//返回:二进制0101
+function getCharBinary(str) {
+    var i = 0;
+    var result = "";
+    while (true) {
+        var temp = str.charCodeAt(i++);
+        if (temp) {
+            result += temp.toString(2);
+        } 
+        else {
+            break;
+        }
+    }
+    return result;
+}
+```
+
+
+
+
+
 ###### 监听窗口改变
 
 ```JS
