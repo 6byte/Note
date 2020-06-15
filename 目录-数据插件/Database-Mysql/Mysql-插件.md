@@ -37,7 +37,7 @@ Page page = new Page(1,100);
  */
 
 @RequestMapping("/index")
-public List<User> verifyEmail(Integer id , String email) {
+public List<User> getList(Integer start , Integer pageSize) {
     Page page = new Page(0,2);
     Page result = mapper.selectPage(page , null);
     return result.getRecords();

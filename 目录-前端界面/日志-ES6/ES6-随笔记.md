@@ -47,12 +47,6 @@ Math.trunc(0.001) 去除小数部分 返回整数
 Math.sign(0||1||-1)
 ```
 
-#### 移动公式
-
-````
-要点:需要offsetLeft和style.left配合使用	
-````
-
 实现
 
 ```JS

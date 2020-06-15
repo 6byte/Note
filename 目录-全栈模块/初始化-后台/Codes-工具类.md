@@ -1,3 +1,7 @@
+
+
+
+
 ## Codes-Tools
 
 ### Tool-Springboot
@@ -395,6 +399,22 @@ public String downloadFile(HttpServletRequest request,
 }
 ```
 
+##### Tool-动态更新属性
+
+```
+
+```
+
+##### Tools-获取所有请求信息
+
+```JAVA
+Enumeration em = request.getParameterNames();
+ while (em.hasMoreElements()) {
+    String name = (String) em.nextElement();
+    String value = req.getParameter(name);
+}
+```
+
 
 
 ### Tool-生成数
@@ -562,17 +582,19 @@ public class A implements Runnable {
     public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
 
-### Tools-获取所有请求信息
 
-```JAVA
-Enumeration em = request.getParameterNames();
- while (em.hasMoreElements()) {
-    String name = (String) em.nextElement();
-    String value = req.getParameter(name);
-}
+
+##### Tool-文件处理
+
 ```
 
-### Tools-时间格式
+```
+
+
+
+### Tool-文本处理
+
+##### Tools-时间格式
 
 ```JAVA
  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -580,7 +602,9 @@ Enumeration em = request.getParameterNames();
 //结果是:2020-05-29
 ```
 
-### Tools-手动注入
+### Tool-Spring
+
+##### Tools-手动注入
 
 注入
 
@@ -733,26 +757,6 @@ public PageInfo<DiscussPost> index(Integer page , Integer size) {
 
 
 ```
-
-### Tool-对象存储
-
-```JAVA
-public class Tools {
-    填写密钥
-        OSS ossClient = getOssClient();
-    public OSS getOssClient() {
-        return ossClient;
-    }
-    public Tools(String endpoint , String accessKeyId , String accessKeySecret) {
-        this.endpoint = endpoint;
-        this.accessKeyId = accessKeyId;
-        this.accessKeySecret = accessKeySecret;
-    }
-    //可以直接调用getOssClient()获取对象
-}
-```
-
-
 
 
 

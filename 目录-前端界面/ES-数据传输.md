@@ -2,23 +2,36 @@
 
 ### Vue-Axios
 
-```js
-axios.get(ulr,{
-    params:{},
-    headers:{}
-})
+get
 
-传递三个参数
-发送是json数据
-axios.post(url,{
-    username:name,
-},{
-    //可以不传
-    
-    params:{
-        //会拼接到URL中
-    }
-})
+```js
+axios.get('/user', {params: {ID: 12345} })
+```
+
+post
+
+```JS
+axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+```
+
+all
+
+```JS
+function getName() {
+  return axios.get('/user/id');
+}
+
+function getId() {
+  return axios.get('/user/name');
+}
+
+axios.all([getName(), getId()])
+  .then(axios.spread(function (acct, perms) {
+    // 两个请求现在都执行完成
+}));
 ```
 
 

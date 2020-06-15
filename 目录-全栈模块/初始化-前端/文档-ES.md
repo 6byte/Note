@@ -432,7 +432,7 @@ var goods = [
 var newArr = goods.filter((i)=>{return id == i.id})
 ```
 
-###### VUE分页
+###### 前端分页
 
 思路
 
@@ -447,10 +447,6 @@ var newArr = goods.filter((i)=>{return id == i.id})
 
 5.通过按钮改变currentPage属性，完成分页逻辑
 ```
-
-
-
-
 
 实现
 
@@ -535,6 +531,35 @@ export default {
 </script>
 
 <style scoped lang='less'></style>
+```
+
+原生JS分页
+
+```JS
+$ 描述:类似懒加载实现，每次点击按钮加载一部分图片
+
+html
+<button type="button">点击加载</button>
+<div>
+    <img>
+</div>
+
+
+	<script type="text/javascript">
+//起点位置
+let start = 0
+//每次点击需要加载数据的数量
+let length = 5
+//记录鼠标当前已经偏移了的位置
+let d = start*length
+function doSome(e) {
+    
+	for (i = start * length; i < length * (start + 1) && d< e.length; i++) {
+		a = host + e[d++].slice(5)
+		$('div').append(`<img src="${a}">`)
+	}
+}
+</script>
 ```
 
 
@@ -732,8 +757,7 @@ function counter(year) {
     var str = 2021 + "年还剩" + day + "天" + hour + "时" + minute + "分" + second + "秒";
     return str
 }
-
-			window.setInterval(counter, 1000);
+window.setInterval(counter, 1000);
 ```
 
 ###### 点击复制
@@ -820,19 +844,7 @@ function exitfullscreen(ele) {
 
 ```
 
-
-
-
-
-#### ES-属性
-
 ###### 页面属性
 
 <https://blog.csdn.net/jarniyy/article/details/80423813>
-
-```
-window.screen.height:	浏览器目前高度，可以动态获取
-window.screen.weight:	浏览器目前宽度，可以动态获取
-document.body.offsetWidth:浏览器总高度
-```
 

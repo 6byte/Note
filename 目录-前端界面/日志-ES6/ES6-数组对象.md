@@ -105,7 +105,7 @@ arr.reverse()
 ##### sort
 
 ```js
-#对数组进行排序，可能使用了二分查找算法
+
 返回：返回一个排序后的数组
  var arr = [1,2,3,4,5,6,7]
   console.log(arr.sort(function(i,e){
