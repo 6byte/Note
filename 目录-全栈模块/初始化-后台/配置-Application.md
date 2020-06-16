@@ -93,6 +93,34 @@ spring.redis.password=
 
 ## 分布式-配置-YML
 
+### Nacos
+
+注意
+
+```
+1.配置文件名一定是Bootstrap.yml,不是application.yml
+2.服务地址一定要和NACOS的保持一致
+```
+
+配置
+
+```YML
+spring:
+  application:
+    name: demo1
+  cloud:
+    nacos:
+      server-addr: 172.27.35.1:8849
+      config:
+        prefix: demo1
+        file-extension: yml
+
+  main:
+    banner-mode: off
+```
+
+
+
 ### 服务端
 
 <https://blog.csdn.net/weixin_44217401/article/details/104266509>
