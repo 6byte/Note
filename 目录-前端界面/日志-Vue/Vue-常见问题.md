@@ -23,3 +23,12 @@ data:function(){
 正确	<b-link to="/home">跳转</b-link>
 ```
 
+##### VUE使用图标
+
+```
+ <link rel="shortcut icon" href="favicon.ico">
+ 一定要加上shortcut
+ 图标名:favicon
+ 放在public/index.html同级即可
+```
+

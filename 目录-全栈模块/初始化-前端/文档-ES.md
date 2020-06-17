@@ -70,7 +70,7 @@ window.onscroll = function() {
 
 获取滚动事件
 
-````
+````js
  function scroll() {
         if(window.pageYOffset != null) // ie9+ 和其他浏览器
         {

@@ -102,21 +102,30 @@ spring.redis.password=
 2.服务地址一定要和NACOS的保持一致
 ```
 
-配置
+生产者
 
 ```YML
+#提供服务，让其他服务调用
 spring:
   application:
     name: demo1
   cloud:
     nacos:
-      server-addr: 172.27.35.1:8849
-      config:
-        prefix: demo1
-        file-extension: yml
+      server-addr: 172.27.35.1:8848
+      discovery:
+        group: TEST_GROUP
+        namespace: 2677f493-d64f-434c-9c89-e21665bd5db0
 
   main:
     banner-mode: off
+server:
+  port: 8085
+```
+
+消费者
+
+```
+
 ```
 
 
