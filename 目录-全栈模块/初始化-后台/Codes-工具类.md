@@ -12,11 +12,18 @@ https://blog.csdn.net/sinat_32829963/article/details/79690058
 
 获取默认静态资源路径
 
+```
+ResourceUtils.getURL("classpath:").getPath()+"static/"
+获取static目录
+```
+
+
+
 配置修改
 
 ```js
 推荐使用,使用编码容易炸
-#配置内部访问地址和外部图片访问地址 /myimgs/**
+#配置内部访问地址和外部图片访问地址 /img/**
 spring.mvc.static-path-pattern=/**
 spring.resources.static-locations=file:G:/market,classpath:/static/
 ```
@@ -193,12 +200,6 @@ public class WebSocketConfig {
 
 逻辑类
 
-浏览器访问
-
-````
-
-````
-
 单例注入
 
 ```java
@@ -312,8 +313,8 @@ public boolean sendEmail(String targetEmail,String content,String title) {
 ```JAVA
 @RequestMapping("/upload")
 @ResponseBody
-public String upload(MultipartFile file) {
-        if(StringUtils.isEmpty(file)) {
+public String upload(MultipartFile MultipartFile) {
+        if(StringUtils.isEmpty(MultipartFile)) {
                 return "上传失败，请选择文件";
         }
         //指定文件另存为的名字
@@ -322,7 +323,7 @@ public String upload(MultipartFile file) {
         String filePath = "F:\\Temp";
         File dest = new File(filePath + fileName);
         try {
-                file.transferTo(dest);
+                MultipartFile.transferTo(dest);
                 return filePath + fileName;
         }
         catch(IOException e) {
@@ -330,6 +331,23 @@ public String upload(MultipartFile file) {
         return "失败";
 }
 ```
+
+前端HTML
+
+```HTML
+//别想了,直接用form
+<form action="" method="post" enctype="multipart/form-data">
+    //与后端MultipartFile的名字对应
+    <input type="file" name="multipartFile" class="custom-file-input" id="user-file">
+    <label class="custom-file-label" for="user-file">选择文件</label>
+
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary " type="button" id="upload">上传</button>
+    </div>
+</form>
+```
+
+
 
 
 
@@ -555,8 +573,6 @@ public class Jwt {
             return claims;
 
     }
-
-
 }
 
 ```
@@ -677,88 +693,6 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 }
 ```
-
-### Tool-分页实现
-
-配置
-
-```JAVA
-@Configuration
-public class BeanConfig {
-    @Bean
-    public PageHelper pageHelper(){
-        PageHelper pageHelper = new PageHelper();
-        Properties p = new Properties();
-        p.setProperty("offsetAsPageNum","true");
-        p.setProperty("rowBoundsWithCount","true");
-        p.setProperty("reasonable","true");
-        pageHelper.setProperties(p);
-        return pageHelper;
-    }
-}
-```
-
-DAO层
-
-```JAVA
-//    按照常规写Mapper
-@Select("select * from discuss_post ")
-List<DiscussPost> selectDiscussPost();
-
-```
-
-Center
-
-```JAVA
-@RequestMapping("/postlist")
-public PageInfo<DiscussPost> index(Integer page , Integer size) {
-    //配置PagerHelper的分页
-    PageHelper.startPage(page,size);
-    //获取List结果
-    List<DiscussPost> discussPosts = discussMapper.selectDiscussPost();
-    //注意此处:会返回一个List列表，除了结果以外附带下面信息
-    return new PageInfo<>(discussPosts);
-}
-```
-
-结果
-
-```
-{
-	"total": 1,
-	"list": [{
-		"id": 1,
-		"userId": 0,
-		"title": "标题啊",
-		"content": "内容啊",
-		"type": 0,
-		"createTime": null,
-		"status": 0,
-		"score": 10.0,
-		"commentCount": 0
-	}],
-	"pageNum": 0,
-	"pageSize": 2,
-	"size": 1,
-	"startRow": 1,
-	"endRow": 1,
-	"pages": 1,
-	"prePage": 0,
-	"nextPage": 1,
-	"isFirstPage": false,
-	"isLastPage": false,
-	"hasPreviousPage": false,
-	"hasNextPage": true,
-	"navigatePages": 8,
-	"navigatepageNums": [1],
-	"navigateFirstPage": 1,
-	"navigateLastPage": 1
-}
-
-
-```
-
-
 
 ### Tool-Jedis
 

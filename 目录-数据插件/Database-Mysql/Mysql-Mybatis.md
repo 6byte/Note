@@ -2,6 +2,44 @@
 
 
 
+#### 分页查询
+
+Center
+
+```JAVA
+@RequestMapping("/postlist")
+public PageInfo<DiscussPost> index(Integer page , Integer size) {
+    //配置PagerHelper的分页
+    PageHelper.startPage(page,size);
+    //获取List结果
+    List<DiscussPost> discussPosts = discussMapper.selectDiscussPost();
+    //注意此处:会返回一个List列表，除了结果以外附带下面信息
+    return new PageInfo<>(discussPosts);
+}
+```
+
+
+
+配置
+
+```JAVA
+@Configuration
+public class BeanConfig {
+    @Bean
+    public PageHelper pageHelper(){
+        PageHelper pageHelper = new PageHelper();
+        Properties p = new Properties();
+        p.setProperty("offsetAsPageNum","true");
+        p.setProperty("rowBoundsWithCount","true");
+        p.setProperty("reasonable","true");
+        pageHelper.setProperties(p);
+        return pageHelper;
+    }
+}
+```
+
+
+
 #### 权限查询
 
 ```MYSQL

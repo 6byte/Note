@@ -7,6 +7,7 @@ https://www.cnblogs.com/yanjieli/p/9780100.html
 #### 概览
 
 ```
+Mysql组成:
 连接池,管理服务和工具组件,sql接口,查询解析器,查询优化器,缓存,插入式存储引擎
 ```
 
@@ -14,5 +15,5 @@ https://www.cnblogs.com/yanjieli/p/9780100.html
 
 
 
-#### 存储引擎
+
 
