@@ -21,7 +21,7 @@ select 	distinct name --第七步
 FROM ON JOIN WHERE GROUP_BY HAVING SELECT_DINSTINCT ORDER_BY LIMIT
 ```
 
-#### 正则表达式
+#### 查询
 
 查询
 
@@ -50,37 +50,49 @@ SELECT * FROM `student` where name regexp '^陈';
   - 3.使用union代替or
 ```
 
-##### INSERT
+##### 优化-INSERT
 
-- ```MYSQL
-  传统方案
-  insert into tableA values('1','NAME')；
-  insert into tableA values('2','NAMEA')；
-  优化方案:
-  insert into tableA values('1','NAME'),('2','NAMEA')
-  ```
+```MYSQL
+传统方案
+insert into tableA values('1','NAME')；
+insert into tableA values('2','NAMEA')；
+优化方案:
+insert into tableA values('1','NAME'),('2','NAMEA')
+```
 
-##### 排序
+##### 优化-排序
 
-- 两种排序方案:
+排序方案:
 
-  ```
-  Using filesort:
-  1.性能:效率低
-  2.算法:
-      一次扫描算法：磁盘IO开销大
-      两次扫描算法：性能较低
-  Using index:效率高
-  ```
+```
+---Using filesort:
+1.性能:效率低
+2.算法:
+    一次扫描算法：磁盘IO开销大
+    两次扫描算法：性能较低
+    
+---Using index:效率高
+```
 
-- ORDER BY，多个字段情形
+ORDER BY
 
-  ```
-  1.排序要么都升序要么都降序
-  
-  2.排序的顺序需要和索引的顺序一致
-  
-  3.同样可以利用索引排序
-  ```
+```
+在多个字段
+1.排序要么都升序要么都降序
 
-- order by null:不排序操作，提升效率
+2.排序的顺序需要和索引的顺序一致
+
+3.同样可以利用索引排序
+```
+
+order by null:不排序操作，提升效率
+
+##### 优化-OR
+
+```
+优化or:
+	1.OR的两边都必须要用到索引
+	2.不能使用复合索引
+	3.使用union代替or
+```
+

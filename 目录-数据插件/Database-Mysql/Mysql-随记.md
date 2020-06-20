@@ -2,85 +2,17 @@
 
 ### MYSQL-命令
 
-杂记
 
-```MYSQL
-# 是否启用binlog日志
-show variables like 'log_bin';
-```
-
-统计
-
-```
-mysqlshow 
-```
 
 
 
 MYSQL-随记
 
-```
-执行顺序
-FROM,ON,WHERE,GROUP BY, ORDER BY,LIMIT,行
-模糊匹配正则表达式
-
-1.select * from tableA where id regexp '^A';
-解释:查询所有以A开头的数据
-2.select * from tableA where id regexp 'A$';
-解释:查询所有以A结尾的数据
-3.select * from tableA where id regexp '[ABC]';
-解释:查询包含ABC中任何一个单词
-```
-
-### MYSQL-优化
-
-#### 优化-索引失效
-
-```sql
-1.varchar:值没有使用双引号
-select * from tableA where name = 1000
-```
 
 
 
-#### 优化-OR
-
-```SQL
-优化or:
-	1.OR的两边都必须要用到索引
-	2.不能使用复合索引
-	3.使用union代替or
-```
-
-#### 优化-INSERT
-
-```mysql
-传统方案
-insert into tableA values('1','NAME')；
-insert into tableA values('2','NAMEA')；
-优化方案:
-insert into tableA values('1','NAME'),('2','NAMEA')
-```
-
-#### 优化-排序
-
-```mysql
-1.MYSQL有两种排序方案:
-Using filesort:
-		1.性能:效率低
-		2.算法:
-			一次扫描算法：磁盘IO开销大
-			两次扫描算法：性能较低
-Using index:效率高
 
 
-2.ORDER BY，多个字段情形:
-	1.排序要么都升序要么都降序
-	2.排序的顺序需要和索引的顺序一致
-	3.同样可以利用索引排序
-	
-3.order by null:不排序操作，提升效率
-```
 
 #### 优化-其他
 
@@ -140,10 +72,6 @@ select * from mysql
 
 
 
-```
-
-```
-
 应用
 
 ```
@@ -153,12 +81,6 @@ show status like "innodb_row_lock%";查看锁的状态
 	Innodb_row_lock_time:锁定的时长
 	Innodb_row_lock_time_avg：锁定的平均时长
 	Innodb_row_lock_waits：一共等待多少次数
-```
-
-笔记
-
-```
-
 ```
 
 
@@ -211,82 +133,7 @@ SQL语句中有大量分号，所以需要上面分隔符处理
 show index from tableA:查看索引	
 ```
 
-### MYSQL-日志
 
-```
-日志类型:错误日志，二进制日志，查询日志，慢查询日志
-常用命令:
-	#查看日志状态
-	1.show master status;
-	#查看日志条数
-	2.show master logs;
-```
-
-#### 错误日志
-
-```mysql
-作用:记录MYSQL所有报错信息
-默认:错误日志默认开启
-#MYSQL错误日志的位置
-show variables like 'log_error%';
-```
-
-#### 二进制日志
-
-```
-作用:
-	1.记录所有增删改语句
-	2.记录数据结构
-	3.用于数据恢复
-	4.MSYQL主从复制
-默认:不开启，需要到配置文件中开启，并配置格式
-```
-
-日志格式
-
-```
-STATEMENT 
-	作用：所有记录都以SQL语句形式记录，通过mysqlbinlog查看
-	优点：减少了binlog日志量，节约IO，提高性能。
-	缺点：主从复制时,会将日志解析成原文本,并在从库(slave)中重新执行一次
-
-ROW
-	作用：记录每条语句的数据变更
-MIXED
-	作用:以上两种日志的混合使用，
-```
-
-#### 查询日志
-
-```
-1.默认不开启
-2.记录所有SQL语句
-```
-
-#### 慢查询日志
-
-```
-1.默认关闭
-```
-
-删除日志
-
-```
-第一种方式:reset master
-```
-
-### MYSQL-缓存
-
-#### 查询缓存
-
-```MYSQL
-#查询缓存是否开启
-show VARIABLES like 'query_cache_type';
-#查询缓存大小
-show VARIABLES like 'query_cache_size';
-#查询缓存空间
-show status like 'Qcache%';
-```
 
 ### MYSQL-集群
 

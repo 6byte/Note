@@ -23,15 +23,17 @@ Transactions 事务
 
 ### 入门案例
 
+```JS
+注意:
+--必须具备几个条件
+	1.目标类,@Component
+	2.增强类,@Aspect注解的类
+	3.配置类,开启@EnableAspectJAutoProxy，@Configuration
+--所有类都必须放在Spring容器中
+--绝对不能手动创建对象
 ```
-必须的类
-Target	：	需要被增强的类		@Component
-Aspect	:	 增强类		   @Aspect
-Config	:	 配置类			@Configuration，@EnableAspectJAutoProxy
 
-```
-
-##### 类:Target
+##### 目标类
 
 ```java
 @Component
@@ -40,7 +42,7 @@ public class Math {
 }
 ```
 
-##### 类:AspectJ
+##### 增强类
 
 ```JAVA
 @Component
@@ -59,7 +61,7 @@ public class AspectJ {
 
 
 
-##### 类:Config
+##### 配置类
 
 ```JAVA
 //将aspectj配置类和目标类同时注入SPRING
@@ -77,7 +79,7 @@ public class Config {
 }
 ```
 
-##### 类:Test
+##### 测试类
 
 ```JAVA
 AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
@@ -87,12 +89,5 @@ context.refresh();
 Math bean = context.getBean(Math.class);
 int add = bean.add(1 , 2);
 
-```
-
-使用注意
-
-```
-1.必须添加的注解@EnableAspectJAutoProxy,@Configuration,@Aspect
-2.不能手动创建对象,需要从IOC容器中获取目标对象，再调用
 ```
 

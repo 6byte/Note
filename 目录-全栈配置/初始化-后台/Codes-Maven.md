@@ -1,12 +1,20 @@
 ## Maven-依赖
 
+### Maven-AspectJ
+
+```vue
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
+
 ### Maven-SpringCloud
 
-解决返回XML问题
 
-```
-<!--排除eureka依赖XML的依赖-->
 
+```vue
+<!--排除eureka依赖XML的依赖,不再返回XML-->
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>
@@ -28,7 +36,7 @@
 
 ### Maven-Httpclient
 
-```
+```vue
 <!-- 用于发起Http请求 -->
 <dependency>
     <groupId>org.apache.httpcomponents</groupId>
@@ -39,7 +47,7 @@
 
 ### Maven-Shiro
 
-```
+```vue
 <!-- Shiro缓存控制 -->
 <dependency>
     <groupId>org.apache.shiro</groupId>
@@ -49,31 +57,31 @@
 
 <!-- Shiro核心包 -->
 <dependency>
-	<groupId>org.apache.shiro</groupId>
-	<artifactId>shiro-core</artifactId>
-	<version>1.3.2</version>
+    <groupId>org.apache.shiro</groupId>
+    <artifactId>shiro-core</artifactId>
+    <version>1.3.2</version>
 </dependency>
 
 <!--利用Spring Aop实现注解权限开发 -->
 <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>1.2.3</version>
+    <groupId>org.apache.shiro</groupId>
+    <artifactId>shiro-spring</artifactId>
+    <version>1.2.3</version>
 </dependency>
 
 <!-- 
-	Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技术支持 
+Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技术支持 
 -->
 <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.2.2</version>
+    <groupId>org.apache.shiro</groupId>
+    <artifactId>shiro-web</artifactId>
+    <version>1.2.2</version>
 </dependency>
 ```
 
 ### Maven-Mybatis
 
-```
+```vue
 <!-- mybatis依赖开始 -->
 <dependency>
     <groupId>org.mybatis</groupId>
@@ -85,13 +93,13 @@
 <!-- @MapperScan才能正常使用 -->
 <dependency>
     <groupId>org.mybatis</groupId>
-    	<artifactId>mybatis-spring</artifactId>
+    <artifactId>mybatis-spring</artifactId>
     <version>2.0.2</version>
 </dependency>
 <!-- 必须，否则无法启动 -->
 <dependency>
     <groupId>org.mybatis.spring.boot</groupId>
-    	<artifactId>mybatis-spring-boot-starter</artifactId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
     <version>1.1.1</version>
 </dependency>
 <!-- end -->
@@ -99,7 +107,7 @@
 
 ### Maven-WebSocket
 
-```
+```vue
 <!-- 长连接通信依赖 -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -287,12 +295,12 @@
 
 ### Maven-Druid
 
-```
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.8</version>
-        </dependency>
+```vue
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.8</version>
+</dependency>
 
 ```
 
