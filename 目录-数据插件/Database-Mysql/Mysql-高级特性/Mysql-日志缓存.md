@@ -44,7 +44,10 @@ show variables like 'log_error%';
 ##### 慢查询日志
 
 ```
-1.默认关闭
+1.开启
+slow_query_log = 1
+slow_query_log_file = low_query.log
+low_query_time = 3
 ```
 
 ##### 日志格式
@@ -66,6 +69,8 @@ MIXED
 ##### 查询缓存
 
 ```MYSQL
+#查看是否支持缓存
+show VARIABLES LIKE 'hava_query_cache';
 #查询缓存是否开启
 show VARIABLES like 'query_cache_type';
 #查询缓存大小
@@ -73,4 +78,3 @@ show VARIABLES like 'query_cache_size';
 #查询缓存空间
 show status like 'Qcache%';
 ```
-

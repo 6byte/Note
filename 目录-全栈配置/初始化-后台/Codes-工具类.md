@@ -598,12 +598,35 @@ public class A implements Runnable {
 }
 ```
 
-### Tool-执行任意SQL
+### Tool-Mybatis
+
+Tool-执行任意Sql
 
 ```java
 @Select("${sql}")
     public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
+
+Tool-拦截Sql语句
+
+```JAVA
+@Autowired
+private SqlSessionFactory sqlSessionFactory;
+
+@RequestMapping("/")
+public void index(Users users) {
+String sql = sqlSessionFactory
+    .getConfiguration()
+    .getMappedStatement("com.example.web.mapper.Mapper.find")
+    .getBoundSql(users)
+    .getSql();
+}
+
+//getMappedStatement(MAPPER方法全名)
+//getBoundSql(参数)
+```
+
+
 
 ### Tool-文本处理
 

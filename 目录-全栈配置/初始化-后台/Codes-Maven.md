@@ -296,6 +296,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 ### Maven-Druid
 
 ```vue
+<!-- 德鲁伊 -->
 <dependency>
     <groupId>com.alibaba</groupId>
     <artifactId>druid</artifactId>
