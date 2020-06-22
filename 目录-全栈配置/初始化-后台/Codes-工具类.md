@@ -628,7 +628,39 @@ String sql = sqlSessionFactory
 
 
 
-### Tool-文本处理
+### Tool-爬虫类
+
+##### Tools-RestTemplate
+
+普通请求
+
+```java
+
+RestTemplate template = new RestTemplate();
+String url = "http://localhost/";
+// 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
+MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<String, Object>();
+paramMap.add("text" , "test");
+// 1、使用postForObject请求接口
+String result = template.postForObject(url , paramMap , String.class);
+System.out.println(result);
+```
+
+普通请求
+
+```
+RestTemplate template = new RestTemplate();
+String url = "http://localhost:8080/test";
+String result = template.postForObject(url , null , String.class);
+```
+
+带参
+
+```
+
+```
+
+
 
 ##### Tools-时间格式
 

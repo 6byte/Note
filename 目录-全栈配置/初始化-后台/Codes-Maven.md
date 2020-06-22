@@ -305,3 +305,13 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ```
 
+### Maven-FastJson
+
+```VUE
+<dependency>
+    <groupId>com.alibaba</groupId>
+    	<artifactId>fastjson</artifactId>
+    <version>1.2.58</version>
+</dependency>
+```
+

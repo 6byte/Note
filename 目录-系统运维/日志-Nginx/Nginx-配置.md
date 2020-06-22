@@ -95,28 +95,17 @@ location / {
 
 ##### 下载站点
 
-概览
-
-```
-autoindex
-    1.能在location ，server，http中使用
-    2.默认关闭
-    3.打开:autoindex on;
-参数
-	autoindex_exact_size off;
-         默认on，显示文件大小，单位：bytes。
-         off，显示文件估计大小，单位：kB||MB||GB
-     autoindex_localtime on;
-     	 默认off，文件时间为GMT时间。
-          on，显示服务器文件时间
-```
-
-使用
-
 ```
 location / {
+	#文件映射,默认关闭
     autoindex on;
+    
+    #默认on，显示文件大小，单位：bytes。
+    #off，显示文件估计大小，单位：kB||MB||GB
     autoindex_exact_size off;
+    
+    #默认off，文件时间为GMT时间。
+    #on，显示服务器文件时间
     autoindex_localtime on;
 }
 ```
@@ -129,21 +118,83 @@ location / {
 概览:分两种方式
 1.连接频率限制:limit_conn_module
 2.请求频率限制:limit_req_module
-用于流量拦截
 ```
 
 入门使用
 
 ```
-http {
-#一定要在全局使用
-limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
-    server {
-    listen       9090;
-    server_name  134.175.79.33;
+http {    
+    #$binary_remote_addr:以二进制传输，用户IP作为标识
+	#zone=one:10m :生成一个大小为10M，名字为one的内存区域
+	#rate=1r/s	:限制客户端每秒1次访问，还可以有比如30r/m的。
+    limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
 
-    location / {
-    limit_req zone=one burst=5  nodelay;
-}}}
+    server {
+    location /{
+    #zone=one ：与上面的zone对应
+	#burst=5：设置值为5的缓冲区
+	#nodelay：
+		#如果设置，超频访问且缓冲区也满了，返回503
+		#如果没有设置，则所有请求会等待排队。
+    	limit_req zone=one burst=5 nodelay;
+    	#limit_conn zone=one burst=5 nodelay;
+	}
+}
+```
+
+##### 访问控制
+
+```
+1.基于IP的访问控制:http_access_module
+2.基于用户的登录认证:http_auth_basic_module
+3.返回:http,server,localtion
+4.返回403页面
+5.局限性，通过代理可以
+```
+
+使用
+
+```
+http {    
+    server {
+    location /{
+    #拒绝恶意IP
+		deny 1.1.1.1;
+		allow all;
+		
+	#仅允许管理员
+		allow 1.1.1.1;
+		deny all;
+	}
+}
+```
+
+##### 用户认证
+
+使用
+
+```
+location / {
+	#auth_basic :提示语
+    auth_basic "dont come in";
+    auth_basic_user_file conf/htpasswd;
+}
+```
+
+生成密码
+
+```
+yum install httd-tools
+
+htpasswd -c /etc/nginx/auth_conf admin 
+#在目录 /etc/nginx/auth_conf下生成 
+admin:$apr1$vGfgrEsl$yLX0mfr2S1U3g/62PLdzK1
+```
+
+##### 静态资源
+
+```
+tcp_nopush : 传输效率高，实时性低
+tcp_nodelay :
 ```
 
