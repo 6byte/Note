@@ -635,20 +635,6 @@ String sql = sqlSessionFactory
 普通请求
 
 ```java
-
-RestTemplate template = new RestTemplate();
-String url = "http://localhost/";
-// 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
-MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<String, Object>();
-paramMap.add("text" , "test");
-// 1、使用postForObject请求接口
-String result = template.postForObject(url , paramMap , String.class);
-System.out.println(result);
-```
-
-普通请求
-
-```
 RestTemplate template = new RestTemplate();
 String url = "http://localhost:8080/test";
 String result = template.postForObject(url , null , String.class);
@@ -656,13 +642,28 @@ String result = template.postForObject(url , null , String.class);
 
 带参
 
+```JAVA
+
+RestTemplate template = new RestTemplate();
+String url = "http://localhost/";
+
+// 封装参数，千万不要替换为Map与HashMap，否则参数无法传递
+MultiValueMap<String, Object> paramMap = new LinkedMultiValueMap<String, Object>();
+
+paramMap.add("text" , "test");
+
+String result = template.postForObject(url , paramMap , String.class);
 ```
 
+##### Tool-转Json
+
+```JAVA
+String addr = JSON.toJSONString(address);
 ```
 
 
 
-##### Tools-时间格式
+##### Tool-时间格式
 
 ```JAVA
  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
