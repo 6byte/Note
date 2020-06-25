@@ -50,3 +50,47 @@ if(matcher.matches()){
 
 
 
+#### 正则对象
+
+概览
+
+```js
+必要条件
+-目标字符串，正则表达式，Pattern添加正则，Matcher添加目标字符串
+步骤
+    -定义一个目标字符串和一个正则表达式
+    --使用Pattern获取Matcher对象
+    ---使用Matcher匹配字符串
+流程:
+	Pattern+正则表达式 -> Matcher+目标字符串 -> 使用Matcher对象
+```
+
+代码
+
+```java
+//       目标字符串
+String string = "Happiness  is  a way , station between too much and too little.";
+//       正则表达式
+String reg = "[\\s\\,]+";
+//        Pattern添加正则
+Pattern pattern = Pattern.compile(reg, Pattern.CASE_INSENSITIVE);
+//        Matcher添加目标字符串
+Matcher matcher = pattern.matcher(string);
+```
+
+##### Matcher
+
+|  方法名   |             作用             |
+| :-------: | :--------------------------: |
+| lookAt()  |      与字符串的前缀匹配      |
+| find（）  |   查找是否有匹配的子字符串   |
+| start（） | 返回字符串的第一个字符的索引 |
+|  end（）  |  返回字符串最后一个的索引+1  |
+|           |                              |
+
+##### 提取指定字符串
+
+```
+通过start(),end()提取字符串位置,再截取
+```
+
