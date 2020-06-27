@@ -608,7 +608,7 @@ function strFilter(str) {
 
 ##### 文字处理
 
-高亮文字
+###### 高亮文字
 
 ```JS
 /**
@@ -629,7 +629,7 @@ function highLight(keyword,selector,style) {
 }
 ```
 
-字符转换
+###### 字符转换
 
 转Unicode
 
@@ -666,7 +666,7 @@ function toUnicode(string) {
 }
 ```
 
-转中文
+###### 转中文
 
 ```JS
 /**
@@ -702,7 +702,7 @@ function toChinese(string) {
 }
 ```
 
-中文转二进制
+###### 中文转二进制
 
 ```JS
 //功能:将中文转换成二进制
@@ -725,7 +725,7 @@ function getCharBinary(str) {
 
 
 
-
+##### BOM事件
 
 ###### 监听窗口改变
 
@@ -847,4 +847,14 @@ function exitfullscreen(ele) {
 ###### 页面属性
 
 <https://blog.csdn.net/jarniyy/article/details/80423813>
+
+##### 遍历对象
+
+###### map遍历
+
+```JS
+Object.entries(data).map(([k, v])=>{
+   console.log(${k},${v})
+})
+```
 
