@@ -195,6 +195,52 @@ admin:$apr1$vGfgrEsl$yLX0mfr2S1U3g/62PLdzK1
 
 ```
 tcp_nopush : 传输效率高，实时性低
-tcp_nodelay :
+tcp_nodelay :传输效率低，实时性高
+```
+
+##### 浏览器缓存
+
+```
+ expires 10d;
+ location /(img|js|css|static)/\.(jpg|png)$ {
+     expires 10d;
+ }
+```
+
+##### 跨域访问
+
+```
+add_header Address-Control-Allow-Origin 允许访问的域名;
+add_header Address-Control-Allow-Method Get,POST,PUT;
+```
+
+##### 防盗链
+
+参数说明
+
+```JS
+valid_referers配置说明：
+    none : 允许没有http_refer的请求；
+    blocked : 允许没有http://开头的请求；
+    server_names : 指定域名或IP的请求访问；
+删除none和 blocked,则不允许通过文件直链进行访问和下载，只能在限定的域名中引用和下载。
+```
+
+
+
+文件类型
+
+```JS
+# 需要防盗的后缀
+location ~* \.(jpg|jpeg|png|gif|bmp|swf|rar|zip|doc|xls|pdf|gz|bz2|mp3|mp4|flv)$
+
+    valid_referers none blocked 192.168.0.1 *.google.com;
+
+    if ($invalid_referer) {
+        # return 403;
+        rewrite ^/ https://site.com/403.jpg;
+    }
+    root  /html;
+}
 ```
 
