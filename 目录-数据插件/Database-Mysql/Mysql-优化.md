@@ -19,6 +19,7 @@ select 	distinct name --第七步
 ```MYSQL
 #先->后
 FROM ON JOIN WHERE GROUP_BY HAVING SELECT_DINSTINCT ORDER_BY LIMIT
+取表 取条件 分组 分条件 查询去重 排序 分页
 ```
 
 #### 查询

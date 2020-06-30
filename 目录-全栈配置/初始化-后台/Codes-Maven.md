@@ -194,7 +194,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ### Maven-Mybatis-Plus
 
-```
+```vue
 <!-- Mybatis-Plus jar包 -->
 <dependency>
     <groupId>org.apache.velocity</groupId>
@@ -247,7 +247,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ### Maven-Jedis
 
-```
+```vue
 <dependency>
     <groupId>redis.clients</groupId>
     <artifactId>jedis</artifactId>
@@ -312,6 +312,17 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
     <groupId>com.alibaba</groupId>
     	<artifactId>fastjson</artifactId>
     <version>1.2.58</version>
+</dependency>
+```
+
+### Maven-HashID
+
+```VUE
+<!-- ID加密 -->
+<dependency>
+    <groupId>org.hashids</groupId>
+    <artifactId>hashids</artifactId>
+    <version>1.0.3</version>
 </dependency>
 ```
 

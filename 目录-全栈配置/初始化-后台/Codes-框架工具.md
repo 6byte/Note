@@ -170,7 +170,7 @@ public class ShiroConfig {
 ###### Shiro-Realm
 
 ```JAVA
-需要继承AuthorizingRealm
+//需要继承AuthorizingRealm
 public class Realm extends AuthorizingRealm {
 //配置加密，一旦使用MD5校验，就一定得配置该类
 @Override
