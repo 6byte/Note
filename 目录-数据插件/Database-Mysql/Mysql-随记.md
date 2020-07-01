@@ -1,19 +1,5 @@
 ## Mysql-随记
 
-### MYSQL-命令
-
-
-
-
-
-MYSQL-随记
-
-
-
-
-
-
-
 #### 优化-其他
 
 ```MYSQL
@@ -21,27 +7,6 @@ MYSQL-随记
 SHOW STATUS like '%innodb_rows_%'	--分析当前表增删查改情况
 show processlist:查看实时SQL执行情况
 explain 结合上面的 show processlist分析语句
-```
-
-
-
-缓存失效
-
-```SQL
-1.命中缓存，SQL必须一致，如大小写不一致，不走缓存
-select * from tableA
-Select * from tableA
-
-2.查询语句中结果出现随机值
-select now()
-
-3.不使用任何表查询
-select "hello"
-
-4.查询系统数据库不走缓存
-select * from mysql
-
-5.当表的发生更改时，缓存被清空
 ```
 
 ### MYSQL-锁

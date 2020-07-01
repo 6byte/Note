@@ -22,7 +22,7 @@ FROM ON JOIN WHERE GROUP_BY HAVING SELECT_DINSTINCT ORDER_BY LIMIT
 取表 取条件 分组 分条件 查询去重 排序 分页
 ```
 
-#### 查询
+#### Mysql-查询
 
 查询
 
@@ -38,7 +38,7 @@ SELECT * FROM `student` where name regexp '^陈';
 SELECT * FROM `student` where name regexp '^陈';
 ```
 
-#### 优化集
+#### Mysql-优化
 
 ```mysql
 - 字符串类型必须用双引号
@@ -96,4 +96,23 @@ order by null:不排序操作，提升效率
 	2.不能使用复合索引
 	3.使用union代替or
 ```
+
+##### 优化-缓存
+
+```MYSQL
+1.命中缓存，SQL必须一致，如大小写不一致，不走缓存
+select * from tableA
+Select * from tableA
+2.查询语句中结果出现随机值
+select now()
+3.不使用任何表查询
+select "hello"
+4.查询系统数据库不走缓存
+select * from mysql
+5.当表的发生更改时，缓存被清空
+```
+
+
+
+
 
