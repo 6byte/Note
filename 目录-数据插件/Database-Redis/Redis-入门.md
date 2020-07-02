@@ -1,62 +1,61 @@
 ## Redis
 
-### String-操作
-
-增
+#### 概念
 
 ```
-set		set key value				
-setex   setex key senconds value	添加key并设置时间
-setnx   setnx key value				设置值如果没有被设置
+五种基本数据类型
+三种特殊数据类型
+作用:数据库，缓存，消息中间件，分布式锁，哨兵，事务，驱动事件，主从复制，索引半径查询
 ```
 
-删
+#### 通用命令
+
+|      命令       |     解释     |     举例      |
+| :-------------: | :----------: | :-----------: |
+| expire key time | 设置过期时间 | expire key 10 |
+|     ttl key     | 查看过期时间 |    ttl key    |
+|       del       |    删除键    |    del key    |
+|      type       |  查看键类型  |   type key    |
+|     exists      | 查看键值存在 |  exists key   |
+
+##### String
+
+概览
 
 ```
-del			del key			删除键
-flushdb				 	   	清除当前数据库所有数据
-flushall					清除所有数据
+操作:键值自增，批量增删，设置过期时间
+业务:网页访问量，分布式锁，缓存
 ```
 
-查
+
+
+|          命令           |       解释       |        举例        |
+| :---------------------: | :--------------: | :----------------: |
+|        incr key         |      自增1       |      incr key      |
+|        decr key         |      自减1       |      decr key      |
+|     incrby key step     |       步减       |   incrby key 10    |
+| setex key seconds value | 设置过期时间的键 | setex key 10 value |
+|     setnx key value     | 仅添加不存在的值 |       setnx        |
+|       mset key..        |    设置多个值    |     mset key..     |
+|                         |                  |                    |
+
+##### List
+
+概览
 
 ```
-get		get key		查看key
-type	type key	查看key的类型
-keys 	key * 		查看所有key
-exsits  exsits key	判断key是否存在
-getrange key 0 2:获取key中0到2之间的字符
+作用:模拟栈队列
 ```
 
-改
 
-```
-getset 		getset key				更新键值
-append 		append key value		向key追加字符串value
-move		move key 1				将key移动到1号数据库
-incr 		incr key				数据自增1
-decr		decr key				数据减1
-incrby		incrby key 10			设置步长为10
-```
 
-其他命令
-
-```
-时间
-ttl key:查看剩余时间
-expire key 5s:为key设置过期时间5秒
-```
-
-### List操作
-
-```
-lpush	lpush key value		左添加
-rpush	rpush key value		右添加
-lpop	lpop  key value		左删除
-rpush	rpush key value		右删除
-
-LREM 	LREM KEY  数量 值		移除n个key
-LLEN	获取list长度
-
-```
+|         命令          |          解释           |        举例         |
+| :-------------------: | :---------------------: | :-----------------: |
+| lpush/rpush key value |         添加值          | lpush/rpush k value |
+| lrange key start end  |        查看范围         |    lrange k 0 2     |
+|  lpop/rpop key value  |         移除值          |     lpop/rpop k     |
+|   lindex key index    |      获取某一个值       |     lindex k 0      |
+|       llen key        |        获取长度         |       llen k        |
+|   lrem key n value    | 移除key中的n个value的值 |     lrem k 1 v      |
+|                       |                         |                     |
 

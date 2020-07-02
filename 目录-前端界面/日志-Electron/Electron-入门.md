@@ -1,9 +1,16 @@
 ## Electron-入门
 
-### 安装启动
+#### 安装启动
 
 ```
-cnpm install --save-dev electron
+# 克隆示例项目的仓库
+git clone https://github.com/electron/electron-quick-start
+
+# 进入这个仓库
+cd electron-quick-start
+
+# 安装依赖并运行
+npm install && npm start
 ```
 
 第一个应用
@@ -12,7 +19,7 @@ cnpm install --save-dev electron
 
 ```
 选择一个目录初始化
-npm init
+npm init -y
 ```
 
 创建main.js
@@ -66,7 +73,7 @@ app.whenReady().then(createWindow)
 npm start
 ```
 
-### 入门介绍
+#### 入门介绍
 
 ```
 Electron分渲染进程和主进程

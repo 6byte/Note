@@ -2,7 +2,7 @@
 
 ### 入门篇-常用命令
 
-```
+```js
 1、启动
 /usr/local/nginx/sbin/nginx
 # cd /usr/local/nginx/sbin 

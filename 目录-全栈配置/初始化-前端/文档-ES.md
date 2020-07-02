@@ -201,6 +201,26 @@ getWindowHeight() {
 
 ```
 
+##### 其他
+
+###### 兼容Event
+
+```JS
+function addloadEvent(func) {
+ 	var oldonload = window.onload;
+ 	if (typeof window.onload != "function") {
+ 		window.onload = func;
+ 	} else {
+ 		window.onload = function() {
+ 			if (oldonload) {
+ 				oldonload();
+ 			}
+ 			func();
+ 		}
+ 	}
+ }
+```
+
 
 
 ###### 获取中文时间
@@ -234,6 +254,26 @@ function writeCurrentDate() {
 	return time;
 }
 ```
+
+###### 获取时间
+
+```JS
+function getTime() {
+    var t = new Date();
+    var y = t.getFullYear();
+    var m = t.getMonth() + 1;
+    var d = t.getDate();
+    var h = t.getHours();
+    var mi = t.getMinutes();
+    m = m < 10 ? "0" + m : m;
+    d = d < 10 ? "0" + d : d;
+    h = h < 10 ? "0" + h : h;
+    mi = mi < 10 ? "0" + mi : mi;
+    return y + "-" + m + "-" + d + "" + h + ":" + mi;
+}
+```
+
+
 
 ###### 操作Cookies
 
