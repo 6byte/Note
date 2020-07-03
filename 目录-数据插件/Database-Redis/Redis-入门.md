@@ -39,7 +39,7 @@
 |       mset key..        |    设置多个值    |     mset key..     |
 |                         |                  |                    |
 
-##### List
+##### Redis-List
 
 概览
 
@@ -58,4 +58,28 @@
 |       llen key        |        获取长度         |       llen k        |
 |   lrem key n value    | 移除key中的n个value的值 |     lrem k 1 v      |
 |                       |                         |                     |
+
+##### Redis-Set
+
+```
+作用:生成随机值,相互关注
+```
+
+|     命令     |     解释     |    举例    |
+| :----------: | :----------: | :--------: |
+|   spop key   |  随机删除值  |   spop k   |
+| smembers key | 查看所有元素 | smembers k |
+|   sadd key   |   添加元素   |   sadd k   |
+
+##### Redis-Hash
+
+```
+作用
+```
+
+|         命令         |    解释    |    举例    |
+| :------------------: | :--------: | :--------: |
+| hset key field value |   存储值   | hset k f v |
+|       hget key       |            |            |
+|     hgetall key      | 获取所有值 | hgetall k  |
 

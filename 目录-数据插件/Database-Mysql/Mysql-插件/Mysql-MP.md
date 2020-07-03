@@ -50,6 +50,48 @@ public List<User> getList(Integer start , Integer pageSize) {
 
 ```
 
+#### 自动更新时间
+
+配置
+
+```java
+@Component
+@Slf4j
+public class MyMeta0bjectHandler implements MetaObjectHandler {
+    //插入时填充
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.setFieldValByName("createTime",new Date(),metaObject);
+        this.setFieldValByName("updateTime",new Date(),metaObject);
+    }
+    //更新时填充
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.setFieldValByName("updateTime",new Date(),metaObject);
+    }
+}
+```
+
+使用
+
+```JAVA
+// 默认不处理
+DEFAULT,
+//插入时更新时间
+INSERT,
+//更新时改变事件
+UPDATE,
+//更新或添加改变时间
+INSERT_UPDATE
+
+@TableField(fill = FieldFill.INSERT)
+private Date createTime ;
+@TableField(fill = FieldFill.INSERT_UPDATE)
+private Date updateTime;
+```
+
+
+
 #### 删除
 
 |           方法名            |      解释       |

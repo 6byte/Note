@@ -130,7 +130,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ### Maven-AspectJ
 
-```
+```vue
 <!-- Spring aop核心依赖 -->
 <dependency>
     <groupId>org.aspectj</groupId>
@@ -257,20 +257,19 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ### Maven-Cglib
 
-```
+```vue
 <!-- cglib jar包 -->
 <dependency>
     <groupId>cglib</groupId>
     <artifactId>cglib</artifactId>
     <version>3.2.12</version>
 </dependency>
-
 <!-- END -->
 ```
 
 ### Maven-PageHelper
 
-```
+```vue
 <!-- 分页插件 -->
 <dependency>
     <groupId>com.github.pagehelper</groupId>
@@ -302,7 +301,6 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
     <artifactId>druid</artifactId>
     <version>1.1.8</version>
 </dependency>
-
 ```
 
 ### Maven-FastJson
