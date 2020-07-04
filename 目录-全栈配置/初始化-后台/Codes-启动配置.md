@@ -4,7 +4,27 @@
 
 ## 单体-配置
 
-### 配置-YML
+### 配置-Application
+
+```
+#设置数据源
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/market?characterEncoding=utf8&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=00000000
+#阿里巴巴连接池类型
+spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+#日志设置
+logging.file.path=log
+#自定义日志格式配置
+logging.pattern.file=   %d{yyy MMM dd HH}  -----=*=----- %F : %L  -----=*=----- %m  %n
+#为避免冲突重定义端口
+server.port=8080
+#关闭启动图案
+spring.main.banner-mode=off
+```
+
+### 配置-Yml
 
 ```
 server:
@@ -21,26 +41,6 @@ logging:
   file:
     path: Log/log4.log
 
-```
-
-### 配置-Application
-
-### 配置-常规
-
-```java
-#设置数据源
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/market?characterEncoding=utf8&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=00000000
-#阿里巴巴连接池类型
-spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
-#日志设置
-logging.file.path=log/log4.log
-#为避免冲突重定义端口
-server.port=8080
-#关闭启动图案
-spring.main.banner-mode=off
 ```
 
 ### 配置-邮件

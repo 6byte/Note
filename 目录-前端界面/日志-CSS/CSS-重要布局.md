@@ -164,21 +164,9 @@ min-width:当设备宽度大于xxx生效
 3.col总数 >	12:下移
 ```
 
-##### 列嵌套
 
-```html
-1.列嵌套要加row
 
-<div class="row">
-    <div class="col-8">
-        <div class="row">
-            <div class="col-8">1</div>
-            <div class="col-2">1</div>
-        </div>
-    </div>
-    <div class="col-2">1</div>
-</div>
-```
+
 
 
 

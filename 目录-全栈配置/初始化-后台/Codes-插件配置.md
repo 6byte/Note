@@ -77,6 +77,7 @@ public class BeanConfig {
 
 ```JAVA
 @Aspect
+@Component
 public class SystemArchitecture {
     // ".." 代表包及其子包
  @Pointcut("within(com.iota.mudule..*)")
@@ -97,8 +98,15 @@ public class SystemArchitecture {
 
 ###### 具体切入点
 
-```
-
+```JAVA
+@Component
+@Aspect
+public class AspectAop {
+    @Before("within( com.example.test..*)")
+     public void before() {
+        log.warn("执行");
+     }
+}
 ```
 
 #### Shiro-配置
@@ -188,7 +196,12 @@ public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
 }
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        //授权
+        Set<String> set = new HashSet();
+        set.add("user:add");
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addStringPermissions(set);
+        return info;
 }
 
     @Override
@@ -249,6 +262,39 @@ public void setPassword(User user) {
         user.setPassword(ciphertext);
         //放进数据库
         Dao层.insertOne(user);
+}
+```
+
+###### 权限认证
+
+```JAVA
+@RequiresPermissions("user:add")
+@RequestMapping("/add")
+public String add() {
+    return"返回越权操作值";
+}
+```
+
+
+
+###### 其他方法
+
+获取Session Id
+
+```JAVA
+/**
+     * 通过sessionid获取Session
+     * @param sessionId
+     * @return Session
+     */
+public static Session getSessionById(String sessionId){
+    SessionKey sessionKey = new SessionKey() {
+        @Override
+        public Serializable getSessionId() {
+            return sessionId;
+        }
+    };
+    return SecurityUtils.getSecurityManager().getSession(sessionKey);
 }
 ```
 
