@@ -31,7 +31,7 @@ http {
     server_name  134.175.79.33;
     location /static { 
     root html/;
-    index a.html; #跳转首页
+    index index.html; #跳转首页
 }}}
 ```
 

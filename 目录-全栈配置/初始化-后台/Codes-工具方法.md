@@ -613,14 +613,11 @@ Tool-拦截Sql语句
 @Autowired
 private SqlSessionFactory sqlSessionFactory;
 
-@RequestMapping("/")
-public void index(Users users) {
 String sql = sqlSessionFactory
     .getConfiguration()
-    .getMappedStatement("com.example.web.mapper.Mapper.find")
+    .getMappedStatement("com.example.Mapper.selectList")
     .getBoundSql(users)
     .getSql();
-}
 
 //getMappedStatement(MAPPER方法全名)
 //getBoundSql(参数)

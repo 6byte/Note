@@ -128,7 +128,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ```
 
-### Maven-AspectJ
+### Maven-Aop
 
 ```vue
 <!-- Spring aop核心依赖 -->
@@ -283,7 +283,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 <https://www.cnblogs.com/chenjiahao9527/p/12432217.html>
 
-```
+```vue
 <!-- 发送邮件 -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
