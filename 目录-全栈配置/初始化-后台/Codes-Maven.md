@@ -93,6 +93,23 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 </dependency>
 ```
 
+### Maven-validation
+
+```XML
+<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>2.0.1.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.7.Final</version>
+</dependency>
+```
+
+
+
 ### Maven-Mybatis
 
 ```vue

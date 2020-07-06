@@ -6308,11 +6308,7 @@ a.badge-dark.focus {
 	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
 
-.text-abs-center {
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-}
+
 
 .text-justify {
 	text-align: justify !important;
