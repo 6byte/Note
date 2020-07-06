@@ -1,11 +1,25 @@
 ## Maven-依赖
 
-### Maven-AspectJ
+### Maven-Aop
 
 ```vue
+<!-- 整合Springboot -->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+
+<!-- Spring aop核心依赖 -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.7</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>5.2.3.RELEASE</version>
 </dependency>
 ```
 
@@ -128,22 +142,7 @@ Shiro不是一个单纯的Web权限框架,使用shiro-web依赖获取更多技�
 
 ```
 
-### Maven-Aop
 
-```vue
-<!-- Spring aop核心依赖 -->
-<dependency>
-    <groupId>org.aspectj</groupId>
-    <artifactId>aspectjweaver</artifactId>
-    <version>1.8.7</version>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-aop</artifactId>
-    <version>5.2.3.RELEASE</version>
-</dependency>
-```
 
 ### Maven-Jsoup
 

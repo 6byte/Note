@@ -58,17 +58,10 @@ public void addResourceHandlers( ResourceHandlerRegistry registry ) {
 ```JAVA
 @ControllerAdvice
 public class ErrorConfig {
-        //标注错误类型
-    @ExceptionHandler(value = AuthorizationException.class)
-     public String methods(){
-         //捕获到异常，返回到页面unAuthor.html
-        return "/guest/unAuthor.html";
-    }
-    //黑名单
-    @ExceptionHandler(value=DisabledAccountException.class)
-    public String DisabledAccountException() {
-        //捕获到异常，返回到页面unAuthor.html
-        return "限定登录";
+    @ExceptionHandler(value = {Exception.class})
+    public Object handleOtherExceptions(final Exception ex) {
+        if(ex instanceof NullPointException)
+        return null;
     }
 }
 ```
@@ -190,19 +183,6 @@ public static String getRemoteAddr(HttpServletRequest request){
 public class WebSocketConfig {
     @Bean
 	public ServerEndpointExporter serverEndpointExporter() {       return new ServerEndpointExporter();}}
-```
-
-逻辑类
-
-单例注入
-
-```java
-@Autowired
-private static ClassA classa;
-@Autowired
-public void getService(ApplicationContext context){
-    classa= context.getBean(ClassA.class);
-}
 ```
 
 ##### Tool-Schedule
@@ -507,6 +487,17 @@ public class SpringContextUtil implements ApplicationContextAware {
     public static <T> T getBean(String name , Class<T> clazz) {
         return getApplicationContext().getBean(name , clazz);
     }
+}
+```
+
+##### Tools-单例注入
+
+```JAVA
+@Autowired
+private static ClassA classa;
+@Autowired
+public void getService(ApplicationContext context){
+    classa= context.getBean(ClassA.class);
 }
 ```
 
