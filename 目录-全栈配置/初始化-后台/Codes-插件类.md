@@ -242,8 +242,8 @@ protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
 
 ```JAVA
 (1):请求
-@RequestMapping("/add")
- public void insert(User user) {
+@RequestMapping("/register")
+ public void register(User user) {
     setPassword(user);
 }
 
