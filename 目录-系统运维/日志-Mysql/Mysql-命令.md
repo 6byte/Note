@@ -2,7 +2,7 @@
 
 #### 启动关闭
 
-```
+```mysql
 启动
 service mysqld start
 
@@ -210,14 +210,11 @@ server-id=2
   #在主库使用命令show master status;获取下面的信息
   MASTER_LOG_FILE='mysql-bin.000012';
   MASTER_LOG_POS=120;
-  
-
 ```
 
 命令：
 
 ```MYSQL
-
 start  slave;  # 启动从库复制
 stop slave		#停止协议
 SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; #最好设置
@@ -250,9 +247,5 @@ log-bin = mysqlbin
 
 pid-file=/var/run/mysqld/mysqld.pid
 symbolic-links=0
-
-
-
-
 ```
 

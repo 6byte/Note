@@ -5,22 +5,20 @@
 ### 安装步骤
 
 ```mysql
-
-0.一定要配置Mysql扩展源，安装出错，找下面的故障解决
+0.	一定要配置Mysql扩展源，安装出错，找下面的故障解决
 
 rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm
 
-1.下载
+1.	下载
 wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.15-1.el7.x86_64.rpm-bundle.tar
 
-2.解压
-切换目录，统一管理软件
+2.	解压，切换目录，统一管理软件
     mkdir /usr/local/mysql 
 解压
     tar -xvf mysql-8.0.15-1.el7.x86_64.rpm-bundle.tar -C /usr/local/mysql/
     
-3.安装,一定要在解压后的MySQL中安装
-#直接复制粘贴
+3.	安装,一定要在解压后的MySQL中安装
+cd /usr/local/mysql
 
 rpm -ivh mysql-community-common-8.0.15-1.el7.x86_64.rpm --nodeps --force && rpm -ivh mysql-community-libs-8.0.15-1.el7.x86_64.rpm --nodeps --force && rpm -ivh mysql-community-client-8.0.15-1.el7.x86_64.rpm --nodeps --force && rpm -ivh mysql-community-server-8.0.15-1.el7.x86_64.rpm --nodeps --force
 
@@ -41,7 +39,13 @@ systemctl enable mysqld;
 #修改密码,要加引号
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你自己的密码'; 
 
-6.创建远程用户
+
+```
+
+#### 创建远程用户
+
+```
+创建远程用户
 #创建用户，并设置密码
 create user '自定义用户名'@'%' identified with mysql_native_password by '你要给用户指定的密码';
 
