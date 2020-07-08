@@ -1,8 +1,16 @@
-### Tool-Jedis
+package com.init.index.config.redis;
 
-##### 配置
+import org.springframework.stereotype.Component;
+import redis.clients.jedis.BinaryClient;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.exceptions.JedisConnectionException;
 
-```java
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 @Component
 public class RedisUtil {
     //Redis服务器IP
@@ -1824,6 +1832,4 @@ public class RedisUtil {
     }
 
 }
-
-```
 

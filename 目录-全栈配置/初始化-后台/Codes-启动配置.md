@@ -12,6 +12,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/market?characterEncoding=utf8&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=00000000
+
 #阿里巴巴连接池类型
 spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
 #日志设置
@@ -122,12 +123,6 @@ server:
   port: 8085
 ```
 
-消费者
-
-```
-
-```
-
 
 
 ### 服务端
@@ -186,39 +181,7 @@ eureka:
     ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
 ```
 
-### 分布式
 
-```
-
-
-#设置数据源
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=00000000
-
-#日志设置
-logging.file.path=cherrioLog/log4.log
-logging.level.com.cherrio.cherrio_controller = info
-
-#为避免冲突重定义端口
-server.port=10000
-
-
-#关闭启动图案
-spring.main.banner-mode=off
-
-server.port=8087
-
-#设置该服务注册中心的hostname
-eureka.instance.hostname=Eureka
-#禁止注册自己
-eureka.client.register-with-eureka=false
-#不检索其他服务
-eureka.client.fetch-registry=false
-#指定服务中心的位置
-eureka.client.service-url.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
-```
 
 ## JRebel破解
 

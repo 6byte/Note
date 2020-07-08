@@ -1,19 +1,5 @@
 ### Redis-管理
 
-#### 登录管理
-
-```
-命令行
-设置密码
-config set reqiurepass "passwd"
-
-获取密码
-config get requirepass
-
-登录
-auth "passwd"
-```
-
 #### 过期管理
 
 |      策略       |                           说明                            |
@@ -30,25 +16,6 @@ auth "passwd"
 RDB
 
 #### 配置管理
-
-##### 连接配置
-
-```MYSQL
-
-# 指定端口
-    port 6379
-# 指定地址
-    bind 127.0.0.1
-# 指定连接空闲时间.
-        # 如果超时将会关闭连接
-        # 如果为0,表示永不超时.
-    timeout 0
-# 指定TCP连接是否为长连接,将增加开支
-  	#默认为0，禁用。非0值表示开启;
-  	#client端socket也可以通过配置keepalive选项,开启"长连接"
-    tcp-keepalive 0
-
-```
 
 ##### 日志配置
 
