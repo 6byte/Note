@@ -7,12 +7,6 @@
 ```
 webpack.config.js由五部分组成
 entry output mode plugin module
-```
-
-解析
-
-```JS
-
 mode
 	1.参数：production,development,none
 	2.作用：指定编译模式
@@ -30,6 +24,8 @@ plugin
 module
 	1.配置解析条件
 ```
+
+
 
 #### 详解-entry
 

@@ -4,14 +4,14 @@
 
 安装
 
-```
+```js
 #	全局安装
 
-cnpm install babel-loader babel babel-core css-loader style-loader  url-loader file-loader less-loader less html-webpack-plugin --save-dev 
+cnpm install babel-loader babel babel-core css-loader style-loader  url-loader file-loader less-loader less html-webpack-plugin css-loader style-loader less webpack-plugin --save-dev 
 
 #	初始化
 cnpm init -y
-#cnpm install webpack webpack-cli –g
+cnpm install webpack webpack-cli –g
 
 #	创建进入一个目录
 cnpm install webpack
@@ -25,11 +25,13 @@ webpack -v
 
 ###### 第一步-概览
 
-```
+```js
 新建 
 	index.html 
 	index.js 
-	webpack.config.js 	非常重要
+
+#非常重要
+	webpack.config.js 	
 ```
 
 ###### 第二步-编译
@@ -119,26 +121,7 @@ module.exports = {
 }
 ```
 
-###### 第三步-babelrc
 
-```
---新建babelrc
---添加内容
 
-{
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": [
-            "> 1%",
-            "last 2 versions"
-          ]
-        }
-      }
-    ]
-  ],
-}
-```
+
 

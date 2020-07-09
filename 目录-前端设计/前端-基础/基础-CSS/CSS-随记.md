@@ -56,15 +56,9 @@ float元素
 除了行内元素就是块级元素
 ```
 
-### Bootstrap应用
 
-```css
-让元素水平垂直居中
-class="h-100 d-flex align-items-center justify-content-end"
-h-100	：	设置高，给垂直空间留出空位
-align-items-center :	垂直居中对齐
-justify-content-end：	水平靠右
-```
+
+
 
 
 

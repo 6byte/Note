@@ -1,7 +1,5 @@
 ## CSS-效果
 
-CSS-边框
-
 #### CSS-边框阴影
 
 ```CSS
@@ -14,7 +12,6 @@ div{ box-shadow: 10px 10px 5px #888888;}
 ```CSS
 //直接用
 #border { 
-   
     border-image: url(border.png) 10 round;
 }
 ```
