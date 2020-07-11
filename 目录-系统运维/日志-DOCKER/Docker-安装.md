@@ -4,69 +4,45 @@
 
 网页加速		https://blog.csdn.net/shijiujiu33/article/details/90540031
 
-##### CentOS 7 (使用yum进行安装)
-
-
-
-###### step 1:安装阿里镜像源
-
 ```js
-#1、新建daemon.json文件
+--  查看是否已经安装
+yum list installed | grep docker
+--	安装
+yum -y install docker
+
+--	新建daemon.json文件
 mkdir /etc/docker
 
-#2、编辑docker
+--	编辑docker
 cd /etc/docker
 vim daemon.json
 在文件中添加以下内容
 {
      "registry-mirrors": ["https://c86u3plt.mirror.aliyuncs.com"]
 }
-重启daemon
+
+--	重启daemon
 systemctl daemon-reload
-重启docker
+
+--	重启docker
 systemctl restart docker
-```
 
-阿里云镜像地址https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
-
-
-
-###### step 2: 安装必要的一些系统工具
-
-```kotlin
+--  不知道干什么的，装就行
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-```
 
-
-
-###### Step 3: 添加软件源信息
-
-```csharp
+--	添加软件源信息
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-```
 
-
-
-###### Step :four: 更新并安装 Docker-CE
-
-```undefined
+--	更新并安装 Docker-CE
 sudo yum makecache fast
 sudo yum -y install docker-ce
-```
 
-
-
-###### Step 5: 开启Docker服务
-
-```undefined
+--	开启Docker服务
 sudo service docker start
-```
 
-
-
-###### Step 6:开机启动
-
-```
+--	开机启动
 chkconfig docker on 
 ```
+
+
 

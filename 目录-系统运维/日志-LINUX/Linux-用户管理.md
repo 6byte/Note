@@ -20,10 +20,6 @@ ex:
     语法		passwd 用户名
     使用		passwd lucy
     
-3.查看是否成功
-    定义			id 用户名
-    ex			 id lucy
-
 ```
 
 权限分配
@@ -41,7 +37,6 @@ Root权限管理
 1.修改计算机名称
 sudo vi /etc/hostname
 reboot	#重启生效
-
 ```
 
 
@@ -51,15 +46,13 @@ reboot	#重启生效
 ### Linux-多用户管理
 
 ```JS
-#强制用户下线
-1.先查看当前在线用户
-w	OR	who
+--	先查看当前在线用户
+w users who
 
-//结果
-USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
-root     pts/1    43.250.201.10    14:57    1:58m  0.02s  0.02s -bash
-root     pts/2    119.39.248.42    17:30    1.00s  0.03s  0.00s w
-2.强制下线
+--	强制下线
 pkill -kill -t pts/0	//强制 pts/0 下线
+
+--  查看登录失败的信息
+lastb lastlog
 ```
 
