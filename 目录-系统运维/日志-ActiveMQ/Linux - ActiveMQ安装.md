@@ -18,6 +18,7 @@ admin/admin
 ### 安装
 
 ```mysql
+和Tomcat类似
 解压
 tar -zxvf active.5.5.tar.gz -C 目标路径
 
