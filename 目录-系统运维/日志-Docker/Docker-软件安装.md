@@ -87,3 +87,37 @@ datadir = /var/lib/mysql
 docker exec -it mysql /bin/bash
 ```
 
+#### 安装TOMCAT
+
+概览
+
+```js
+--	容器中	TOMCAT	路径
+        /usr/local/tomcat/webapps
+        /usr/local/tomcat/bin
+        /usr/local/tomcat/conf
+--	主机对应路径
+        /home/tomcats/tomcat-001/webapps
+        /home/tomcats/tomcat-001/conf
+        /home/tomcats/tomcat-001/bin
+```
+
+安装命令
+
+```js
+--	基本安装
+       docker run -d \
+           -v /root/tomcat/webapp/:/usr/local/tomcat/webapps \
+		  --name tomcat \
+           -p 8080:8080 tomcat
+          
+
+--	集群安装
+	docker run -d \
+    	--name tomcat-001 \
+        -v /home/tomcats/tomcat-001/webapps:/usr/local/tomcat/webapps \
+        -v /home/tomcats/tomcat-001/conf:/usr/local/tomcat/conf \
+        -v /home/tomcats/tomcat-001/bin:/usr/local/tomcat/bin \
+        -p 8080:8080 tomcat
+```
+
