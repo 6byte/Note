@@ -20,56 +20,38 @@ docker rmi -f $(docker images -aq)		#删除所有软件
 
 #### 容器命令
 
-##### 运行
-
-```js
-启动
-    docker run [参数]	image
-      --	参数说明
-            --name = "Name"		 	 #容器名字
-            -d					    #后台方式运行
-            -it						#能对容器进行一系列操作
-
-            -p						#随机端口
-            -p 主机端口:容器端口	   #指定主机端口、容器的端口
-            -p ip:主机端口:容器端口	   #指定IP，主机端口，容器端口
-
-    --	运行
-        docker run -itd --name 指定容器的名字 指定镜像 指定命令行
-        docker run -itd --name mysql-01 mysql /bin/bash
-同步
-	docker -v 主机目录:容器目录
-```
-
-##### 配置容器
-
-```
+```sql
 --	进入容器
-docker attach 容器名	#开启一个新的终端
-docker exec	容器名		#打开之前已经开启的终端
+    docker attach 容器名	#开启一个新的终端
+    docker exec	容器名		#打开之前已经开启的终端
 
---	从容器中启动复制文件到主机(非常重要)
-docker cp 容器id:容器内路径 主机路径
-```
+--	文件复制
+    docker cp 容器id:容器内路径 主机路径
 
-
-
-##### 其他命令
-
-```mysql
---	查看正在运行的容器
-docker ps -a
-
+--  重启策略
+    docker run --restart=	\
+        always|no|on-failure|on-failure:3|always|unless-stopped
+	
 --	删除容器
-docker rm -f	#能删除所有状态的容器
-docker rm		#不能删除正在运行的容器
+    docker rm -f	#能删除所有状态的容器
+    docker rm		#不能删除正在运行的容器
 
 --	启动容器
-docker start mysql	#只能启动已经停止的容器
-
+	docker start mysql	#只能启动已经停止的容器
+	
 --	停止容器
-docker stop mysql	#停止正在运行的容器
-
---	查看日志
-docker -ft --tail 
+    docker stop mysql	#停止正在运行的容器
+    
+--	查看正在运行的容器
+    docker ps -a
 ```
+
+#### 卷命令
+
+```sql
+--	查看卷
+	docker volume ls
+--	删除卷
+	docker volume rm mysql001 (上面查到的卷名)
+```
+

@@ -11,6 +11,9 @@ systemctl start firewalld.service
 
 #开启80端口
 firewall-cmd --zone=public --add-port=80/tcp --permanent 
+
+#批量开启
+firewall-cmd --zone=public --add-port=1000-5000/tcp --permanent
 ```
 
 `重启`

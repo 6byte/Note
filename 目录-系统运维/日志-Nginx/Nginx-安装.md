@@ -3,33 +3,33 @@
 ### 入门篇-常用命令
 
 ```js
-1、启动
-/usr/local/nginx/sbin/nginx
-# cd /usr/local/nginx/sbin 
-# ./nginx 
+--	启动
+    /usr/local/nginx/sbin/nginx
+    # cd /usr/local/nginx/sbin 
+    # ./nginx 
 
-2、启动，通过其他配置文件启动
-/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+--	配置文件启动
+    /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 
-3、重启
-/usr/local/nginx/sbin/nginx -s reload 
-注意不是重启，是重新加载配置文件，可以当重启使用。
+--	重启
+    /usr/local/nginx/sbin/nginx -s reload 
+    注意不是重启，是重新加载配置文件，可以当重启使用。
 
-4、停止
-		1.  /usr/local/nginx/sbin/nginx -s stop   
-		2.  /usr/local/nginx/sbin/nginx -s quit  
-注:stop和quit的区别在于
-quit：处理完成所有请求再关闭
-Stop ：快速关闭，不再处理任何请求。
+--	停止
+	/usr/local/nginx/sbin/nginx -s stop   
+	/usr/local/nginx/sbin/nginx -s quit  
+    --	说明
+        quit：处理完成所有请求再关闭
+        Stop ：快速关闭，不再处理任何请求。
 
-5.测试nginx配置文件是否正确
-/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf
+--	测试配置文件是否正确
+	/usr/local/nginx/sbin/nginx -t -c /usr/local/nginx/conf/nginx.conf
 
-6.重新打开日志文件
-/usr/local/nginx/sbin/nginx -s reopen
+--	重新打开日志文件
+    /usr/local/nginx/sbin/nginx -s reopen
 
 7.查看是否启动
-ps -ef | grep nginx
+    ps -ef | grep nginx
 ```
 
 

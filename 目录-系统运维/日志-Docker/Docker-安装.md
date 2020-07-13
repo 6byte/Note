@@ -1,8 +1,6 @@
 ## Docker安装
 
-网页安装		https://www.jianshu.com/p/66575c930cf1
-
-网页加速		https://blog.csdn.net/shijiujiu33/article/details/90540031
+网页安装		<https://www.zhihu.com/topic/20167613/hot>
 
 ```js
 --  查看是否已经安装

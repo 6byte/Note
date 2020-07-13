@@ -10,7 +10,7 @@ wget https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.4/binaries/ap
 
 ##### 解压
 
-```
+```sql
 --	解压到/usr/local中
   tar -xzvf apache-maven-3.5.4-bin.tar.gz -C /usr/local
   
@@ -38,7 +38,9 @@ mvn help:system
 
 配置仓库
 
-```
+```xml
+cd /usr/local/maven/conf
+在setting中添加
 <mirror>
     <id>nexus-aliyun</id>
     <mirrorOf>central</mirrorOf>
