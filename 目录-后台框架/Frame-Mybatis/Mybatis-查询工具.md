@@ -63,15 +63,20 @@ select *from student where name like "%"#{name}"%"
 ```
 1.只能拦截Executor、ParameterHandler、StatementHandler、ResultSetHandler四个接口
 	--Executor
-        *Executor是Mybatis的核心接口。
-        *update()执行增删改，query(执行查询)
+        Executor是Mybatis的核心接口。
+        update()执行增删改，query(执行查询)
+        
     --ParameterHandler
-        *用来设置参数
+        用来设置参数
+        
     --StatementHandler
-        *负责处理Mybatis与JDBC之间Statement的交互
+        负责处理Mybatis与JDBC之间Statement的交互
+        
     --ResultSetHandler
-        *处理结果
-2.Mybatis拦截器的使用，分两步：自定义拦截器类、注册拦截器类。
+        处理结果
+2.Mybatis拦截器的使用，分两步：
+   -- 自定义拦截器类	
+   -- 注册拦截器类
 ```
 
 
