@@ -1,25 +1,16 @@
 ## Aop-概览
 
-#### 注解应用
+#### 概念
 
-|   通知类型    |      应用      |
-| :-----------: | :------------: |
-|    before     |      校验      |
-|     after     |     关闭流     |
-| afterReturing | 无异常处理数据 |
-|    around     |  执行任意操作  |
-| afteThrowing  |    封装异常    |
-|               |                |
+```
+切面：在程序运行时，对方法进行控制，可以进行修改添加阻止等操作
 
-#### 执行顺序
+连接点（Join point）：将拦截到的信息封装成类，通过该类能获取目标信息
 
-方法前运行
+通知(Advice)：拦截方法的时机,around，before，after,around,afterThrowing
 
-- before,around
+切入点（Pointcut）：对目标方法进行完全控制
 
-方法后运行
 
-- after
-- afterReturning
-- around
+```
 

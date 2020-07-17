@@ -25,12 +25,12 @@ Transactions 事务
 
 ```JS
 注意:
---必须具备几个条件
-	1.目标类,@Component
-	2.增强类,@Aspect注解的类
-	3.配置类,开启@EnableAspectJAutoProxy，@Configuration
---所有类都必须放在Spring容器中
---绝对不能手动创建对象
+--	必须具备几个条件
+        1.目标类,@Component
+        2.增强类,@Aspect注解的类
+        3.配置类,开启@EnableAspectJAutoProxy，@Configuration
+--	所有类都必须放在Spring容器中
+--	绝对不能手动创建对象
 ```
 
 ##### 目标类
