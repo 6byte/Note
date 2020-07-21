@@ -7,6 +7,16 @@
     public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
 
+
+
+执行LIKE
+
+```
+ select * from message where name like '%${name} %' 
+```
+
+
+
 ##### 拦截Sql
 
 ```JAVA

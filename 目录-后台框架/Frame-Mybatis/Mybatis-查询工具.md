@@ -26,8 +26,8 @@ WHERE
 #### 模糊查询
 
 ```MYSQL
-select *from student where name like "%"#{name}"%"
-一定要用双引号
+@Select("  select * from message where name like '%${name} %'  ")
+@Select("  select * from message where name like concat('%', #{name}, '%')  ")
 ```
 
 #### 多表查询
