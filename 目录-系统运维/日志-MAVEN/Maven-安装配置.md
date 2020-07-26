@@ -32,8 +32,6 @@ export PATH=${MAVEN_HOME}/bin:${PATH}
 source /etc/profile
 . /etc/profile
 
---	初始化
-mvn help:system
 ```
 
 配置仓库
@@ -47,6 +45,12 @@ cd /usr/local/maven/conf
     <name>Nexus aliyun</name>
     <url>http://maven.aliyun.com/nexus/content/groups/public</url>
 </mirror>
+```
+
+初始化
+
+```
+mvn help:system
 ```
 
 

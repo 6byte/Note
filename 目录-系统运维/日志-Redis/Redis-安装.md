@@ -24,10 +24,10 @@ pkill redis
 --	下载
 	wget http://download.redis.io/releases/redis-4.0.8.tar.gz
 --	解压
-	tar xzvf redis-4.0.8.tar.gz
+	tar xzvf redis-4.0.8.tar.gz 
 --	安装
     cd redis-4.0.8
-    make
+    make	--此处有坑，解决方案在下方故障中
     cd src
     make install PREFIX=/usr/local/redis
 --  单机版统一管理
@@ -35,7 +35,6 @@ pkill redis
     mkdir /usr/local/redis/etc
     cd redis根目录 #conf文件在根目录中
     cp redis.conf /usr/local/redis/etc
-
 
 ```
 
@@ -55,8 +54,26 @@ vi /etc/rc.local
 
 ```
 vi /usr/local/redis/etc/redis.conf 
-将daemonize no 改成daemonize yes
+将 daemonize no 改成daemonize yes
 ```
+
+
+
+#### 故障
+
+```
+错误提示:
+	Error jemalloc/jemalloc.h: No such file or directory
+解决方案
+	make MALLOC=libc
+
+错误提示
+	 /bin/sh: cc: command not found
+解决方案
+	 yum -y install gcc gcc-c++ libstdc++-devel
+```
+
+
 
 
 

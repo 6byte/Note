@@ -14,7 +14,7 @@ rpm -e --nodeps java-1.8.0-openjdk-devel-1.8.0.242.b08-0.el7_7.x86_64
 #安装Java,两个必须一起安装
 	yum install -y java-1.8.0-openjdk.x86_64
 	yum install -y java-1.8.0-openjdk-devel.x86_64
-	yum install -y java-1.8.0-openjdk-devel.x86_64
+
 #验证
 java -version
 //验证配置
@@ -30,6 +30,7 @@ echo $JAVA_HOME
 #配置路径:		 vim /etc/profile
 
 在末尾添加	jdk的路径和jre的路径
+
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk 
 export JRE_HOME=/usr/lib/jvm/jre
 export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
