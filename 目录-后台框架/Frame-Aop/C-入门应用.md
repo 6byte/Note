@@ -4,33 +4,16 @@
 
 <https://blog.csdn.net/weixin_33755649/article/details/91389367>：shiro使AOP失效解决方案
 
-##### 使用场景
-
-```
-Authentication 权限
-Caching 缓存
-Context passing 内容传递
-Error handling 错误处理
-Lazy loading　懒加载
-Debugging　　调试
-logging, tracing, profiling and monitoring　记录跟踪　优化　校准
-Performance optimization　性能优化
-Persistence　　持久化
-Resource pooling　资源池
-Synchronization　同步
-Transactions 事务
-```
-
 ### 入门案例
 
 ```JS
 注意:
---	必须具备几个条件
+	必须具备几个条件
         1.目标类,@Component
         2.增强类,@Aspect注解的类
         3.配置类,开启@EnableAspectJAutoProxy，@Configuration
---	所有类都必须放在Spring容器中
---	绝对不能手动创建对象
+	所有类都必须放在Spring容器中
+	绝对不能手动创建对象
 ```
 
 ##### 目标类

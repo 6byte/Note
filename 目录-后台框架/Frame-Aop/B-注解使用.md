@@ -1,31 +1,30 @@
-### AOP-属性
+### AOP-常用注解
+
+#### 概览
+
+```
+Pointcut:切入点
+execution:匹配式
+```
+
+
 
 #### 注解
 
 ##### Pointcut
 
 ```java
-概念:统一方法切入点
+作用:统一方法切入点
 注意:绝对不能写错，否则启动不了
-// 指定的方法
-@Pointcut("execution(* execution(..))")
-public void Method() {}
 ```
-
-匹配方式
-
-```
-execution,within,@annotation,bean
-```
-
-- execution：匹配具体某个方法
-
-- within：匹配所在类或所在包下面的方法
-
-- @annotation:方法上具有特点的注解
-- bean:根据bean的名字匹配
 
 ##### JoinPoint
+
+```
+作用:获取目标方法的信息
+```
+
+
 
 ```java
 打印参数
@@ -45,6 +44,12 @@ for (int i = 0; i < args.length; i++) {
 
 ##### ProceedingJoinPoint
 
+```
+作用:对目标方法进行完全控制
+```
+
+
+
 #### 表达式
 
 ##### execution
@@ -53,9 +58,6 @@ for (int i = 0; i < args.length; i++) {
 
 ```
 execution([方法的访问控制修饰符 | 方法的返回值] 包名.类名/接口名.方法名(参数))
-
---方法的控制修饰符如public可以省略
---包名和类名必须有
 ```
 
 
