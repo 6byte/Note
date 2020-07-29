@@ -1,6 +1,6 @@
 ### Springboot-拦截器
 
-##### 概览
+#### 概览
 
 ```
 1.继承HandlerInterceptor可实现拦截
@@ -15,11 +15,13 @@
 #### 拦截器
 
 ```JAVA
-
 public class WebInterceptor implements HandlerInterceptor {
 
     /*
-     * 功能:截取用户请求，统计用户访问量
+     *  功能:任何流量都会通过该方法
+     	返回值:
+     		true：放行
+     		false：不允许通过
      * */
     @Override
     public boolean preHandle(HttpServletRequest request , HttpServletResponse response , Object handler) {

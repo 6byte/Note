@@ -68,56 +68,6 @@ public class ErrorConfig {
 
 
 
-##### Tool-Session监听
-
-继承
-
-```java
-public class SessionListener implements HttpSessionListener {
-    public static int online = 0;
-    //    Session销毁
-    @Override
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("创建session");
-        online++;
-    }
-    //Session创建
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("销毁session");
-        online--;
-    }
-}
-
-```
-
-配置
-
-```JAVA
-@Configuration
-public class MywebConfig implements WebMvcConfigurer {
-    @Bean
-    public ServletListenerRegistrationBean listenerRegist() {
-        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
-        srb.setListener(new SessionListener());
-        return srb;
-    }
-}
-```
-
-其他
-
-```JAVA
-public class MyListener implements HttpSessionBindingListener {
-    @Override
-    public void valueBound(HttpSessionBindingEvent event) {
-    }
-    @Override
-    public void valueUnbound(HttpSessionBindingEvent event){
-    }
-}
-```
-
 ##### Tool-获取远程IP
 
 ```JAVA
@@ -185,39 +135,7 @@ public class WebSocketConfig {
 	public ServerEndpointExporter serverEndpointExporter() {       return new ServerEndpointExporter();}}
 ```
 
-##### Tool-Schedule
 
-概念
-
-```java
-作用:定时执行方法，处理对应逻辑
-注意:
-	1.使用一定要添加对应注解
-    2.学会指定时间格式
-```
-
-代码
-
-```java
-@Configuration
-@EnableScheduling//最好加在main入口处，让全局可用
-public class ErrorConfig {
-    @Scheduled(fixedRate = 2000)
-    @Scheduled(cron="0/5 * * * * ?")
-    public void methods() {
-        System.out.println("每2000执行一次");
-    }
-}
-```
-
-时间格式
-
-```
-@Scheduled的CRON参数详解
-cron="秒 分 时 周日 月份 星期 年份"
-不会就用*代替
-To be Continue
-```
 
 ##### Tool-发送Email
 
