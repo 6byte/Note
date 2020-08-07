@@ -4,7 +4,7 @@
 
 ```JAVA
 @Select("${sql}")
-    public List<Map<String , Object>> exec(@Param("sql") String sql);
+public List<Map<String , Object>> exec(@Param("sql") String sql);
 ```
 
 
