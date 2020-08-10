@@ -134,11 +134,7 @@ getPriority():				获取优先级
 <https://www.cnblogs.com/zhujiabin/p/5404771.html>
 
 ```
-Java通过Executors提供四种线程池，分别为：
-newCachedThreadPool，newScheduledThreadPool，newSingleThreadExecutor
-newCachedThreadPool 		创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
-newScheduledThreadPool 		创建一个定长线程池，支持定时及周期性任务执行。
-newSingleThreadExecutor 	创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+
 ```
 
 线程池-使用场景
@@ -166,6 +162,8 @@ workQueue:			用来保存等待被执行任务的阻塞队列
 threadFactory		创建新的线程
 handler:			线程池执行策略
 ```
+
+
 
 
 
