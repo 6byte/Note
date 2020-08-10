@@ -1,27 +1,5 @@
 ## Mysql-技巧
 
-#### SQL执行顺序
-
-```mysql
-select 	distinct name --第七步
-	from tab_provider 	--第一步
-	join tab_consumer --第三步
-	on <condition>	  --第二步
-	where <condition>	--第四步
-	group by list_   --第五步
-	having string  --第六步
-	order by desc|asc   --第八步
-	limit start pageSize --第九步
-```
-
-简洁版
-
-```MYSQL
-#先->后
-FROM ON JOIN WHERE GROUP_BY HAVING SELECT_DINSTINCT ORDER_BY LIMIT
-取表 取条件 分组 分条件 查询去重 排序 分页
-```
-
 #### Mysql-查询
 
 查询
@@ -109,7 +87,7 @@ select now()
 select "hello"
 4.查询系统数据库不走缓存
 select * from mysql
-5.当表的发生更改时，缓存被清空
+5.当表发生更改时，缓存被清空
 ```
 
 
