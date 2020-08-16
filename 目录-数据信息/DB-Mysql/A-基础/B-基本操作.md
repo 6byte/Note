@@ -40,3 +40,9 @@ FROM ON JOIN WHERE GROUP_BY HAVING SELECT_DINSTINCT ORDER_BY LIMIT
 解释:查询包含ABC中任何一个单词
 ```
 
+#### 子查询
+
+```
+exists:
+```
+
