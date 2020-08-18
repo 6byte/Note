@@ -70,10 +70,8 @@ https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3
 ```
 --	新建系统环境变量
 MAVEN_HOME
-
 --	赋值maven根目录路径
 D:\program\apache-maven-3.6.3
-
 --  追加path环境变量
 %MAVEN_HOME%\bin\;
 

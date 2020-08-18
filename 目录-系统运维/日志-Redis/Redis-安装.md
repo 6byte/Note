@@ -18,7 +18,7 @@ pkill redis
 
 
 
-#### 安装
+#### 安装-Linux
 
 ```sql
 --	下载
@@ -38,7 +38,7 @@ pkill redis
 
 ```
 
-#### 自启动
+##### 自启动
 
 开机启动
 
@@ -59,7 +59,7 @@ vi /usr/local/redis/etc/redis.conf
 
 
 
-#### 故障
+##### 故障
 
 ```
 错误提示:
@@ -73,15 +73,24 @@ vi /usr/local/redis/etc/redis.conf
 	 yum -y install gcc gcc-c++ libstdc++-devel
 ```
 
-
-
-
-
-#### 卸载
+##### 卸载
 
 ```
 rm -rf /usr/local/redis //删除安装目录
 rm -rf /usr/bin/redis-* //删除所有redis相关命令脚本
 rm -rf /root/download/redis-4.0.4 //删除redis解压文件夹
+```
+
+#### 安装-Win
+
+```
+1.后台守护
+redis-server --service-install redis.windows.conf --loglevel verbose
+
+2.启动服务
+redis-server --service-start
+
+3. 停止服务
+redis-server --service-stop  
 ```
 
