@@ -1,5 +1,7 @@
 #### Win-初始化
 
+https://www.cnblogs.com/lgx5/p/10732016.html  非常详细
+
 ##### CNPM安装
 
 ```
