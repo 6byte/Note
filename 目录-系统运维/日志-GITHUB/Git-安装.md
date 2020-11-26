@@ -23,8 +23,9 @@ yum -y install git
 
 ```js
 #设置用户名
-git config --global user.name "your name"#设置邮箱
-git config --global user.name "your email address" #设置邮箱
+git config --global user.name "your name"
+#设置邮箱
+git config --global user.email "your email address" 
 
 #初始化仓库
 1.新建文件夹
