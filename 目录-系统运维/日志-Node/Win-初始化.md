@@ -2,15 +2,20 @@
 
 https://www.cnblogs.com/lgx5/p/10732016.html  非常详细
 
+
+
 ##### CNPM安装
 
 ```
-  # 安装
-- npm install -g cnpm --registry=https://registry.npm.taobao.org
-  # 检查
-- cnpm -v
-  # 添加环境变量
-- 
+新建文件夹
+node_global:	D:\Program\Node\node_global
+node_cache:		D:\Program\Node\node_cache
+
+配置目录
+npm config set prefix D:\Program\Node\node_global
+npm config set cache D:\Program\Node\node_cache
+# 配置镜像
+npm config set registry=http://registry.npm.taobao.org 
 ```
 
 

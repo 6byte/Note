@@ -81,7 +81,7 @@ rm -rf /usr/bin/redis-* //删除所有redis相关命令脚本
 rm -rf /root/download/redis-4.0.4 //删除redis解压文件夹
 ```
 
-#### 安装-Win
+#### Windows-安装
 
 ```
 1.后台守护
@@ -92,5 +92,11 @@ redis-server --service-start
 
 3. 停止服务
 redis-server --service-stop  
+
+4.添加到系统环境变量path
+C:\Program Files\Redis
+使用 redis-cli 直接启动客户端
+
+
 ```
 

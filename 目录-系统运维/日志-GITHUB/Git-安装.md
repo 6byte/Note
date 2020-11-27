@@ -64,6 +64,9 @@ yum install -y git
         name = Yooven
         email = 444891953@qq.com
 （5）完成上述步骤后，在执行push命令时，系统会要求使用密码再登录一次
+
+(6)配置免密PUSH
+git config  credential.helper store
 ```
 
 
