@@ -7,7 +7,6 @@ https://blog.csdn.net/wangliang888888/article/details/80536277
 如果已经存在本地仓库
 
 ```css
-
 git remote add origin https://github.com/6byte/test1.git
 
 git branch -M main
@@ -52,7 +51,7 @@ git push origin --delete '分支名'
 ```
 #分支合并
 git checkout '主分支名'
-git meger '子分支名'
+git merge '子分支名'
 //子分支文件将合并到主分支目录下
 ```
 

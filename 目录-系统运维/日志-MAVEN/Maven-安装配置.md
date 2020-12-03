@@ -107,8 +107,8 @@ setting.xml在maven根目录下
 ##### 配置--本地路径
 
 ```
---	在maven安装目录找setting文件
---	在setting搜localRepository
+--	在 maven 安装目录找setting文件
+--	在 setting 搜 localRepository
 --  将地址替换成当前maven所在的根目录
 ```
 
@@ -117,7 +117,7 @@ setting.xml在maven根目录下
 ##### 配置--pom.xml
 
 ```xml
---	搜repositories，复制粘贴
+--	搜 repositories，复制粘贴
 <repositories>  
         <repository>  
             <id>alimaven</id>  
