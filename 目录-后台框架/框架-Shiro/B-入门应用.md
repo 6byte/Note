@@ -146,7 +146,7 @@ public void setPassword(User user) {
         //类型转换
         ByteSource byteSalt = ByteSource.Util.bytes(ciphertext);
         //将加密后的盐值和密码插入数据库
-        user.setSalt(String.valueOf(salt));
+        user.setSalt(String.valueOf(byteSalt));
         user.setPassword(ciphertext);
         //放进数据库
         Dao层.insertOne(user);
