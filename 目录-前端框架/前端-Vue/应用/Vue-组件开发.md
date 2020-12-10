@@ -85,3 +85,19 @@ Vue.component(btn.name,MButton)
 
 ```
 
+#### 批量引入组件
+
+```js
+import com from './com.vue'
+const components = {
+    install(Vue){
+        Vue.component('v-com',com);
+    }
+}
+if(typeof window != 'undefined' && window.Vue){
+    window.Vue.use(components)
+}
+
+export default components
+```
+
