@@ -50,7 +50,7 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 //第一个参数是用于安装所有组件，第二个参数是用于单个组件引入
-export default {isntall,bbtn};
+export default {install,bbtn};
 
 ```
 
