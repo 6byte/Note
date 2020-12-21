@@ -4,7 +4,7 @@
 
 >数据库:	createTime：类型是datetime
 
-##### java
+##### java代码
 
 ```JAVA
 import java.util.Date;//一定是java.util.Data，否则报错
@@ -17,7 +17,7 @@ public class Bean{
 
 ```
 
-##### MybaitsPlus 配置
+##### MP 配置
 
 ```JAVA
 import java.util.Date;//一定是这个
@@ -38,6 +38,19 @@ public class MybatisConfig implements MetaObjectHandler {
 
 }
 
+```
+
+#### MP-分页
+
+配置
+
+```JAVA
+@Bean
+public PaginationInterceptor paginationInterceptor() {
+    PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+    paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+    return paginationInterceptor;
+}
 ```
 
 
