@@ -34,9 +34,10 @@ export default {
 >位置:src/component/index.js
 
 ```js
-
+///////////////
+//	需要改动  //
+///////////////
 import bbtn from "./btn/BBtn.vue";
-import _Vue from "vue";
 const components = [bbtn];
 
 const install = function(Vue) {
@@ -56,23 +57,29 @@ export default {install,bbtn};
 
 #### 修改Package.json
 
+```
+注意:
+	需要修改 "private" "package" "main"三个配置
+	修改需要更改版本号，
+
+```
+
+
+
 ```JSON
 {
-  "name": "project", // 使用 npm install [project]
-  "version": "0.1",
-  "private": false,	//必须选择 false ,否则不能发布
+  "name": "project",					||	发布需要修改,不可与npm仓库中任何名字重复
+  "version": "1.0.1",					||  修改时需要改动
+  "private": false,						|| 	必须改为false
+  "main": "dist/vtext.umd.min.js",		||	指定 使用者 import 得到的文件
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-     "package": "vue-cli-service build --target lib ./src/components/index.js --dest com --name com_01"
-      /**
-      	package:自定义命令
-      	--target [打包方式] 打包入口
-      	--dest [输出目录]
-      	--name [根目录名]
-      */
+    "pack": "vue-cli-service build --target lib src/com/index.js"
+    // "自定义指令": "vue-cli-service build --target lib src/com/index.js"
   }
 }
+
 ```
 
 #### 发布NPM
@@ -81,5 +88,18 @@ export default {install,bbtn};
 登陆npm
 在src根目录下运行 npm pulish
 注意包名不与其他人重复
+```
+
+##### .npmignore
+
+```
+.*
+*.md
+*.yml
+build/
+node_modules/
+src/
+test/
+gulpfile.js
 ```
 

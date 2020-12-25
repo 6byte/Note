@@ -11,7 +11,12 @@
 
 创建
 
-```
+```java
 ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+
+ScheduledExecutorService  service = Executors.newScheduledThreadPool(5);//5是线程数
+Class clazz = new Class();
+Thread thread = new Thread(clazz);
+service.schedule(thread, 2, TimeUnit.SECONDS);//2是延时2s执行
 ```
 
