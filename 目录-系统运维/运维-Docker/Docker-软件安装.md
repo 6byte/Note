@@ -78,8 +78,8 @@ docker run --name nginx-name -p 8080:80 -d nginx
     --name mysql-1 -p 3306:3306 \
     -e MYSQL_ROOT_PASSWORD=passwd \
     -v mysql-conf-1:/etc/mysql/conf.d \
-    -v mysql-data-1:/var/lib/mysql
-    mysql
+    -v mysql-data-1:/var/lib/mysql \
+    mysql \
  
 --	进入容器
 docker exec -it mysql /bin/bash
@@ -106,7 +106,7 @@ docker exec -it mysql /bin/bash
 docker run -d \
     -v /root/tomcat/webapp/:/usr/local/tomcat/webapps \
     --name tomcat \
-    -p 8080:8080 tomcat
+    -p 8080:8080 tomcat \
 ```
 
 ##### 集群安装

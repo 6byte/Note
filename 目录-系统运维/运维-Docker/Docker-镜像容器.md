@@ -51,6 +51,7 @@ docker rmi -f $(docker images -aq)		#删除所有软件
 ```sql
 --	查看卷
 	docker volume ls
+	
 --	删除卷
 	docker volume rm mysql001 (上面查到的卷名)
 ```

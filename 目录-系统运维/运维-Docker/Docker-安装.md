@@ -5,6 +5,7 @@
 ```js
 --  查看是否已经安装
 yum list installed | grep docker
+
 --	安装
 yum -y install docker
 
@@ -14,10 +15,9 @@ mkdir /etc/docker
 --	编辑docker
 cd /etc/docker
 vim daemon.json
+
 在文件中添加以下内容
-{
-     "registry-mirrors": ["https://c86u3plt.mirror.aliyuncs.com"]
-}
+{ "registry-mirrors": ["https://c86u3plt.mirror.aliyuncs.com"]}
 
 --	重启daemon
 systemctl daemon-reload
