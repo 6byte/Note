@@ -1,4 +1,4 @@
-## 文件传输
+## 文件传输-Ajax
 
 https://www.cnblogs.com/heqiyoujing/p/9477490.htm
 
@@ -117,6 +117,57 @@ public String downloadFile(HttpServletRequest request,
         }
     }
     return null
+}
+```
+
+## 文件传输-Axios
+
+### vue
+
+```VUE
+<!--需要完善-->
+<template>
+	<v-file-input v-model="file" @change="upload"></v-file-input>
+</template>
+<script>
+    data(){
+        file:null//值为null,不然可能不支持
+    },
+    methods:{
+        //上传
+       upload() {
+           var forms = new FormData();
+           //不能配这个
+           var configs = {// headers: { "Content-Type": "multipart/form-data" },};
+               forms.append("file", this.files);
+           axios.post("http://127.0.0.1:8080/file/upload",forms,configs)
+               .then((res) => {
+               console.log(res);
+           });
+        },   
+    }
+</script>
+```
+
+
+
+### SpringBoot
+
+```JAVA
+//需要完善
+@PostMapping("/upload")
+public String upload(@RequestParam("file") MultipartFile file) {
+    // 获取文件原名
+    String fileName = file.getOriginalFilename();
+    // 指定文件路径
+    String filePath = "D:\\Temp\\";
+    File dest = new File(filePath + fileName);
+    try {
+        file.transferTo(dest);
+        return filePath + fileName;
+    } catch (IOException e) {
+    }
+    return "失败";
 }
 ```
 
